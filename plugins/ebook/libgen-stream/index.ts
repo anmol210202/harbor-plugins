@@ -303,12 +303,15 @@ function parseCatalogHtml(html: string, base: string): EBookSummary[] {
     }
 
     // Title in cell 1 (or 0)
-    const titleCell = hasCoverCol ? secondCell : firstCell;
+    const titleCell = (hasCoverCol ? secondCell : firstCell).replace(/<(?:br|wbr|hr)\s*\/?>/gi, ' ');
     let bestTitle = '';
 
-    const editionAnchor = titleCell.match(/<a\b[^>]*href=["'][^"']*edition\.php[^"']*["'][^>]*>([\s\S]*?)<\/a>/i);
+    const editionAnchor = titleCell.match(/<a\b[^>]*\bedition\.php[^>]*>([\s\S]*?)<\/a>/i);
     if (editionAnchor) {
-      const txt = decodeHtmlEntities(editionAnchor[1].replace(/<[^>]+>/g, '').trim().replace(/\s+/g, ' '));
+      const inner = editionAnchor[1];
+      const boldInAnchor = inner.match(/<b\b[^>]*>([\s\S]*?)<\/b>/i);
+      const raw = boldInAnchor ? boldInAnchor[1] : inner;
+      const txt = decodeHtmlEntities(raw.replace(/<[^>]+>/g, '')).replace(/\s+/g, ' ').trim();
       if (isUsefulTitle(txt)) bestTitle = txt;
     }
 
@@ -341,9 +344,13 @@ function parseCatalogHtml(html: string, base: string): EBookSummary[] {
     const fileSize = cells[offset + 6]?.replace(/<[^>]+>/g, '').trim();
     const format = cells[offset + 7]?.replace(/<[^>]+>/g, '').trim()?.toLowerCase();
 
+    // Add format badge so user easily identifies EPUB vs PDF vs AZW3
+    const formatBadge = format ? ` [${format.toUpperCase()}]` : '';
+    const displayTitle = bestTitle.includes('[') ? bestTitle : `${bestTitle}${formatBadge}`;
+
     results.push({
       id: md5,
-      title: bestTitle,
+      title: displayTitle,
       author,
       cover,
       year,
@@ -456,33 +463,53 @@ export const plugin: EBookProvider = {
       return cached;
     }
 
-    // 2. Fetch ads.php to resolve download URL with security token
-    const { text: adsHtml, base } = await fetchFromMirrors(`/ads.php?md5=${id}`);
-    const getMatch = adsHtml.match(/<a[^>]*href=["'](get\.php\?[^"']*md5=[a-fA-F0-9]{32}[^"']*)["']/i);
+    try {
+      // 2. Fetch ads.php to resolve download URL with security token
+      const { text: adsHtml, base } = await fetchFromMirrors(`/ads.php?md5=${id}`);
+      const getMatch = adsHtml.match(/<a[^>]*href=["'](get\.php\?[^"']*md5=[a-fA-F0-9]{32}[^"']*)["']/i);
 
-    let downloadUrl: string | undefined;
-    if (getMatch) {
-      const rel = getMatch[1].replace(/&amp;/g, '&');
-      downloadUrl = `${base}/${rel.startsWith('/') ? rel.slice(1) : rel}`;
-    } else {
-      // Fallback to library.lol mirror
-      downloadUrl = `https://library.lol/main/${id}`;
+      let downloadUrl: string;
+      if (getMatch) {
+        const rel = getMatch[1].replace(/&amp;/g, '&');
+        downloadUrl = `https://libgen.li/${rel.startsWith('/') ? rel.slice(1) : rel}`;
+      } else {
+        downloadUrl = `https://libgen.li/get.php?md5=${id}`;
+      }
+
+      // 3. Download the file bytes
+      const dlHeaders: Record<string, string> = {
+        'User-Agent': USER_AGENT,
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+        'Referer': `https://libgen.li/ads.php?md5=${id}`,
+      };
+
+      const bytes = await fetchBinary(downloadUrl, dlHeaders);
+
+      // 4. Verify ZIP archive magic bytes (0x50, 0x4B)
+      const isZip = bytes && bytes.length > 100 && bytes[0] === 0x50 && bytes[1] === 0x4B;
+      if (isZip) {
+        const chapters = unpackEpub(id, bytes);
+        if (chapters.length > 0) {
+          bookChaptersCache.set(id, chapters);
+          return chapters;
+        }
+      }
+    } catch (_) {
+      // Graceful fallback for non-EPUB formats (AZW3, PDF, etc.)
     }
 
-    // 3. Download the EPUB bytes
-    const dlHeaders: Record<string, string> = {
-      'User-Agent': USER_AGENT,
-      'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
-      'Referer': `${base}/ads.php?md5=${id}`,
-    };
-
-    const bytes = await fetchBinary(downloadUrl, dlHeaders);
-
-    // 4. Unpack EPUB and extract prose chapters
-    const chapters = unpackEpub(id, bytes);
-    bookChaptersCache.set(id, chapters);
-
-    return chapters;
+    // 5. Fallback: Never return empty chapters to Harbor
+    const fallbackChapterId = `overview:${id}`;
+    const fallbackChapters: EBookChapter[] = [
+      {
+        id: fallbackChapterId,
+        title: 'Book Overview & Download Links',
+        position: 0,
+        chapter: '1',
+      },
+    ];
+    bookChaptersCache.set(id, fallbackChapters);
+    return fallbackChapters;
   },
 
   async content(chapterId: string): Promise<string> {
@@ -492,7 +519,35 @@ export const plugin: EBookProvider = {
       return cached;
     }
 
-    // 2. If direct link / bookmark without previous chapters() call:
+    // 2. Handle overview fallback chapter for non-EPUB / PDF / AZW3 formats
+    if (chapterId.startsWith('overview:')) {
+      const bookId = chapterId.replace(/^overview:/, '');
+      try {
+        const book = await this.detail(bookId);
+        const { text: adsHtml, base } = await fetchFromMirrors(`/ads.php?md5=${bookId}`);
+        const getMatch = adsHtml.match(/<a[^>]*href=["'](get\.php\?[^"']*md5=[a-fA-F0-9]{32}[^"']*)["']/i);
+        const dlUrl = getMatch
+          ? `https://libgen.li/${getMatch[1].replace(/&amp;/g, '&')}`
+          : `https://libgen.li/get.php?md5=${bookId}`;
+
+        const lines: string[] = [
+          `# ${book?.title || 'Book Overview'}`,
+          book?.author ? `*By ${book.author}${book.year ? ` (${book.year})` : ''}*` : '',
+          book?.description ? `**Details:** ${book.description}` : '',
+          '---\n\n### 📖 Reader Notice',
+          '> ℹ️ **About this Edition**:\n> This specific file could not be parsed into chapter-by-chapter text (it is in **PDF**, **AZW3**, or **Kindle** format, rather than standard EPUB).\n>\n> 💡 **Tip for Harbor Reader**:\n> Search for this book title again in Harbor and look for the version tagged with **[EPUB]** to stream and read chapters directly in Harbor!',
+          '---\n\n### 📥 Direct File Links',
+          `🔗 **[Direct Download File](${dlUrl})**`,
+          `🔗 **[Download via Library.lol Mirror](https://library.lol/main/${bookId})**`,
+          `🔗 **[LibGen Web Page](${base}/ads.php?md5=${bookId})**`,
+        ];
+        return lines.filter(Boolean).join('\n\n');
+      } catch (_) {
+        return `# Book Overview\n\nDirect download page: https://libgen.li/ads.php?md5=${chapterId.replace(/^overview:/, '')}`;
+      }
+    }
+
+    // 3. Direct link / bookmark without previous chapters() call
     const parts = chapterId.split(':');
     if (parts.length >= 2) {
       const bookId = parts[0];
