@@ -1,0 +1,11 @@
+{
+  "id": "freewebnovel",
+  "name": "FreeWebNovel",
+  "version": "1.0.0",
+  "lang": "en",
+  "nsfw": false,
+  "icon": "https://freewebnovel.com/static/freewebnovel/favicon.ico",
+  "entry": "freewebnovel.plugin.js",
+  "description": "Massive library of over 10,000 popular light novels, web fiction, and fantasy books with full chapters and clean prose",
+  "website": "https://freewebnovel.com"
+}
