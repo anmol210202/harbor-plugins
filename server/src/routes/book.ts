@@ -5,9 +5,45 @@ import { EpubResolver } from '../services/epubResolver.js';
 import { EpubParser } from '../services/epubParser.js';
 import type { SearchResultItem } from '../types.js';
 
-const BASE = 'https://libgen.li';
-const USER_AGENT =
-  'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36';
+const SEARCH_MIRRORS = [
+  'https://libgen.vg',
+  'https://libgen.li',
+  'https://libgen.la',
+  'https://libgen.gl',
+];
+
+const BROWSER_HEADERS: Record<string, string> = {
+  'User-Agent':
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36',
+  'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+  'Accept-Language': 'en-US,en;q=0.9',
+  'Cookie': 'covers=on',
+};
+
+async function fetchFromMirrors(pathWithQuery: string): Promise<{ html: string; base: string }> {
+  let lastError: Error | null = null;
+  for (const base of SEARCH_MIRRORS) {
+    try {
+      const url = `${base}${pathWithQuery}`;
+      const res = await fetch(url, {
+        headers: BROWSER_HEADERS,
+      });
+      if (!res.ok) {
+        lastError = new Error(`Mirror ${base} HTTP ${res.status}`);
+        continue;
+      }
+      const html = await res.text();
+      if (html.includes('exceeded the \'max_user_connections\'') || html.length < 500) {
+        lastError = new Error(`Mirror ${base} database busy`);
+        continue;
+      }
+      return { html, base };
+    } catch (err: any) {
+      lastError = err;
+    }
+  }
+  throw lastError || new Error('All LibGen search mirrors failed');
+}
 
 function isUsefulTitle(text: string): boolean {
   if (!text || text.length < 2) return false;
@@ -40,22 +76,19 @@ export const bookRoutes: FastifyPluginAsync = async (server: FastifyInstance) =>
     const q = req.query.q || '';
     const page = parseInt(req.query.page || '1', 10) || 1;
 
-    const searchUrl = q
-      ? `${BASE}/index.php?req=${encodeURIComponent(q)}&page=${page}&topics[]=l&topics[]=f&covers=on`
-      : `${BASE}/index.php?req=fiction&page=${page}&topics[]=l&topics[]=f&covers=on`;
+    const path = q
+      ? `/index.php?req=${encodeURIComponent(q)}&page=${page}&topics[]=l&topics[]=f&covers=on`
+      : `/index.php?req=fiction&page=${page}&topics[]=l&topics[]=f&covers=on`;
 
-    const res = await fetch(searchUrl, {
-      headers: {
-        'User-Agent': USER_AGENT,
-        'Cookie': 'covers=on',
-      },
-    });
-
-    if (!res.ok) {
-      return reply.status(res.status).send({ error: `LibGen HTTP ${res.status}` });
+    let html = '';
+    let base = 'https://libgen.vg';
+    try {
+      const fetched = await fetchFromMirrors(path);
+      html = fetched.html;
+      base = fetched.base;
+    } catch (err: any) {
+      return reply.status(502).send({ error: err.message });
     }
-
-    const html = await res.text();
     const cleanHtml = html.replace(/<(?:br|wbr|hr)\s*\/?>/gi, ' ');
     const $ = cheerio.load(cleanHtml);
 
@@ -79,7 +112,7 @@ export const bookRoutes: FastifyPluginAsync = async (server: FastifyInstance) =>
         hasCoverCol = true;
         const src = coverImg.attr('src') || '';
         if (src && !src.includes('blank.png') && !src.includes('logo.png')) {
-          cover = src.startsWith('http') ? src : `${BASE}${src.startsWith('/') ? '' : '/'}${src}`;
+          cover = src.startsWith('http') ? src : `${base}${src.startsWith('/') ? '' : '/'}${src}`;
         }
       }
 
@@ -136,20 +169,18 @@ export const bookRoutes: FastifyPluginAsync = async (server: FastifyInstance) =>
     Querystring: { page?: string };
   }>('/api/v1/popular', async (req, reply) => {
     const page = parseInt(req.query.page || '1', 10) || 1;
-    const url = `${BASE}/index.php?req=fiction&page=${page}&topics[]=l&topics[]=f&covers=on`;
+    const path = `/index.php?req=fiction&page=${page}&topics[]=l&topics[]=f&covers=on`;
 
-    const res = await fetch(url, {
-      headers: {
-        'User-Agent': USER_AGENT,
-        'Cookie': 'covers=on',
-      },
-    });
-
-    if (!res.ok) {
-      return reply.status(res.status).send({ error: `LibGen HTTP ${res.status}` });
+    let html = '';
+    let base = 'https://libgen.vg';
+    try {
+      const fetched = await fetchFromMirrors(path);
+      html = fetched.html;
+      base = fetched.base;
+    } catch (err: any) {
+      return reply.status(502).send({ error: err.message });
     }
 
-    const html = await res.text();
     const cleanHtml = html.replace(/<(?:br|wbr|hr)\s*\/?>/gi, ' ');
     const $ = cheerio.load(cleanHtml);
     const results: SearchResultItem[] = [];
@@ -171,7 +202,7 @@ export const bookRoutes: FastifyPluginAsync = async (server: FastifyInstance) =>
         hasCoverCol = true;
         const src = coverImg.attr('src') || '';
         if (src && !src.includes('blank.png') && !src.includes('logo.png')) {
-          cover = src.startsWith('http') ? src : `${BASE}${src.startsWith('/') ? '' : '/'}${src}`;
+          cover = src.startsWith('http') ? src : `${base}${src.startsWith('/') ? '' : '/'}${src}`;
         }
       }
 

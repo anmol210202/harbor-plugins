@@ -1,7 +1,7 @@
 import type { EBookChapter, EBookProvider, EBookSummary, EBookTag } from '../../../shared/types/ebook.js';
 
-// Default endpoint for Harbor Book Proxy service
-const PROXY_URL = 'http://localhost:3000';
+// Live public endpoint for Harbor Book Proxy service on Render
+const PROXY_URL = 'https://harbor-plugins.onrender.com';
 
 interface ProxySearchItem {
   id: string;
