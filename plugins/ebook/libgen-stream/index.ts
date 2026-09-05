@@ -25,7 +25,7 @@ const chapterTextCache = new Map<string, string>();
 // Configurable VPS Docker Proxy URL (e.g., 'https://books.yourname.duckdns.org')
 // If set, requests are proxied and cached by your VPS with sub-10ms response times.
 // If left empty or if offline, the plugin automatically falls back to in-app direct unpacking.
-export const PROXY_SERVER_URL = '';
+export const PROXY_SERVER_URL = 'https://harbor-books.myvpslab.duckdns.org';
 
 /**
  * Safe network requester using Harbor host bridge
