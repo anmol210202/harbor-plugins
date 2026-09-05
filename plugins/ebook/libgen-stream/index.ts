@@ -39,6 +39,8 @@ async function harborRequest(
     const res = await harbor.http(url, {
       responseType,
       headers,
+      allowReferer: url,
+      allowCookie: url,
     });
     if (!res.ok) {
       throw new Error(`HTTP ${res.status} for ${url}`);
@@ -468,7 +470,7 @@ export const plugin: EBookProvider = {
       return cached;
     }
 
-    // 2. Try user's VPS Docker server if configured
+    // 2. Fast check: Is the book already cached on user's VPS Docker server?
     if (PROXY_SERVER_URL) {
       try {
         const jsonStr = await fetchText(`${PROXY_SERVER_URL.replace(/\/+$/, '')}/api/v1/book/${id}/chapters`);
@@ -478,12 +480,12 @@ export const plugin: EBookProvider = {
           return data.chapters;
         }
       } catch (_) {
-        // Fallback to local unpacking
+        // Not in VPS cache yet, continue to resolve download URL
       }
     }
 
     try {
-      // 3. Fetch ads.php to resolve download URL with security token
+      // 3. Fetch ads.php to resolve download URL with security token (from client residential connection)
       const { text: adsHtml, base } = await fetchFromMirrors(`/ads.php?md5=${id}`);
       const getMatch = adsHtml.match(/<a[^>]*href=["'](get\.php\?[^"']*md5=[a-fA-F0-9]{32}[^"']*)["']/i);
 
@@ -495,7 +497,22 @@ export const plugin: EBookProvider = {
         downloadUrl = `${base}/get.php?md5=${id}`;
       }
 
-      // 4. Download the file bytes
+      // 4. If VPS proxy is configured, pass the direct download URL so VPS can download & cache it permanently
+      if (PROXY_SERVER_URL) {
+        try {
+          const vpsUrl = `${PROXY_SERVER_URL.replace(/\/+$/, '')}/api/v1/book/${id}/chapters?downloadUrl=${encodeURIComponent(downloadUrl)}`;
+          const jsonStr = await fetchText(vpsUrl);
+          const data = JSON.parse(jsonStr);
+          if (data && Array.isArray(data.chapters) && data.chapters.length > 0) {
+            bookChaptersCache.set(id, data.chapters);
+            return data.chapters;
+          }
+        } catch (_) {
+          // If VPS processing fails or times out, fall through to in-app direct unpacking
+        }
+      }
+
+      // 5. In-app fallback: Download directly in Harbor using safe bridge with Referer
       const dlHeaders: Record<string, string> = {
         'User-Agent': USER_AGENT,
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
@@ -504,7 +521,7 @@ export const plugin: EBookProvider = {
 
       const bytes = await fetchBinary(downloadUrl, dlHeaders);
 
-      // 5. Verify ZIP archive magic bytes (0x50, 0x4B)
+      // 6. Verify ZIP archive magic bytes (0x50, 0x4B) and unpack EPUB
       const isZip = bytes && bytes.length > 100 && bytes[0] === 0x50 && bytes[1] === 0x4B;
       if (isZip) {
         const chapters = unpackEpub(id, bytes);
@@ -517,7 +534,7 @@ export const plugin: EBookProvider = {
       // Graceful fallback for non-EPUB formats (AZW3, PDF, etc.)
     }
 
-    // 6. Fallback: Never return empty chapters to Harbor
+    // 7. Fallback: Never return empty chapters to Harbor
     const fallbackChapterId = `overview:${id}`;
     const fallbackChapters: EBookChapter[] = [
       {
@@ -553,6 +570,17 @@ export const plugin: EBookProvider = {
             return data.content;
           }
         } catch (_) {}
+      }
+    }
+
+    // 3. Fallback: If not in memory cache and VPS didn't return it, unpack book chapters
+    if (!chapterId.startsWith('overview:')) {
+      const parts = chapterId.split(':');
+      if (parts.length >= 2) {
+        const bookId = parts[0];
+        await this.chapters(bookId);
+        const secondCheck = chapterTextCache.get(chapterId);
+        if (secondCheck) return secondCheck;
       }
     }
 

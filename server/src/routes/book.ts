@@ -6,10 +6,10 @@ import { EpubParser } from '../services/epubParser.js';
 import type { SearchResultItem } from '../types.js';
 
 const SEARCH_MIRRORS = [
-  'https://libgen.vg',
   'https://libgen.li',
   'https://libgen.la',
   'https://libgen.gl',
+  'https://libgen.vg',
 ];
 
 const BROWSER_HEADERS: Record<string, string> = {
@@ -27,6 +27,7 @@ async function fetchFromMirrors(pathWithQuery: string): Promise<{ html: string; 
       const url = `${base}${pathWithQuery}`;
       const res = await fetch(url, {
         headers: BROWSER_HEADERS,
+        signal: AbortSignal.timeout(6000),
       });
       if (!res.ok) {
         lastError = new Error(`Mirror ${base} HTTP ${res.status}`);
@@ -286,8 +287,10 @@ export const bookRoutes: FastifyPluginAsync = async (server: FastifyInstance) =>
   // Book Chapters
   server.get<{
     Params: { md5: string };
+    Querystring: { downloadUrl?: string };
   }>('/api/v1/book/:md5/chapters', async (req, reply) => {
     const { md5 } = req.params;
+    const { downloadUrl } = req.query;
 
     // Check if chapters are already parsed and cached
     const cachedChapters = CacheService.getChapters(md5);
@@ -301,8 +304,8 @@ export const bookRoutes: FastifyPluginAsync = async (server: FastifyInstance) =>
     }
 
     try {
-      // 1. Download buffer
-      const buffer = await EpubResolver.downloadBookBuffer(md5);
+      // 1. Download buffer (using downloadUrl if provided)
+      const buffer = await EpubResolver.downloadBookBuffer(md5, downloadUrl);
 
       // 2. Parse EPUB / FB2
       const parsed = EpubParser.parse(buffer);
