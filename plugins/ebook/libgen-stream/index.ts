@@ -1,50 +1,357 @@
 import type { EBookChapter, EBookProvider, EBookSummary, EBookTag } from '../../../shared/types/ebook.js';
+import { unzipSync, strFromU8 } from 'fflate';
 
-// Live public endpoint for Harbor Book Proxy service on Render
-const PROXY_URL = 'https://harbor-plugins.onrender.com';
+const MIRROR_DOMAINS = [
+  'https://libgen.li',
+  'https://libgen.vg',
+  'https://libgen.la',
+  'https://libgen.gl',
+];
 
-interface ProxySearchItem {
-  id: string;
-  title: string;
-  author?: string;
-  year?: number;
-  format?: string;
-  cover?: string;
-  fileSize?: string;
+const USER_AGENT =
+  'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36';
+
+const HEADERS: Record<string, string> = {
+  'User-Agent': USER_AGENT,
+  'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+  'Accept-Language': 'en-US,en;q=0.9',
+  'Cookie': 'covers=on',
+};
+
+// In-memory chapter & prose cache for instant sub-millisecond reader retrieval
+const bookChaptersCache = new Map<string, EBookChapter[]>();
+const chapterTextCache = new Map<string, string>();
+
+/**
+ * Safe network requester using Harbor host bridge
+ */
+async function harborRequest(
+  url: string,
+  responseType: 'text' | 'base64',
+  headers: Record<string, string> = HEADERS
+): Promise<string> {
+  if (typeof harbor !== 'undefined' && harbor.http) {
+    const res = await harbor.http(url, {
+      responseType,
+      headers,
+    });
+    if (!res.ok) {
+      throw new Error(`HTTP ${res.status} for ${url}`);
+    }
+    return res.body;
+  }
+
+  // Fallback for standalone/mock environments
+  const fallbackFetcher = (globalThis as any)['fetch'];
+  if (fallbackFetcher) {
+    const res = await fallbackFetcher(url, { headers, redirect: 'follow' });
+    if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
+    if (responseType === 'base64') {
+      const ab = await res.arrayBuffer();
+      const u8 = new Uint8Array(ab);
+      let binary = '';
+      const chunk = 8192;
+      for (let i = 0; i < u8.length; i += chunk) {
+        binary += String.fromCharCode.apply(null, u8.subarray(i, i + chunk) as unknown as number[]);
+      }
+      return btoa(binary);
+    }
+    return await res.text();
+  }
+
+  throw new Error('No HTTP client available in Harbor scope');
 }
 
-interface ProxySearchResult {
-  page: number;
-  results: ProxySearchItem[];
+async function fetchText(url: string, headers: Record<string, string> = HEADERS): Promise<string> {
+  return harborRequest(url, 'text', headers);
 }
 
-interface ProxyBookDetail {
-  id: string;
-  title: string;
-  author?: string;
-  publisher?: string;
-  year?: number;
-  isbn?: string;
-  cover?: string;
-  description?: string;
+async function fetchBinary(url: string, headers: Record<string, string> = HEADERS): Promise<Uint8Array> {
+  const base64Str = await harborRequest(url, 'base64', headers);
+  const binary = atob(base64Str);
+  const len = binary.length;
+  const bytes = new Uint8Array(len);
+  for (let i = 0; i < len; i++) {
+    bytes[i] = binary.charCodeAt(i);
+  }
+  return bytes;
 }
 
-interface ProxyChaptersResponse {
-  id: string;
-  title?: string;
-  author?: string;
-  totalChapters: number;
-  chapters: Array<{
-    id: string;
-    title: string;
-    position: number;
-  }>;
+/**
+ * Executes a request across multiple LibGen mirror domains with automatic fallback
+ */
+async function fetchFromMirrors(pathWithQuery: string): Promise<{ text: string; base: string }> {
+  let lastErr: Error | null = null;
+  for (const base of MIRROR_DOMAINS) {
+    try {
+      const url = `${base}${pathWithQuery}`;
+      const text = await fetchText(url);
+      if (text.includes("exceeded the 'max_user_connections'") || text.length < 300) {
+        lastErr = new Error(`Mirror ${base} database busy`);
+        continue;
+      }
+      return { text, base };
+    } catch (err: any) {
+      lastErr = err;
+    }
+  }
+  throw lastErr || new Error('All LibGen mirror domains failed');
 }
 
-interface ProxyChapterContentResponse {
-  bookId: string;
-  chapterId: string;
-  content: string;
+function decodeHtmlEntities(str: string): string {
+  return str
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&mdash;/g, '—')
+    .replace(/&ndash;/g, '–')
+    .replace(/&hellip;/g, '…');
+}
+
+function isUsefulTitle(text: string): boolean {
+  if (!text || text.length < 2) return false;
+  if (/^\d+$/.test(text)) return false;
+  if (/^#\d+/.test(text)) return false;
+  if (/^[0-9; \-Xx]+$/.test(text)) return false;
+  if (/^[frclb]\s*\d+$/i.test(text)) return false;
+  if (text.toLowerCase() === 'b' || text.toLowerCase() === 'book') return false;
+  if (/^\d{4}[ -](?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)/i.test(text)) return false;
+  return true;
+}
+
+function formatAuthor(raw?: string | null): string | undefined {
+  if (!raw) return undefined;
+  let cleaned = raw.replace(/<[^>]+>/g, '').trim().replace(/\s+/g, ' ');
+  cleaned = cleaned.replace(/\s*\([^)]*\)$/, '').trim();
+  if (!cleaned) return undefined;
+  const commaMatch = cleaned.match(/^([^,]+),\s*([^,]+)$/);
+  if (commaMatch && !/author|editor/i.test(commaMatch[2])) {
+    return `${commaMatch[2]} ${commaMatch[1]}`.trim();
+  }
+  return cleaned;
+}
+
+function cleanHtmlToProse(html: string): { title?: string; prose: string } {
+  let clean = html.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
+  clean = clean.replace(/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>/gi, '');
+  clean = clean.replace(/<head\b[^<]*(?:(?!<\/head>)<[^<]*)*<\/head>/gi, '');
+
+  // Extract heading for chapter title
+  const headingMatch = clean.match(/<h[1-3][^>]*>([\s\S]*?)<\/h[1-3]>/i);
+  let title: string | undefined;
+  if (headingMatch) {
+    title = decodeHtmlEntities(headingMatch[1].replace(/<[^>]+>/g, '').trim().replace(/\s+/g, ' '));
+  }
+
+  // Extract paragraphs
+  const paragraphs: string[] = [];
+  const pRegex = /<(?:p|blockquote)[^>]*>([\s\S]*?)<\/(?:p|blockquote)>/gi;
+  let pMatch: RegExpExecArray | null;
+  while ((pMatch = pRegex.exec(clean)) !== null) {
+    const inner = pMatch[1].replace(/<br\s*\/?>/gi, '\n');
+    const text = decodeHtmlEntities(inner.replace(/<[^>]+>/g, '')).replace(/\s+/g, ' ').trim();
+    if (text.length > 0) {
+      paragraphs.push(text);
+    }
+  }
+
+  // Fallback if no <p> tags
+  if (paragraphs.length === 0) {
+    const text = decodeHtmlEntities(clean.replace(/<br\s*\/?>/gi, '\n').replace(/<[^>]+>/g, ''));
+    const lines = text.split(/\n+/).map(l => l.trim()).filter(Boolean);
+    paragraphs.push(...lines);
+  }
+
+  return {
+    title,
+    prose: paragraphs.join('\n\n'),
+  };
+}
+
+/**
+ * Pure JavaScript in-memory EPUB decompressor & chapter extractor
+ */
+function unpackEpub(bookId: string, bytes: Uint8Array): EBookChapter[] {
+  const unzipped = unzipSync(bytes);
+
+  // 1. Locate rootfile from META-INF/container.xml
+  const containerBytes = unzipped['META-INF/container.xml'];
+  if (!containerBytes) {
+    throw new Error('Invalid EPUB file: META-INF/container.xml missing');
+  }
+
+  const containerXml = strFromU8(containerBytes);
+  const opfMatch = containerXml.match(/full-path=["']([^"']+)["']/i);
+  if (!opfMatch) {
+    throw new Error('Invalid EPUB: OPF rootfile path not found in container.xml');
+  }
+
+  const opfPath = opfMatch[1];
+  const opfDir = opfPath.includes('/') ? opfPath.split('/').slice(0, -1).join('/') : '';
+  const opfBytes = unzipped[opfPath];
+  if (!opfBytes) {
+    throw new Error(`Invalid EPUB: OPF file not found at ${opfPath}`);
+  }
+
+  const opfXml = strFromU8(opfBytes);
+
+  // 2. Build manifest map
+  const manifest = new Map<string, string>();
+  const itemRegex = /<item\b([^>]+)\/?>/gi;
+  let m: RegExpExecArray | null;
+  while ((m = itemRegex.exec(opfXml)) !== null) {
+    const attrs = m[1];
+    const idMatch = attrs.match(/\bid=["']([^"']+)["']/i);
+    const hrefMatch = attrs.match(/\bhref=["']([^"']+)["']/i);
+    if (idMatch && hrefMatch) {
+      manifest.set(idMatch[1], hrefMatch[1]);
+    }
+  }
+
+  // 3. Read spine in reading order
+  const spineHrefs: string[] = [];
+  const spineRegex = /<itemref\b([^>]+)\/?>/gi;
+  while ((m = spineRegex.exec(opfXml)) !== null) {
+    const idref = m[1].match(/\bidref=["']([^"']+)["']/i);
+    if (idref && manifest.has(idref[1])) {
+      spineHrefs.push(manifest.get(idref[1])!);
+    }
+  }
+
+  // 4. Try reading Table of Contents from NCX
+  const tocMap = new Map<string, string>();
+  for (const [, href] of manifest.entries()) {
+    if (href.endsWith('.ncx')) {
+      const ncxPath = opfDir ? `${opfDir}/${href}` : href;
+      const ncxBytes = unzipped[ncxPath] || unzipped[href];
+      if (ncxBytes) {
+        const ncxXml = strFromU8(ncxBytes);
+        const npRegex = /<navPoint\b[\s\S]*?<navLabel>\s*<text>([\s\S]*?)<\/text>\s*<\/navLabel>\s*<content\s+src=["']([^"']+)["']/gi;
+        let nm: RegExpExecArray | null;
+        while ((nm = npRegex.exec(ncxXml)) !== null) {
+          const label = decodeHtmlEntities(nm[1].trim());
+          const src = nm[2].split('#')[0];
+          if (label && src) {
+            tocMap.set(src, label);
+          }
+        }
+      }
+      break;
+    }
+  }
+
+  // 5. Parse each chapter file in spine order
+  const chapters: EBookChapter[] = [];
+  let position = 0;
+
+  for (const rawHref of spineHrefs) {
+    const relHref = rawHref.split('#')[0];
+    const fullPath = opfDir ? `${opfDir}/${relHref}` : relHref;
+    const fileBytes = unzipped[fullPath] || unzipped[relHref];
+    if (!fileBytes) continue;
+
+    const html = strFromU8(fileBytes);
+    const { title: headingTitle, prose } = cleanHtmlToProse(html);
+
+    // Skip purely empty pages with zero text unless it's a frontispiece
+    const proseText = prose.length > 0 ? prose : '*(This section contains an illustration or frontispiece)*';
+    const chapterTitle = tocMap.get(relHref) || headingTitle || `Chapter ${position + 1}`;
+    const chapterId = `${bookId}:${position + 1}`;
+
+    chapters.push({
+      id: chapterId,
+      title: chapterTitle,
+      position,
+      chapter: String(position + 1),
+    });
+
+    chapterTextCache.set(chapterId, proseText);
+    position++;
+  }
+
+  return chapters;
+}
+
+function parseCatalogHtml(html: string, base: string): EBookSummary[] {
+  const results: EBookSummary[] = [];
+  const rows = html.match(/<tr\b[\s\S]*?<\/tr>/gi) || [];
+
+  for (const row of rows) {
+    const md5Match = row.match(/md5=([a-fA-F0-9]{32})/i);
+    if (!md5Match) continue;
+
+    const md5 = md5Match[1].toLowerCase();
+    const cells = row.match(/<td\b[\s\S]*?<\/td>/gi) || [];
+    if (cells.length < 8) continue;
+
+    // Cover in cell 0
+    let cover: string | undefined;
+    let hasCoverCol = false;
+    const coverImgMatch = cells[0].match(/<img\b[^>]*src=["']([^"']+)["']/i);
+
+    if (coverImgMatch) {
+      hasCoverCol = true;
+      const src = coverImgMatch[1];
+      if (!src.includes('blank.png') && !src.includes('logo.png')) {
+        cover = src.startsWith('http') ? src : `${base}${src.startsWith('/') ? '' : '/'}${src}`;
+      }
+    }
+
+    // Title in cell 1 (or 0)
+    const titleCell = hasCoverCol ? cells[1] : cells[0];
+    let bestTitle = '';
+
+    const editionAnchor = titleCell.match(/<a\b[^>]*href=["'][^"']*edition\.php[^"']*["'][^>]*>([\s\S]*?)<\/a>/i);
+    if (editionAnchor) {
+      const txt = decodeHtmlEntities(editionAnchor[1].replace(/<[^>]+>/g, '').trim().replace(/\s+/g, ' '));
+      if (isUsefulTitle(txt)) bestTitle = txt;
+    }
+
+    if (!bestTitle) {
+      const boldMatch = titleCell.match(/<b\b[^>]*>([\s\S]*?)<\/b>/i);
+      if (boldMatch) {
+        const bTxt = decodeHtmlEntities(boldMatch[1].replace(/<[^>]+>/g, '').trim().replace(/\s+/g, ' '));
+        if (isUsefulTitle(bTxt)) bestTitle = bTxt;
+      }
+    }
+
+    if (!bestTitle) {
+      const anyAnchor = titleCell.match(/<a\b[^>]*>([\s\S]*?)<\/a>/i);
+      if (anyAnchor) {
+        const txt = decodeHtmlEntities(anyAnchor[1].replace(/<[^>]+>/g, '').trim().replace(/\s+/g, ' '));
+        if (isUsefulTitle(txt)) bestTitle = txt;
+      }
+    }
+
+    if (!bestTitle) {
+      bestTitle = `Book (${md5.slice(0, 8)})`;
+    }
+
+    const offset = hasCoverCol ? 1 : 0;
+    const rawAuthor = cells[offset + 1]?.replace(/<[^>]+>/g, '').trim();
+    const author = formatAuthor(rawAuthor);
+    const publisher = cells[offset + 2]?.replace(/<[^>]+>/g, '').trim();
+    const yearMatch = cells[offset + 3]?.match(/\b(\d{4})\b/);
+    const year = yearMatch ? parseInt(yearMatch[1], 10) : undefined;
+    const fileSize = cells[offset + 6]?.replace(/<[^>]+>/g, '').trim();
+    const format = cells[offset + 7]?.replace(/<[^>]+>/g, '').trim()?.toLowerCase();
+
+    results.push({
+      id: md5,
+      title: bestTitle,
+      author,
+      cover,
+      year,
+      genres: format ? [format.toUpperCase()] : undefined,
+      description: publisher ? `${publisher} (${year || 'N/A'}) • ${fileSize || ''}` : undefined,
+      siteUrl: `${base}/ads.php?md5=${md5}`,
+    });
+  }
+
+  return results;
 }
 
 export const plugin: EBookProvider = {
@@ -53,110 +360,146 @@ export const plugin: EBookProvider = {
 
   async popular(offset: number): Promise<EBookSummary[]> {
     const page = Math.floor(offset / 25) + 1;
-    const res = await harbor.http<ProxySearchResult>(`${PROXY_URL}/api/v1/popular?page=${page}`, {
-      responseType: 'json',
-    });
-
-    if (!res || !res.results) return [];
-
-    return res.results.map((item) => ({
-      id: item.id,
-      title: item.title,
-      author: item.author,
-      year: item.year,
-      cover: item.cover,
-      genres: item.format ? [item.format.toUpperCase()] : undefined,
-      description: item.fileSize ? `Format: ${item.format || 'EPUB'} • ${item.fileSize}` : undefined,
-    }));
+    const path = `/index.php?req=fiction&page=${page}&topics[]=l&topics[]=f&covers=on`;
+    const { text, base } = await fetchFromMirrors(path);
+    return parseCatalogHtml(text, base);
   },
 
   async search(query: string, offset: number): Promise<EBookSummary[]> {
     const page = Math.floor(offset / 25) + 1;
-    const res = await harbor.http<ProxySearchResult>(
-      `${PROXY_URL}/api/v1/search?q=${encodeURIComponent(query)}&page=${page}`,
-      {
-        responseType: 'json',
-      }
-    );
-
-    if (!res || !res.results) return [];
-
-    return res.results.map((item) => ({
-      id: item.id,
-      title: item.title,
-      author: item.author,
-      year: item.year,
-      cover: item.cover,
-      genres: item.format ? [item.format.toUpperCase()] : undefined,
-      description: item.fileSize ? `Format: ${item.format || 'EPUB'} • ${item.fileSize}` : undefined,
-    }));
+    const path = `/index.php?req=${encodeURIComponent(query)}&page=${page}&topics[]=l&topics[]=f&covers=on`;
+    const { text, base } = await fetchFromMirrors(path);
+    return parseCatalogHtml(text, base);
   },
 
   async detail(id: string): Promise<EBookSummary | null> {
-    const res = await harbor.http<ProxyBookDetail>(`${PROXY_URL}/api/v1/book/${id}/detail`, {
-      responseType: 'json',
-    });
+    const path = `/ads.php?md5=${id}`;
+    const { text, base } = await fetchFromMirrors(path);
 
-    if (!res) return null;
+    // Parse structured BibTeX
+    const bibMatch = text.match(/<textarea[^>]*id=["']bibtext["'][^>]*>([\s\S]*?)<\/textarea>/i);
+    let title = '';
+    let author = '';
+    let publisher = '';
+    let isbn = '';
+    let year: number | undefined;
+
+    if (bibMatch) {
+      const bib = bibMatch[1];
+      const t = bib.match(/title\s*=\s*\{([^}]+)\}/i);
+      const a = bib.match(/author\s*=\s*\{([^}]+)\}/i);
+      const p = bib.match(/publisher\s*=\s*\{([^}]+)\}/i);
+      const is = bib.match(/isbn\s*=\s*\{([^}]+)\}/i);
+      const y = bib.match(/year\s*=\s*\{([^}]+)\}/i);
+      if (t) title = decodeHtmlEntities(t[1].trim());
+      if (a) author = a[1].trim();
+      if (p) publisher = decodeHtmlEntities(p[1].trim());
+      if (is) isbn = is[1].replace(/[- ]/g, '').trim();
+      if (y) year = parseInt(y[1], 10) || undefined;
+    }
+
+    if (!title) {
+      const tMatch = text.match(/Title:\s*([^<\n\r]+)/i);
+      if (tMatch) title = decodeHtmlEntities(tMatch[1].trim());
+    }
+    if (!author) {
+      const aMatch = text.match(/Author\(s\):\s*<a[^>]*>([^<]+)<\/a>/i) || text.match(/Author\(s\):\s*([^<\n\r]+)/i);
+      if (aMatch) author = aMatch[1].trim();
+    }
+    if (!publisher) {
+      const pMatch = text.match(/Publisher:\s*([^<\n\r]+)/i);
+      if (pMatch) publisher = decodeHtmlEntities(pMatch[1].trim());
+    }
+    if (!isbn) {
+      const isMatch = text.match(/ISBN:\s*([0-9Xx\- ]+)/i);
+      if (isMatch) isbn = isMatch[1].replace(/[- ]/g, '').trim();
+    }
+    if (!year) {
+      const yMatch = text.match(/Year:\s*(\d{4})/i);
+      if (yMatch) year = parseInt(yMatch[1], 10) || undefined;
+    }
+
+    let cover: string | undefined;
+    const coverMatch = text.match(/<img[^>]*src=["']([^"']*(?:covers|fictioncovers|fictionruscovers)[^"']*)["']/i);
+    if (coverMatch) {
+      const rawCover = coverMatch[1];
+      if (!rawCover.includes('blank.png') && !rawCover.includes('logo.png')) {
+        cover = rawCover.startsWith('http') ? rawCover : `${base}${rawCover.startsWith('/') ? '' : '/'}${rawCover}`;
+      }
+    }
+
+    const formattedAuthor = formatAuthor(author);
+    const descParts: string[] = [];
+    if (formattedAuthor) descParts.push(`Author: ${formattedAuthor}`);
+    if (publisher) descParts.push(`Publisher: ${publisher}`);
+    if (year) descParts.push(`Year: ${year}`);
+    if (isbn) descParts.push(`ISBN: ${isbn}`);
 
     return {
-      id: res.id,
-      title: res.title,
-      author: res.author,
-      cover: res.cover,
-      isbn: res.isbn,
-      year: res.year,
-      description: res.description,
+      id,
+      title: title || `Book (${id.slice(0, 8)})`,
+      author: formattedAuthor,
+      cover,
+      isbn: isbn || undefined,
+      year,
+      description: descParts.length > 0 ? descParts.join(' • ') : undefined,
+      siteUrl: `${base}/ads.php?md5=${id}`,
     };
   },
 
   async chapters(id: string): Promise<EBookChapter[]> {
-    const res = await harbor.http<ProxyChaptersResponse>(`${PROXY_URL}/api/v1/book/${id}/chapters`, {
-      responseType: 'json',
-    });
-
-    if (!res || !res.chapters || res.chapters.length === 0) {
-      return [
-        {
-          id: `${id}::1`,
-          title: 'Complete Book / Preface',
-          position: 0,
-          chapter: '1',
-        },
-      ];
+    // 1. Check in-memory cache
+    const cached = bookChaptersCache.get(id);
+    if (cached && cached.length > 0) {
+      return cached;
     }
 
-    return res.chapters.map((ch) => ({
-      id: `${id}::${ch.id}`,
-      title: ch.title,
-      position: ch.position,
-      chapter: String(ch.position + 1),
-    }));
+    // 2. Fetch ads.php to resolve download URL with security token
+    const { text: adsHtml, base } = await fetchFromMirrors(`/ads.php?md5=${id}`);
+    const getMatch = adsHtml.match(/<a[^>]*href=["'](get\.php\?[^"']*md5=[a-fA-F0-9]{32}[^"']*)["']/i);
+
+    let downloadUrl: string | undefined;
+    if (getMatch) {
+      const rel = getMatch[1].replace(/&amp;/g, '&');
+      downloadUrl = `${base}/${rel.startsWith('/') ? rel.slice(1) : rel}`;
+    } else {
+      // Fallback to library.lol mirror
+      downloadUrl = `https://library.lol/main/${id}`;
+    }
+
+    // 3. Download the EPUB bytes
+    const dlHeaders: Record<string, string> = {
+      'User-Agent': USER_AGENT,
+      'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+      'Referer': `${base}/ads.php?md5=${id}`,
+    };
+
+    const bytes = await fetchBinary(downloadUrl, dlHeaders);
+
+    // 4. Unpack EPUB and extract prose chapters
+    const chapters = unpackEpub(id, bytes);
+    bookChaptersCache.set(id, chapters);
+
+    return chapters;
   },
 
   async content(chapterId: string): Promise<string> {
-    const parts = chapterId.split('::');
-    if (parts.length < 2) {
-      throw new Error(`Invalid chapter identifier: ${chapterId}`);
+    // 1. Instant cache lookup
+    const cached = chapterTextCache.get(chapterId);
+    if (cached) {
+      return cached;
     }
 
-    const [bookId, chId] = parts;
-    const res = await harbor.http<ProxyChapterContentResponse>(
-      `${PROXY_URL}/api/v1/book/${bookId}/chapter/${chId}`,
-      {
-        responseType: 'json',
-      }
-    );
-
-    if (!res || typeof res.content !== 'string') {
-      throw new Error(`Failed to load content for chapter ${chId} from proxy.`);
+    // 2. If direct link / bookmark without previous chapters() call:
+    const parts = chapterId.split(':');
+    if (parts.length >= 2) {
+      const bookId = parts[0];
+      await this.chapters(bookId);
+      const text = chapterTextCache.get(chapterId);
+      if (text) return text;
     }
 
-    if (!res.content.trim()) {
-      return '*(This section contains an illustration or frontispiece)*';
-    }
-
-    return res.content;
+    return '*(Chapter content is currently loading or unavailable)*';
   },
 
   async tags(): Promise<EBookTag[]> {
@@ -167,4 +510,6 @@ export const plugin: EBookProvider = {
   },
 };
 
-harbor.register(plugin);
+if (typeof harbor !== 'undefined' && harbor.register) {
+  harbor.register(plugin);
+}

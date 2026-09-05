@@ -1,11 +1,11 @@
 {
   "id": "libgen-stream",
   "name": "Library Genesis (Stream)",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "lang": "en",
   "nsfw": false,
   "icon": "https://libgen.li/img/logo.png",
   "entry": "libgen-stream.plugin.js",
-  "description": "Stream published literature and fiction chapter-by-chapter directly into Harbor via high-performance proxy",
+  "description": "Stream published literature and books chapter-by-chapter directly in Harbor with built-in instant unpacker",
   "website": "https://libgen.li"
 }
