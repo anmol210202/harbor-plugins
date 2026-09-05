@@ -1,6 +1,14 @@
 import Fastify from 'fastify';
 import cors from '@fastify/cors';
+import { ProxyAgent, setGlobalDispatcher } from 'undici';
 import { bookRoutes } from './routes/book.js';
+
+// Route outbound requests through proxy if configured (e.g., Cloudflare WARP container)
+const proxyUrl = process.env.HTTPS_PROXY || process.env.HTTP_PROXY;
+if (proxyUrl) {
+  setGlobalDispatcher(new ProxyAgent(proxyUrl));
+  console.log(`🛡️ Outbound requests routed through proxy: ${proxyUrl}`);
+}
 
 const server = Fastify({
   logger: true,
