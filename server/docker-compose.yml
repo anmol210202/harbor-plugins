@@ -10,6 +10,10 @@ services:
     environment:
       - PORT=3000
       - HOST=0.0.0.0
-      - CACHE_DIR=/app/.cache
+      - CACHE_DIR=/app/cache
+      - NODE_ENV=production
     volumes:
-      - ./cache:/app/.cache
+      - harbor-cache:/app/cache
+
+volumes:
+  harbor-cache:
