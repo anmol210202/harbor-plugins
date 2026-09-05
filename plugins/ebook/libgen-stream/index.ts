@@ -290,7 +290,9 @@ function parseCatalogHtml(html: string, base: string): EBookSummary[] {
     // Cover in cell 0
     let cover: string | undefined;
     let hasCoverCol = false;
-    const coverImgMatch = cells[0].match(/<img\b[^>]*src=["']([^"']+)["']/i);
+    const firstCell = cells[0] || '';
+    const secondCell = cells[1] || '';
+    const coverImgMatch = firstCell.match(/<img\b[^>]*src=["']([^"']+)["']/i);
 
     if (coverImgMatch) {
       hasCoverCol = true;
@@ -301,7 +303,7 @@ function parseCatalogHtml(html: string, base: string): EBookSummary[] {
     }
 
     // Title in cell 1 (or 0)
-    const titleCell = hasCoverCol ? cells[1] : cells[0];
+    const titleCell = hasCoverCol ? secondCell : firstCell;
     let bestTitle = '';
 
     const editionAnchor = titleCell.match(/<a\b[^>]*href=["'][^"']*edition\.php[^"']*["'][^>]*>([\s\S]*?)<\/a>/i);
