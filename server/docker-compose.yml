@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  harbor-book-proxy:
+    build: .
+    container_name: harbor-book-proxy
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - HOST=0.0.0.0
+      - CACHE_DIR=/app/.cache
+    volumes:
+      - ./cache:/app/.cache

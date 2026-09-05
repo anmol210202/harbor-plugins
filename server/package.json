@@ -1,0 +1,24 @@
+{
+  "name": "harbor-book-proxy",
+  "version": "1.0.0",
+  "description": "High-performance EPUB streaming and proxy service for Harbor",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@fastify/cors": "^9.0.1",
+    "adm-zip": "^0.5.16",
+    "cheerio": "^1.0.0-rc.12",
+    "fastify": "^4.28.1"
+  },
+  "devDependencies": {
+    "@types/adm-zip": "^0.5.5",
+    "@types/node": "^22.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.5.0"
+  }
+}

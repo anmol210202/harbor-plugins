@@ -8,7 +8,9 @@
     "build": "tsx scripts/build.ts",
     "validate": "tsx scripts/validate.ts",
     "typecheck": "tsc --noEmit",
-    "serve": "tsx scripts/serve.ts"
+    "serve": "tsx scripts/serve.ts",
+    "proxy": "cd server && npm start",
+    "proxy:dev": "cd server && npm run dev"
   },
   "keywords": [
     "harbor",
