@@ -22,6 +22,10 @@ const HEADERS: Record<string, string> = {
 const bookChaptersCache = new Map<string, EBookChapter[]>();
 const chapterTextCache = new Map<string, string>();
 
+// User VPS Docker proxy endpoint (e.g. 'https://harbor.duckdns.org')
+// If left empty or if offline, the plugin automatically falls back to in-app local decompression.
+const PROXY_SERVER_URL = '';
+
 /**
  * Safe network requester using Harbor host bridge
  */
@@ -463,29 +467,43 @@ export const plugin: EBookProvider = {
       return cached;
     }
 
+    // 2. Try user's VPS Docker server if configured
+    if (PROXY_SERVER_URL) {
+      try {
+        const jsonStr = await fetchText(`${PROXY_SERVER_URL}/api/v1/book/${id}/chapters`);
+        const parsed = JSON.parse(jsonStr);
+        if (parsed && Array.isArray(parsed.chapters) && parsed.chapters.length > 0) {
+          bookChaptersCache.set(id, parsed.chapters);
+          return parsed.chapters;
+        }
+      } catch (_) {
+        // Fallback to local unpacking
+      }
+    }
+
     try {
-      // 2. Fetch ads.php to resolve download URL with security token
+      // 3. Fetch ads.php to resolve download URL with security token
       const { text: adsHtml, base } = await fetchFromMirrors(`/ads.php?md5=${id}`);
       const getMatch = adsHtml.match(/<a[^>]*href=["'](get\.php\?[^"']*md5=[a-fA-F0-9]{32}[^"']*)["']/i);
 
       let downloadUrl: string;
       if (getMatch) {
         const rel = getMatch[1].replace(/&amp;/g, '&');
-        downloadUrl = `https://libgen.li/${rel.startsWith('/') ? rel.slice(1) : rel}`;
+        downloadUrl = `${base}/${rel.startsWith('/') ? rel.slice(1) : rel}`;
       } else {
-        downloadUrl = `https://libgen.li/get.php?md5=${id}`;
+        downloadUrl = `${base}/get.php?md5=${id}`;
       }
 
-      // 3. Download the file bytes
+      // 4. Download the file bytes
       const dlHeaders: Record<string, string> = {
         'User-Agent': USER_AGENT,
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
-        'Referer': `https://libgen.li/ads.php?md5=${id}`,
+        'Referer': `${base}/ads.php?md5=${id}`,
       };
 
       const bytes = await fetchBinary(downloadUrl, dlHeaders);
 
-      // 4. Verify ZIP archive magic bytes (0x50, 0x4B)
+      // 5. Verify ZIP archive magic bytes (0x50, 0x4B)
       const isZip = bytes && bytes.length > 100 && bytes[0] === 0x50 && bytes[1] === 0x4B;
       if (isZip) {
         const chapters = unpackEpub(id, bytes);
@@ -498,7 +516,7 @@ export const plugin: EBookProvider = {
       // Graceful fallback for non-EPUB formats (AZW3, PDF, etc.)
     }
 
-    // 5. Fallback: Never return empty chapters to Harbor
+    // 6. Fallback: Never return empty chapters to Harbor
     const fallbackChapterId = `overview:${id}`;
     const fallbackChapters: EBookChapter[] = [
       {
@@ -517,6 +535,22 @@ export const plugin: EBookProvider = {
     const cached = chapterTextCache.get(chapterId);
     if (cached) {
       return cached;
+    }
+
+    // 2. Try user's VPS Docker server if configured
+    if (PROXY_SERVER_URL && !chapterId.startsWith('overview:')) {
+      const parts = chapterId.split(':');
+      if (parts.length >= 2) {
+        const bookId = parts[0];
+        try {
+          const jsonStr = await fetchText(`${PROXY_SERVER_URL}/api/v1/book/${bookId}/chapter/${encodeURIComponent(chapterId)}`);
+          const parsed = JSON.parse(jsonStr);
+          if (parsed && typeof parsed.content === 'string') {
+            chapterTextCache.set(chapterId, parsed.content);
+            return parsed.content;
+          }
+        } catch (_) {}
+      }
     }
 
     // 2. Handle overview fallback chapter for non-EPUB / PDF / AZW3 formats

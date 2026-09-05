@@ -10,11 +10,11 @@ FROM node:22-alpine AS runner
 
 WORKDIR /app
 ENV NODE_ENV=production
-ENV PORT=7860
+ENV PORT=3000
 ENV HOST=0.0.0.0
-ENV CACHE_DIR=/tmp/cache
+ENV CACHE_DIR=/app/cache
 
-RUN mkdir -p /tmp/cache && chown -R node:node /tmp/cache /app
+RUN mkdir -p /app/cache && chown -R node:node /app/cache /app
 
 USER node
 
@@ -23,6 +23,6 @@ RUN npm ci --omit=dev
 
 COPY --from=builder --chown=node:node /app/dist ./dist
 
-EXPOSE 7860
+EXPOSE 3000
 
 CMD ["node", "dist/index.js"]

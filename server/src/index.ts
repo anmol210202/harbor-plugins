@@ -46,7 +46,7 @@ server.get<{ Querystring: { url?: string } }>('/api/v1/test', async (req) => {
 // Register book routes
 await server.register(bookRoutes);
 
-const PORT = parseInt(process.env.PORT || '7860', 10);
+const PORT = parseInt(process.env.PORT || '3000', 10);
 const HOST = process.env.HOST || '0.0.0.0';
 
 try {
