@@ -22,6 +22,27 @@ server.get('/health', async () => {
   };
 });
 
+// Diagnostic route to inspect upstream response
+server.get<{ Querystring: { url?: string } }>('/api/v1/test', async (req) => {
+  const target = req.query.url || 'https://libgen.vg/index.php?req=fiction';
+  try {
+    const res = await fetch(target, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36',
+      },
+    });
+    const text = await res.text();
+    return {
+      target,
+      status: res.status,
+      headers: Object.fromEntries(res.headers.entries()),
+      bodyPreview: text.slice(0, 1000),
+    };
+  } catch (err: any) {
+    return { target, error: err.message };
+  }
+});
+
 // Register book routes
 await server.register(bookRoutes);
 
