@@ -1,0 +1,11 @@
+{
+  "id": "royalroad",
+  "name": "Royal Road",
+  "version": "1.0.0",
+  "lang": "en",
+  "nsfw": false,
+  "icon": "https://www.royalroad.com/icons/favicon-32x32.png",
+  "entry": "royalroad.plugin.js",
+  "description": "Original web novels, litrpg, fantasy, and sci-fi serialized fiction from Royal Road",
+  "website": "https://www.royalroad.com"
+}

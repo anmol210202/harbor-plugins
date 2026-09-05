@@ -1,0 +1,11 @@
+{
+  "id": "libgen",
+  "name": "Library Genesis (Books)",
+  "version": "1.0.0",
+  "lang": "en",
+  "nsfw": false,
+  "icon": "https://libgen.li/favicon.ico",
+  "entry": "libgen.plugin.js",
+  "description": "Fiction and literature book search with automatic ISBN and metadata resolution via Harbor",
+  "website": "https://libgen.li"
+}
