@@ -1,0 +1,11 @@
+{
+  "id": "example-manga",
+  "name": "Example Manga Source",
+  "version": "1.0.0",
+  "lang": "en",
+  "nsfw": false,
+  "icon": "https://harbor-reader.test/icons/manga.png",
+  "entry": "example-manga.plugin.js",
+  "description": "Clean, typed, annotated reference Manga source plugin for Harbor",
+  "website": "https://example-manga.test"
+}

@@ -1,0 +1,11 @@
+{
+  "id": "example-ebook",
+  "name": "Example eBook Source",
+  "version": "1.0.0",
+  "lang": "en",
+  "nsfw": false,
+  "icon": "https://harbor-reader.test/icons/ebook.png",
+  "entry": "example-ebook.plugin.js",
+  "description": "Clean, typed, annotated reference eBook source plugin for Harbor",
+  "website": "https://example-ebook-host.test"
+}
