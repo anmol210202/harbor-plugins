@@ -123,6 +123,7 @@ export const bookRoutes: FastifyPluginAsync = async (server: FastifyInstance) =>
       });
     });
 
+    reply.header('Cache-Control', 'public, max-age=300');
     return {
       query: q,
       page,
@@ -211,6 +212,7 @@ export const bookRoutes: FastifyPluginAsync = async (server: FastifyInstance) =>
       });
     });
 
+    reply.header('Cache-Control', 'public, max-age=1800');
     return {
       page,
       results,
@@ -225,6 +227,7 @@ export const bookRoutes: FastifyPluginAsync = async (server: FastifyInstance) =>
 
     const cached = CacheService.getBookDetail(md5);
     if (cached) {
+      reply.header('Cache-Control', 'public, max-age=86400');
       return cached;
     }
 
@@ -242,6 +245,7 @@ export const bookRoutes: FastifyPluginAsync = async (server: FastifyInstance) =>
       };
 
       CacheService.saveBookDetail(md5, detail);
+      reply.header('Cache-Control', 'public, max-age=86400');
       return detail;
     } catch (err: any) {
       return reply.status(500).send({ error: err.message });
@@ -257,6 +261,7 @@ export const bookRoutes: FastifyPluginAsync = async (server: FastifyInstance) =>
     // Check if chapters are already parsed and cached
     const cachedChapters = CacheService.getChapters(md5);
     if (cachedChapters && cachedChapters.length > 0) {
+      reply.header('Cache-Control', 'public, max-age=604800');
       return {
         id: md5,
         totalChapters: cachedChapters.length,
@@ -286,6 +291,7 @@ export const bookRoutes: FastifyPluginAsync = async (server: FastifyInstance) =>
         CacheService.saveBookDetail(md5, existingDetail);
       }
 
+      reply.header('Cache-Control', 'public, max-age=604800');
       return {
         id: md5,
         title: parsed.title,
@@ -306,6 +312,7 @@ export const bookRoutes: FastifyPluginAsync = async (server: FastifyInstance) =>
 
     const cachedContent = CacheService.getChapterContent(md5, chapterId);
     if (cachedContent !== null) {
+      reply.header('Cache-Control', 'public, max-age=31536000, immutable');
       return {
         bookId: md5,
         chapterId,
@@ -330,6 +337,7 @@ export const bookRoutes: FastifyPluginAsync = async (server: FastifyInstance) =>
         return reply.status(404).send({ error: `Chapter ${chapterId} not found in book ${md5}` });
       }
 
+      reply.header('Cache-Control', 'public, max-age=31536000, immutable');
       return {
         bookId: md5,
         chapterId,
