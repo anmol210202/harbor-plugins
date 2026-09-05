@@ -22,9 +22,10 @@ const HEADERS: Record<string, string> = {
 const bookChaptersCache = new Map<string, EBookChapter[]>();
 const chapterTextCache = new Map<string, string>();
 
-// User VPS Docker proxy endpoint (e.g. 'https://harbor.duckdns.org')
-// If left empty or if offline, the plugin automatically falls back to in-app local decompression.
-const PROXY_SERVER_URL = '';
+// Configurable VPS Docker Proxy URL (e.g., 'https://books.yourname.duckdns.org')
+// If set, requests are proxied and cached by your VPS with sub-10ms response times.
+// If left empty or if offline, the plugin automatically falls back to in-app direct unpacking.
+export const PROXY_SERVER_URL = '';
 
 /**
  * Safe network requester using Harbor host bridge
@@ -470,11 +471,11 @@ export const plugin: EBookProvider = {
     // 2. Try user's VPS Docker server if configured
     if (PROXY_SERVER_URL) {
       try {
-        const jsonStr = await fetchText(`${PROXY_SERVER_URL}/api/v1/book/${id}/chapters`);
-        const parsed = JSON.parse(jsonStr);
-        if (parsed && Array.isArray(parsed.chapters) && parsed.chapters.length > 0) {
-          bookChaptersCache.set(id, parsed.chapters);
-          return parsed.chapters;
+        const jsonStr = await fetchText(`${PROXY_SERVER_URL.replace(/\/+$/, '')}/api/v1/book/${id}/chapters`);
+        const data = JSON.parse(jsonStr);
+        if (data && Array.isArray(data.chapters) && data.chapters.length > 0) {
+          bookChaptersCache.set(id, data.chapters);
+          return data.chapters;
         }
       } catch (_) {
         // Fallback to local unpacking
@@ -543,11 +544,13 @@ export const plugin: EBookProvider = {
       if (parts.length >= 2) {
         const bookId = parts[0];
         try {
-          const jsonStr = await fetchText(`${PROXY_SERVER_URL}/api/v1/book/${bookId}/chapter/${encodeURIComponent(chapterId)}`);
-          const parsed = JSON.parse(jsonStr);
-          if (parsed && typeof parsed.content === 'string') {
-            chapterTextCache.set(chapterId, parsed.content);
-            return parsed.content;
+          const jsonStr = await fetchText(
+            `${PROXY_SERVER_URL.replace(/\/+$/, '')}/api/v1/book/${bookId}/chapter/${encodeURIComponent(chapterId)}`
+          );
+          const data = JSON.parse(jsonStr);
+          if (data && typeof data.content === 'string' && data.content.length > 0) {
+            chapterTextCache.set(chapterId, data.content);
+            return data.content;
           }
         } catch (_) {}
       }

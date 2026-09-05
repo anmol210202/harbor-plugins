@@ -87,7 +87,8 @@ export const CacheService = {
     const mem = getMem<string>(`content:${md5}:${chapterId}`);
     if (mem) return mem;
 
-    const file = path.join(getBookDir(md5), `ch_${chapterId}.txt`);
+    const safeId = chapterId.replace(/[^a-zA-Z0-9_-]/g, '_');
+    const file = path.join(getBookDir(md5), `ch_${safeId}.txt`);
     if (!fs.existsSync(file)) return null;
 
     try {
@@ -101,7 +102,8 @@ export const CacheService = {
 
   saveChapterContent(md5: string, chapterId: string, content: string): void {
     setMem(`content:${md5}:${chapterId}`, content);
-    const file = path.join(getBookDir(md5), `ch_${chapterId}.txt`);
+    const safeId = chapterId.replace(/[^a-zA-Z0-9_-]/g, '_');
+    const file = path.join(getBookDir(md5), `ch_${safeId}.txt`);
     fs.writeFileSync(file, content, 'utf8');
   },
 };

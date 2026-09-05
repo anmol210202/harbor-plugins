@@ -163,12 +163,10 @@ export const EpubResolver = {
         const arrayBuf = await res.arrayBuffer();
         const buf = Buffer.from(arrayBuf);
 
-        // Check for HTML error payload
-        if (buf.length < 2048) {
-          const str = buf.toString('utf8');
-          if (str.includes('<html') || str.includes('exceeded the \'max_user_connections\'')) {
-            throw new Error(`LibGen returned HTML error rather than book file: ${str.slice(0, 150)}`);
-          }
+        // Check for valid ZIP/EPUB magic bytes (0x50, 0x4B)
+        if (buf.length < 100 || buf[0] !== 0x50 || buf[1] !== 0x4B) {
+          const str = buf.subarray(0, 500).toString('utf8');
+          throw new Error(`Upstream returned non-zip payload: ${str.slice(0, 150)}`);
         }
 
         return buf;
