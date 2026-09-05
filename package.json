@@ -5,7 +5,10 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "build": "tsx scripts/build.ts",
+    "build": "tsx scripts/build.ts && npm --prefix server install && npm --prefix server run build",
+    "build:plugins": "tsx scripts/build.ts",
+    "build:server": "npm --prefix server install && npm --prefix server run build",
+    "start": "npm --prefix server start",
     "validate": "tsx scripts/validate.ts",
     "typecheck": "tsc --noEmit",
     "serve": "tsx scripts/serve.ts",
