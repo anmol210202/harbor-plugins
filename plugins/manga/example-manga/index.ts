@@ -3,11 +3,20 @@ import type { HElement } from '../../../shared/types/harbor.js';
 import { createUrlResolver } from '../../../shared/utils/url.js';
 import { calcPage, cleanTitle } from '../../../shared/utils/text.js';
 
-const BASE = 'https://example-manga-host.test';
-const resolveUrl = createUrlResolver(BASE);
+const DEFAULT_BASE = 'https://example.com';
+
+function getBaseUrl(): string {
+  if (typeof harbor !== 'undefined' && typeof harbor.getPreference === 'function') {
+    return harbor.getPreference('mirrorUrl', DEFAULT_BASE) || DEFAULT_BASE;
+  }
+  return DEFAULT_BASE;
+}
+
+const resolveUrl = createUrlResolver(DEFAULT_BASE);
 
 async function getDoc(path: string) {
-  const res = await harbor.http(BASE + path, { responseType: 'text' });
+  const base = getBaseUrl();
+  const res = await harbor.http(base + path, { responseType: 'text' });
   if (!res.ok) throw new Error(`HTTP ${res.status} for ${path}`);
   return harbor.parseHtml(res.body);
 }
@@ -83,7 +92,7 @@ export const plugin: MangaProvider = {
 
   async pageUrls(chapterId: string): Promise<string[]> {
     // Attempt JSON API first
-    const data = await harbor.http<{ images?: string[] }>(`${BASE}/api/${chapterId}/pages`, { responseType: 'json' });
+    const data = await harbor.http<{ images?: string[] }>(`${getBaseUrl()}/api/${chapterId}/pages`, { responseType: 'json' });
     if (data && Array.isArray(data.images)) {
       return data.images.map(resolveUrl).filter((url): url is string => Boolean(url));
     }
@@ -110,17 +119,23 @@ export const plugin: MangaProvider = {
 
   preferences: [
     {
+      key: 'mirrorUrl',
+      label: 'Mirror Domain',
+      type: 'text',
+      default: 'https://example.com',
+    },
+    {
       key: 'imageQuality',
       label: 'Image Quality',
       type: 'select',
-      options: ['high', 'medium', 'dataSaver'],
+      options: ['high', 'medium', 'low'],
       default: 'high',
     },
     {
-      key: 'mirrorDomain',
-      label: 'Custom Mirror URL',
-      type: 'text',
-      default: 'https://example-manga-host.test',
+      key: 'dataSaver',
+      label: 'Data Saver Mode',
+      type: 'checkbox',
+      default: false,
     },
   ],
 

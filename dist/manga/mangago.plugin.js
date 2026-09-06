@@ -56,6 +56,12 @@
       return "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36";
     },
     getState(key, def) {
+      if (typeof harbor !== "undefined" && typeof harbor.getPreference === "function") {
+        try {
+          const val = harbor.getPreference(key, undefined);
+          if (val !== undefined && val !== null && val !== "") return val;
+        } catch (_) {}
+      }
       return __stateStore.has(key) ? __stateStore.get(key) : def;
     },
     setState(val, key) {
@@ -77,7 +83,20 @@
       return new Promise((r) => setTimeout(r, ms));
     },
     async scheduleRequest(req) {
-      const url = req.url;
+      let url = req.url;
+      if (typeof harbor !== "undefined" && typeof harbor.getPreference === "function") {
+        try {
+          const customMirror = harbor.getPreference("mirrorUrl", "");
+          if (customMirror && typeof customMirror === "string" && customMirror.trim()) {
+            const mirrorBase = customMirror.trim().replace(/[/]+$/, "");
+            const parsedMirror = mirrorBase.startsWith("http") ? mirrorBase : "https://" + mirrorBase;
+            const urlObj = new URL(url);
+            const mirrorObj = new URL(parsedMirror);
+            url = url.replace(urlObj.origin, mirrorObj.origin);
+          }
+        } catch (_) {}
+      }
+
       const method = req.method || "GET";
       const headers = req.headers || {};
       const body = req.body;
@@ -148,6 +167,28 @@ return getDescramblingKeyInner(${JSON.stringify(t)});
   const plugin = {
     id: "mangago",
     name: "Mangago",
+
+    preferences: [
+      {
+        key: "mirrorUrl",
+        label: "Mirror Domain",
+        type: "text",
+        default: "",
+      },
+      {
+        key: "imageQuality",
+        label: "Image Quality",
+        type: "select",
+        options: ["high", "medium", "low"],
+        default: "high",
+      },
+      {
+        key: "dataSaver",
+        label: "Data Saver Mode",
+        type: "checkbox",
+        default: false,
+      },
+    ],
 
     async popular(offset, tagOrFilters) {
       if (__ext) {
