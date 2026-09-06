@@ -20,6 +20,8 @@ export interface HttpOptions {
   body?: string;
   responseType?: 'text' | 'json' | 'base64';
   timeoutMs?: number;
+  allowReferer?: string;
+  allowCookie?: string;
 }
 
 export interface HttpResponseText {

@@ -22,6 +22,9 @@
   ],
   "author": "",
   "license": "MIT",
+  "dependencies": {
+    "fflate": "^0.8.2"
+  },
   "devDependencies": {
     "@types/node": "^26.4.1",
     "esbuild": "^0.28.2",
