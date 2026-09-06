@@ -38,8 +38,8 @@ jobs:
       - name: Typecheck
         run: npm run typecheck
 
-      - name: Build Plugins & Manifests
-        run: npm run build
+      - name: Sync Upstream & Build Plugins
+        run: npm run sync-upstream && npm run build
 
       - name: Validate Plugins
         run: npm run validate
