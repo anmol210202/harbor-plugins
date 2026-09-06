@@ -79,6 +79,16 @@ export interface HarborHost {
   register(provider: any): void;
 
   /**
+   * Read user configuration preference value.
+   */
+  getPreference<T = unknown>(key: string, defaultValue?: T): T;
+
+  /**
+   * Safely extract JSON embedded in HTML script tags or data attributes.
+   */
+  extractJson(html: string, selector?: string): unknown;
+
+  /**
    * Log messages to Harbor dev console.
    */
   log(...args: any[]): void;

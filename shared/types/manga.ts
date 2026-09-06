@@ -41,17 +41,39 @@ export interface MangaTag {
   group?: string;
 }
 
+export type FilterTriState = "include" | "exclude" | "ignore";
+
+export type PluginFilterItem =
+  | { type: "tri-state"; id: string; name: string; state?: FilterTriState }
+  | { type: "select"; id: string; name: string; values: string[]; selectedIndex?: number }
+  | { type: "sort"; id: string; name: string; values: string[]; selectedIndex?: number; ascending?: boolean }
+  | { type: "checkbox"; id: string; name: string; checked?: boolean }
+  | { type: "text"; id: string; name: string; value?: string };
+
+export type PluginFilterGroup = {
+  id: string;
+  name: string;
+  filters: PluginFilterItem[];
+};
+
+export type PluginPreference =
+  | { key: string; label: string; type: "select"; options: string[]; default: string }
+  | { key: string; label: string; type: "text"; default?: string }
+  | { key: string; label: string; type: "checkbox"; default?: boolean };
+
 export interface MangaProvider {
   /** Must match manifest id */
   id: string;
   name: string;
 
-  popular(offset: number, tagId?: string): Promise<MangaSummary[]>;
-  search(query: string, offset: number, tagId?: string): Promise<MangaSummary[]>;
+  popular(offset: number, tagId?: string | PluginFilterGroup[]): Promise<MangaSummary[]>;
+  search(query: string, offset: number, tagId?: string | PluginFilterGroup[]): Promise<MangaSummary[]>;
   detail(id: string): Promise<MangaSummary | null>;
   chapters(id: string): Promise<MangaChapter[]>;
   pageUrls(chapterId: string): Promise<string[]>;
   tags?(): Promise<MangaTag[]>;
+  getFilters?(): Promise<PluginFilterGroup[]>;
+  preferences?: PluginPreference[];
 }
 
 export interface MangaPluginManifest {

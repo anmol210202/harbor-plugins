@@ -8,12 +8,12 @@
     "totalEndpoints": 7,
     "cloudflareDetected": true,
     "cloudflareChallenge": true,
-    "totalLatencyMs": 2257,
+    "totalLatencyMs": 2472,
     "endpoints": [
       {
         "endpoint": "popular_page1",
         "status": "PASS",
-        "latencyMs": 761,
+        "latencyMs": 690,
         "itemCount": 20,
         "sample": {
           "id": "SFrub9DDGMrmdZWyh",
@@ -24,13 +24,13 @@
       {
         "endpoint": "popular_page2_scroll",
         "status": "PASS",
-        "latencyMs": 221,
+        "latencyMs": 208,
         "itemCount": 20
       },
       {
         "endpoint": "search",
         "status": "PASS",
-        "latencyMs": 223,
+        "latencyMs": 248,
         "itemCount": 6,
         "sample": {
           "query": "Solo Leveling",
@@ -40,7 +40,7 @@
       {
         "endpoint": "detail",
         "status": "PASS",
-        "latencyMs": 213,
+        "latencyMs": 224,
         "sample": {
           "title": "Solo Leveling",
           "status": "Completed",
@@ -50,7 +50,7 @@
       {
         "endpoint": "chapters",
         "status": "PASS",
-        "latencyMs": 363,
+        "latencyMs": 377,
         "itemCount": 219,
         "sample": {
           "chapterId": "SFrub9DDGMrmdZWyh::0",
@@ -61,7 +61,7 @@
       {
         "endpoint": "pageUrls",
         "status": "FAIL",
-        "latencyMs": 442,
+        "latencyMs": 690,
         "error": "Application.executeInWebView is not a function"
       }
     ],
@@ -76,24 +76,24 @@
     "totalEndpoints": 7,
     "cloudflareDetected": true,
     "cloudflareChallenge": true,
-    "totalLatencyMs": 2304,
+    "totalLatencyMs": 5228,
     "endpoints": [
       {
         "endpoint": "popular_page1",
         "status": "FAIL",
-        "latencyMs": 1015,
+        "latencyMs": 1186,
         "error": "Returned 0 items or invalid structure"
       },
       {
         "endpoint": "popular_page2_scroll",
         "status": "PASS",
-        "latencyMs": 638,
+        "latencyMs": 1540,
         "itemCount": 0
       },
       {
         "endpoint": "search",
         "status": "FAIL",
-        "latencyMs": 312,
+        "latencyMs": 1931,
         "error": "Search for 'Solo' returned 0 items"
       }
     ],
@@ -108,12 +108,12 @@
     "totalEndpoints": 7,
     "cloudflareDetected": true,
     "cloudflareChallenge": false,
-    "totalLatencyMs": 6050,
+    "totalLatencyMs": 5248,
     "endpoints": [
       {
         "endpoint": "popular_page1",
         "status": "PASS",
-        "latencyMs": 1511,
+        "latencyMs": 934,
         "itemCount": 20,
         "sample": {
           "id": "xdhnm",
@@ -124,13 +124,13 @@
       {
         "endpoint": "popular_page2_scroll",
         "status": "PASS",
-        "latencyMs": 364,
+        "latencyMs": 367,
         "itemCount": 20
       },
       {
         "endpoint": "search",
         "status": "PASS",
-        "latencyMs": 370,
+        "latencyMs": 371,
         "itemCount": 1,
         "sample": {
           "query": "Lookism",
@@ -140,7 +140,7 @@
       {
         "endpoint": "detail",
         "status": "PASS",
-        "latencyMs": 730,
+        "latencyMs": 632,
         "sample": {
           "title": "Lookism",
           "status": "Ongoing",
@@ -150,7 +150,7 @@
       {
         "endpoint": "chapters",
         "status": "PASS",
-        "latencyMs": 1656,
+        "latencyMs": 1565,
         "itemCount": 4094,
         "sample": {
           "chapterId": "xdhnm::kEb2b",
@@ -160,7 +160,7 @@
       {
         "endpoint": "pageUrls",
         "status": "PASS",
-        "latencyMs": 390,
+        "latencyMs": 467,
         "itemCount": 57,
         "sample": {
           "firstPageUrl": "https://atsu.moe/static/pages/cmgzl8e3c8vehm191t1j11y4p/kEb2b/dc7990561c1beb54.avif"
@@ -169,7 +169,7 @@
       {
         "endpoint": "image_probe",
         "status": "PASS",
-        "latencyMs": 1025,
+        "latencyMs": 909,
         "sample": {
           "status": 206,
           "contentType": "image/avif"
@@ -187,12 +187,12 @@
     "totalEndpoints": 7,
     "cloudflareDetected": true,
     "cloudflareChallenge": false,
-    "totalLatencyMs": 5750,
+    "totalLatencyMs": 7299,
     "endpoints": [
       {
         "endpoint": "popular_page1",
         "status": "PASS",
-        "latencyMs": 894,
+        "latencyMs": 1026,
         "itemCount": 18,
         "sample": {
           "id": "lookism",
@@ -203,13 +203,13 @@
       {
         "endpoint": "popular_page2_scroll",
         "status": "PASS",
-        "latencyMs": 322,
+        "latencyMs": 473,
         "itemCount": 18
       },
       {
         "endpoint": "search",
         "status": "PASS",
-        "latencyMs": 323,
+        "latencyMs": 615,
         "itemCount": 1,
         "sample": {
           "query": "Lookism",
@@ -219,7 +219,7 @@
       {
         "endpoint": "detail",
         "status": "PASS",
-        "latencyMs": 328,
+        "latencyMs": 468,
         "sample": {
           "title": "Lookism",
           "status": "Ongoing",
@@ -229,7 +229,7 @@
       {
         "endpoint": "chapters",
         "status": "PASS",
-        "latencyMs": 3002,
+        "latencyMs": 3810,
         "itemCount": 632,
         "sample": {
           "chapterId": "lookism::8581",
@@ -240,7 +240,7 @@
       {
         "endpoint": "pageUrls",
         "status": "PASS",
-        "latencyMs": 314,
+        "latencyMs": 509,
         "itemCount": 92,
         "sample": {
           "firstPageUrl": "https://storage.hivetoon.com/public/upload/series/lookism/503468341f2bfb17/image_1_9c56338a.webp"
@@ -249,7 +249,87 @@
       {
         "endpoint": "image_probe",
         "status": "PASS",
-        "latencyMs": 543,
+        "latencyMs": 378,
+        "sample": {
+          "status": 206,
+          "contentType": "image/webp"
+        }
+      }
+    ],
+    "notes": "Behind Cloudflare WAF, passes seamlessly"
+  },
+  {
+    "id": "flamecomics",
+    "name": "FlameComics",
+    "version": "1.0.0-alpha.1",
+    "overallStatus": "OPERATIONAL",
+    "endpointsPassed": 7,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": false,
+    "totalLatencyMs": 20971,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "PASS",
+        "latencyMs": 8815,
+        "itemCount": 6,
+        "sample": {
+          "id": "23",
+          "title": "The Ancient Sovereign of Eternity",
+          "cover": "https://cdn.flamecomics.xyz/uploads/images/series/23/thumbnail.png?1723049203"
+        }
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 3025,
+        "itemCount": 6
+      },
+      {
+        "endpoint": "search",
+        "status": "PASS",
+        "latencyMs": 5428,
+        "itemCount": 1,
+        "sample": {
+          "query": "The Ancient",
+          "match": "The Ancient Sovereign of Eternity"
+        }
+      },
+      {
+        "endpoint": "detail",
+        "status": "PASS",
+        "latencyMs": 998,
+        "sample": {
+          "title": "The Ancient Sovereign of Eternity",
+          "status": "Ongoing",
+          "author": "Tai Yi Shui Sheng"
+        }
+      },
+      {
+        "endpoint": "chapters",
+        "status": "PASS",
+        "latencyMs": 888,
+        "itemCount": 512,
+        "sample": {
+          "chapterId": "23::23:701b5baf6a0aac4d",
+          "chapter": "512",
+          "title": "Chapter 512"
+        }
+      },
+      {
+        "endpoint": "pageUrls",
+        "status": "PASS",
+        "latencyMs": 592,
+        "itemCount": 12,
+        "sample": {
+          "firstPageUrl": "https://cdn.flamecomics.xyz/uploads/images/series/23/701b5baf6a0aac4d/ASOE-512-00.webp?701b5baf6a0aac4d"
+        }
+      },
+      {
+        "endpoint": "image_probe",
+        "status": "PASS",
+        "latencyMs": 1222,
         "sample": {
           "status": 206,
           "contentType": "image/webp"
@@ -267,108 +347,28 @@
     "totalEndpoints": 7,
     "cloudflareDetected": true,
     "cloudflareChallenge": false,
-    "totalLatencyMs": 6469,
+    "totalLatencyMs": 32601,
     "endpoints": [
       {
         "endpoint": "popular_page1",
         "status": "FAIL",
-        "latencyMs": 3180,
+        "latencyMs": 12092,
         "error": "Returned 0 items or invalid structure"
       },
       {
         "endpoint": "popular_page2_scroll",
         "status": "PASS",
-        "latencyMs": 1656,
+        "latencyMs": 13227,
         "itemCount": 0
       },
       {
         "endpoint": "search",
         "status": "FAIL",
-        "latencyMs": 798,
+        "latencyMs": 3583,
         "error": "Search for 'Solo' returned 0 items"
       }
     ],
     "notes": "Host unresponsive or changed domain"
-  },
-  {
-    "id": "flamecomics",
-    "name": "FlameComics",
-    "version": "1.0.0-alpha.1",
-    "overallStatus": "OPERATIONAL",
-    "endpointsPassed": 7,
-    "totalEndpoints": 7,
-    "cloudflareDetected": true,
-    "cloudflareChallenge": false,
-    "totalLatencyMs": 9811,
-    "endpoints": [
-      {
-        "endpoint": "popular_page1",
-        "status": "PASS",
-        "latencyMs": 1650,
-        "itemCount": 6,
-        "sample": {
-          "id": "23",
-          "title": "The Ancient Sovereign of Eternity",
-          "cover": "https://cdn.flamecomics.xyz/uploads/images/series/23/thumbnail.png?1723049203"
-        }
-      },
-      {
-        "endpoint": "popular_page2_scroll",
-        "status": "PASS",
-        "latencyMs": 1745,
-        "itemCount": 6
-      },
-      {
-        "endpoint": "search",
-        "status": "PASS",
-        "latencyMs": 1451,
-        "itemCount": 1,
-        "sample": {
-          "query": "The Ancient",
-          "match": "The Ancient Sovereign of Eternity"
-        }
-      },
-      {
-        "endpoint": "detail",
-        "status": "PASS",
-        "latencyMs": 1596,
-        "sample": {
-          "title": "The Ancient Sovereign of Eternity",
-          "status": "Ongoing",
-          "author": "Tai Yi Shui Sheng"
-        }
-      },
-      {
-        "endpoint": "chapters",
-        "status": "PASS",
-        "latencyMs": 832,
-        "itemCount": 512,
-        "sample": {
-          "chapterId": "23::23:701b5baf6a0aac4d",
-          "chapter": "512",
-          "title": "Chapter 512"
-        }
-      },
-      {
-        "endpoint": "pageUrls",
-        "status": "PASS",
-        "latencyMs": 298,
-        "itemCount": 12,
-        "sample": {
-          "firstPageUrl": "https://cdn.flamecomics.xyz/uploads/images/series/23/701b5baf6a0aac4d/ASOE-512-00.webp?701b5baf6a0aac4d"
-        }
-      },
-      {
-        "endpoint": "image_probe",
-        "status": "PASS",
-        "latencyMs": 2236,
-        "sample": {
-          "status": 206,
-          "contentType": "image/webp"
-        }
-      }
-    ],
-    "notes": "Behind Cloudflare WAF, passes seamlessly"
   },
   {
     "id": "comix",
@@ -379,25 +379,57 @@
     "totalEndpoints": 7,
     "cloudflareDetected": true,
     "cloudflareChallenge": false,
-    "totalLatencyMs": 2357,
+    "totalLatencyMs": 2762,
     "endpoints": [
       {
         "endpoint": "popular_page1",
         "status": "FAIL",
-        "latencyMs": 1128,
+        "latencyMs": 1455,
         "error": "Application.executeInWebView is not a function"
       },
       {
         "endpoint": "popular_page2_scroll",
         "status": "FAIL",
-        "latencyMs": 791,
+        "latencyMs": 890,
         "error": "Application.executeInWebView is not a function"
       },
       {
         "endpoint": "search",
         "status": "FAIL",
-        "latencyMs": 417,
+        "latencyMs": 399,
         "error": "Application.executeInWebView is not a function"
+      }
+    ],
+    "notes": "Host unresponsive or changed domain"
+  },
+  {
+    "id": "kunmanga",
+    "name": "KunManga",
+    "version": "1.0.0-alpha.14",
+    "overallStatus": "OFFLINE",
+    "endpointsPassed": 1,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": false,
+    "totalLatencyMs": 3592,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "FAIL",
+        "latencyMs": 2052,
+        "error": "Returned 0 items or invalid structure"
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 780,
+        "itemCount": 0
+      },
+      {
+        "endpoint": "search",
+        "status": "FAIL",
+        "latencyMs": 387,
+        "error": "Search for 'Solo' returned 0 items"
       }
     ],
     "notes": "Host unresponsive or changed domain"
@@ -411,12 +443,12 @@
     "totalEndpoints": 7,
     "cloudflareDetected": true,
     "cloudflareChallenge": false,
-    "totalLatencyMs": 2922,
+    "totalLatencyMs": 4672,
     "endpoints": [
       {
         "endpoint": "popular_page1",
         "status": "PASS",
-        "latencyMs": 745,
+        "latencyMs": 926,
         "itemCount": 15,
         "sample": {
           "id": "01J76XYE72FJ56JA2KBB8HM7ZF",
@@ -427,13 +459,13 @@
       {
         "endpoint": "popular_page2_scroll",
         "status": "PASS",
-        "latencyMs": 293,
+        "latencyMs": 296,
         "itemCount": 15
       },
       {
         "endpoint": "search",
         "status": "PASS",
-        "latencyMs": 654,
+        "latencyMs": 631,
         "itemCount": 15,
         "sample": {
           "query": "Solo",
@@ -443,7 +475,7 @@
       {
         "endpoint": "detail",
         "status": "PASS",
-        "latencyMs": 261,
+        "latencyMs": 251,
         "sample": {
           "title": "I'm a Noble on the Brink of Ruin So I Might as Well Try Mastering Magic",
           "status": "Ongoing",
@@ -453,7 +485,7 @@
       {
         "endpoint": "chapters",
         "status": "PASS",
-        "latencyMs": 278,
+        "latencyMs": 229,
         "itemCount": 39,
         "sample": {
           "chapterId": "01J76XYE72FJ56JA2KBB8HM7ZF::01M0MS9PB2KEB1S2V6W3GDGFCR",
@@ -464,7 +496,7 @@
       {
         "endpoint": "pageUrls",
         "status": "PASS",
-        "latencyMs": 265,
+        "latencyMs": 218,
         "itemCount": 50,
         "sample": {
           "firstPageUrl": "https://official.lowee.us/manga/My-Noble-Family-Is-Headed-for-Ruin-so-I-May-as-Well-Study-Magic-in-My-Free-Time/0039-001.png"
@@ -473,7 +505,7 @@
       {
         "endpoint": "image_probe",
         "status": "PASS",
-        "latencyMs": 402,
+        "latencyMs": 2102,
         "sample": {
           "status": 206,
           "contentType": "image/png"
@@ -481,70 +513,6 @@
       }
     ],
     "notes": "Behind Cloudflare WAF, passes seamlessly"
-  },
-  {
-    "id": "kunmanga",
-    "name": "KunManga",
-    "version": "1.0.0-alpha.14",
-    "overallStatus": "OFFLINE",
-    "endpointsPassed": 1,
-    "totalEndpoints": 7,
-    "cloudflareDetected": true,
-    "cloudflareChallenge": false,
-    "totalLatencyMs": 5329,
-    "endpoints": [
-      {
-        "endpoint": "popular_page1",
-        "status": "FAIL",
-        "latencyMs": 2732,
-        "error": "Returned 0 items or invalid structure"
-      },
-      {
-        "endpoint": "popular_page2_scroll",
-        "status": "PASS",
-        "latencyMs": 1436,
-        "itemCount": 0
-      },
-      {
-        "endpoint": "search",
-        "status": "FAIL",
-        "latencyMs": 842,
-        "error": "Search for 'Solo' returned 0 items"
-      }
-    ],
-    "notes": "Host unresponsive or changed domain"
-  },
-  {
-    "id": "mangakakalot",
-    "name": "MangaKakalot",
-    "version": "1.0.0-alpha.11",
-    "overallStatus": "CLOUDFLARE_BLOCKED",
-    "endpointsPassed": 1,
-    "totalEndpoints": 7,
-    "cloudflareDetected": true,
-    "cloudflareChallenge": true,
-    "totalLatencyMs": 3496,
-    "endpoints": [
-      {
-        "endpoint": "popular_page1",
-        "status": "FAIL",
-        "latencyMs": 1388,
-        "error": "Returned 0 items or invalid structure"
-      },
-      {
-        "endpoint": "popular_page2_scroll",
-        "status": "PASS",
-        "latencyMs": 1042,
-        "itemCount": 0
-      },
-      {
-        "endpoint": "search",
-        "status": "FAIL",
-        "latencyMs": 523,
-        "error": "Search for 'Solo' returned 0 items"
-      }
-    ],
-    "notes": "Requires interactive Cloudflare Turnstile clearance"
   },
   {
     "id": "toongod",
@@ -555,24 +523,56 @@
     "totalEndpoints": 7,
     "cloudflareDetected": true,
     "cloudflareChallenge": true,
-    "totalLatencyMs": 5624,
+    "totalLatencyMs": 4775,
     "endpoints": [
       {
         "endpoint": "popular_page1",
         "status": "FAIL",
-        "latencyMs": 2526,
+        "latencyMs": 1722,
         "error": "Returned 0 items or invalid structure"
       },
       {
         "endpoint": "popular_page2_scroll",
         "status": "PASS",
-        "latencyMs": 1258,
+        "latencyMs": 1527,
         "itemCount": 0
       },
       {
         "endpoint": "search",
         "status": "FAIL",
-        "latencyMs": 985,
+        "latencyMs": 743,
+        "error": "Search for 'Solo' returned 0 items"
+      }
+    ],
+    "notes": "Requires interactive Cloudflare Turnstile clearance"
+  },
+  {
+    "id": "mangakakalot",
+    "name": "MangaKakalot",
+    "version": "1.0.0-alpha.11",
+    "overallStatus": "CLOUDFLARE_BLOCKED",
+    "endpointsPassed": 1,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": true,
+    "totalLatencyMs": 5630,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "FAIL",
+        "latencyMs": 1726,
+        "error": "Returned 0 items or invalid structure"
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 1335,
+        "itemCount": 0
+      },
+      {
+        "endpoint": "search",
+        "status": "FAIL",
+        "latencyMs": 1871,
         "error": "Search for 'Solo' returned 0 items"
       }
     ],
@@ -587,13 +587,13 @@
     "totalEndpoints": 7,
     "cloudflareDetected": false,
     "cloudflareChallenge": false,
-    "totalLatencyMs": 6109,
+    "totalLatencyMs": 6652,
     "endpoints": [
       {
         "endpoint": "popular_page1",
         "status": "PASS",
-        "latencyMs": 1879,
-        "itemCount": 96,
+        "latencyMs": 2673,
+        "itemCount": 98,
         "sample": {
           "id": "2cf5ac51-8ad6-46a5-a921-2e2f26b5fcf1",
           "title": "The Result of Confessing to the Class Angel",
@@ -603,13 +603,13 @@
       {
         "endpoint": "popular_page2_scroll",
         "status": "PASS",
-        "latencyMs": 299,
-        "itemCount": 96
+        "latencyMs": 318,
+        "itemCount": 98
       },
       {
         "endpoint": "search",
         "status": "PASS",
-        "latencyMs": 951,
+        "latencyMs": 984,
         "itemCount": 19,
         "sample": {
           "query": "The Result",
@@ -619,7 +619,7 @@
       {
         "endpoint": "detail",
         "status": "PASS",
-        "latencyMs": 829,
+        "latencyMs": 753,
         "sample": {
           "title": "The Result of Confessing to the Class Angel",
           "status": "ongoing",
@@ -629,7 +629,7 @@
       {
         "endpoint": "chapters",
         "status": "PASS",
-        "latencyMs": 838,
+        "latencyMs": 741,
         "itemCount": 2,
         "sample": {
           "chapterId": "2cf5ac51-8ad6-46a5-a921-2e2f26b5fcf1::78564646-a4a6-452a-b4b3-54810d75a15a",
@@ -639,7 +639,7 @@
       {
         "endpoint": "pageUrls",
         "status": "PASS",
-        "latencyMs": 452,
+        "latencyMs": 454,
         "itemCount": 16,
         "sample": {
           "firstPageUrl": "https://cmdxd98sb0x3yprd.mangadex.network/data/af82e8a3b0c1360e7b8306f98637f9b2/1-e7e5dacfefa828a78b7ddcaf412c0b203186fb2904226ad05e406a57a3996bde.jpg"
@@ -648,7 +648,7 @@
       {
         "endpoint": "image_probe",
         "status": "PASS",
-        "latencyMs": 820,
+        "latencyMs": 705,
         "sample": {
           "status": 206,
           "contentType": "image/jpeg"
@@ -666,24 +666,24 @@
     "totalEndpoints": 7,
     "cloudflareDetected": false,
     "cloudflareChallenge": false,
-    "totalLatencyMs": 213,
+    "totalLatencyMs": 134,
     "endpoints": [
       {
         "endpoint": "popular_page1",
         "status": "FAIL",
-        "latencyMs": 160,
+        "latencyMs": 98,
         "error": "Returned 0 items or invalid structure"
       },
       {
         "endpoint": "popular_page2_scroll",
         "status": "PASS",
-        "latencyMs": 12,
+        "latencyMs": 7,
         "itemCount": 0
       },
       {
         "endpoint": "search",
         "status": "FAIL",
-        "latencyMs": 10,
+        "latencyMs": 5,
         "error": "Search for 'Solo' returned 0 items"
       }
     ],
@@ -698,24 +698,24 @@
     "totalEndpoints": 7,
     "cloudflareDetected": false,
     "cloudflareChallenge": false,
-    "totalLatencyMs": 166,
+    "totalLatencyMs": 94,
     "endpoints": [
       {
         "endpoint": "popular_page1",
         "status": "FAIL",
-        "latencyMs": 113,
+        "latencyMs": 61,
         "error": "Returned 0 items or invalid structure"
       },
       {
         "endpoint": "popular_page2_scroll",
         "status": "PASS",
-        "latencyMs": 14,
+        "latencyMs": 7,
         "itemCount": 0
       },
       {
         "endpoint": "search",
         "status": "FAIL",
-        "latencyMs": 10,
+        "latencyMs": 5,
         "error": "Search for 'Solo' returned 0 items"
       }
     ],
@@ -730,12 +730,12 @@
     "totalEndpoints": 7,
     "cloudflareDetected": false,
     "cloudflareChallenge": false,
-    "totalLatencyMs": 3314,
+    "totalLatencyMs": 3321,
     "endpoints": [
       {
         "endpoint": "popular_page1",
         "status": "FAIL",
-        "latencyMs": 30,
+        "latencyMs": 23,
         "error": "Returned 0 items or invalid structure"
       },
       {
@@ -747,7 +747,7 @@
       {
         "endpoint": "search",
         "status": "PASS",
-        "latencyMs": 1191,
+        "latencyMs": 1145,
         "itemCount": 12,
         "sample": {
           "query": "Solo",
@@ -757,7 +757,7 @@
       {
         "endpoint": "detail",
         "status": "PASS",
-        "latencyMs": 493,
+        "latencyMs": 408,
         "sample": {
           "title": "I Solo Fiction",
           "author": "AG Media"
@@ -766,7 +766,7 @@
       {
         "endpoint": "chapters",
         "status": "PASS",
-        "latencyMs": 744,
+        "latencyMs": 804,
         "itemCount": 1,
         "sample": {
           "chapterId": "en/canvas/i-solo-fiction/list?title_no=725064::en/canvas/i-solo-fiction/god-reveal/viewer?title_no=725064&episode_no=1&readingLanguageCode=en",
@@ -777,7 +777,7 @@
       {
         "endpoint": "pageUrls",
         "status": "PASS",
-        "latencyMs": 554,
+        "latencyMs": 564,
         "itemCount": 13,
         "sample": {
           "firstPageUrl": "https://webtoon-phinf.pstatic.net/20220119_119/164260419854006Lvu_JPEG/cdb09bfd-38d7-4680-96ba-df1c6c9733a9.jpg?type=q90"
@@ -786,10 +786,2576 @@
       {
         "endpoint": "image_probe",
         "status": "FAIL",
-        "latencyMs": 280,
+        "latencyMs": 358,
         "error": "Image probe returned non-image content (403 text/html)"
       }
     ],
     "notes": "Direct connection"
+  },
+  {
+    "id": "anilist",
+    "name": "AniList",
+    "version": "1.0.0-alpha.19",
+    "overallStatus": "OFFLINE",
+    "endpointsPassed": 1,
+    "totalEndpoints": 7,
+    "cloudflareDetected": false,
+    "cloudflareChallenge": false,
+    "totalLatencyMs": 33,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "FAIL",
+        "latencyMs": 29,
+        "error": "Returned 0 items or invalid structure"
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 0,
+        "itemCount": 0
+      },
+      {
+        "endpoint": "search",
+        "status": "FAIL",
+        "latencyMs": 0,
+        "error": "Search for 'Solo' returned 0 items"
+      }
+    ],
+    "notes": "Host unresponsive or changed domain"
+  },
+  {
+    "id": "allporncomic",
+    "name": "AllPornComic",
+    "version": "1.0.0-alpha.14",
+    "overallStatus": "OFFLINE",
+    "endpointsPassed": 1,
+    "totalEndpoints": 7,
+    "cloudflareDetected": false,
+    "cloudflareChallenge": false,
+    "totalLatencyMs": 112,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "FAIL",
+        "latencyMs": 82,
+        "error": "Returned 0 items or invalid structure"
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 5,
+        "itemCount": 0
+      },
+      {
+        "endpoint": "search",
+        "status": "FAIL",
+        "latencyMs": 2,
+        "error": "Search for 'Solo' returned 0 items"
+      }
+    ],
+    "notes": "fetch failed"
+  },
+  {
+    "id": "arthurscan",
+    "name": "ArthurScan",
+    "version": "1.0.0-alpha.16",
+    "overallStatus": "CLOUDFLARE_BLOCKED",
+    "endpointsPassed": 1,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": true,
+    "totalLatencyMs": 12584,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "FAIL",
+        "latencyMs": 5983,
+        "error": "Unable to fetch numeric postId for this item! slug:rebirth-of-the-godly-prodigal"
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 3941,
+        "itemCount": 9
+      },
+      {
+        "endpoint": "search",
+        "status": "FAIL",
+        "latencyMs": 1676,
+        "error": "Search for 'Solo' returned 0 items"
+      }
+    ],
+    "notes": "Requires interactive Cloudflare Turnstile clearance"
+  },
+  {
+    "id": "example-manga",
+    "name": "Example Manga Source",
+    "version": "1.0.0",
+    "overallStatus": "OFFLINE",
+    "endpointsPassed": 0,
+    "totalEndpoints": 7,
+    "cloudflareDetected": false,
+    "cloudflareChallenge": false,
+    "totalLatencyMs": 280,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "FAIL",
+        "latencyMs": 136,
+        "error": "HTTP 0 for /browse?sort=popular&page=1"
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "FAIL",
+        "latencyMs": 142,
+        "error": "HTTP 0 for /browse?sort=popular&page=2"
+      },
+      {
+        "endpoint": "search",
+        "status": "FAIL",
+        "latencyMs": 2,
+        "error": "HTTP 0 for /search?q=Solo&page=1"
+      }
+    ],
+    "notes": "fetch failed"
+  },
+  {
+    "id": "coffeemanga",
+    "name": "CoffeeManga",
+    "version": "1.0.0-alpha.16",
+    "overallStatus": "OFFLINE",
+    "endpointsPassed": 1,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": false,
+    "totalLatencyMs": 3640,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "FAIL",
+        "latencyMs": 1925,
+        "error": "Returned 0 items or invalid structure"
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 888,
+        "itemCount": 0
+      },
+      {
+        "endpoint": "search",
+        "status": "FAIL",
+        "latencyMs": 504,
+        "error": "Search for 'Solo' returned 0 items"
+      }
+    ],
+    "notes": "Host unresponsive or changed domain"
+  },
+  {
+    "id": "gourmetscans",
+    "name": "GourmetScans",
+    "version": "1.0.0-alpha.14",
+    "overallStatus": "CLOUDFLARE_BLOCKED",
+    "endpointsPassed": 1,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": true,
+    "totalLatencyMs": 8998,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "FAIL",
+        "latencyMs": 4274,
+        "error": "Returned 0 items or invalid structure"
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 2805,
+        "itemCount": 0
+      },
+      {
+        "endpoint": "search",
+        "status": "FAIL",
+        "latencyMs": 956,
+        "error": "Search for 'Solo' returned 0 items"
+      }
+    ],
+    "notes": "Requires interactive Cloudflare Turnstile clearance"
+  },
+  {
+    "id": "hentai20",
+    "name": "Hentai20",
+    "version": "1.0.0-alpha.6",
+    "overallStatus": "OFFLINE",
+    "endpointsPassed": 1,
+    "totalEndpoints": 7,
+    "cloudflareDetected": false,
+    "cloudflareChallenge": false,
+    "totalLatencyMs": 126,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "FAIL",
+        "latencyMs": 89,
+        "error": "Returned 0 items or invalid structure"
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 9,
+        "itemCount": 0
+      },
+      {
+        "endpoint": "search",
+        "status": "FAIL",
+        "latencyMs": 4,
+        "error": "Search for 'Solo' returned 0 items"
+      }
+    ],
+    "notes": "fetch failed"
+  },
+  {
+    "id": "hiperdex",
+    "name": "HiperDex",
+    "version": "1.0.0-alpha.15",
+    "overallStatus": "OFFLINE",
+    "endpointsPassed": 1,
+    "totalEndpoints": 7,
+    "cloudflareDetected": false,
+    "cloudflareChallenge": false,
+    "totalLatencyMs": 107,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "FAIL",
+        "latencyMs": 71,
+        "error": "Returned 0 items or invalid structure"
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 9,
+        "itemCount": 0
+      },
+      {
+        "endpoint": "search",
+        "status": "FAIL",
+        "latencyMs": 4,
+        "error": "Search for 'Solo' returned 0 items"
+      }
+    ],
+    "notes": "fetch failed"
+  },
+  {
+    "id": "lekmanga",
+    "name": "LekManga",
+    "version": "1.0.0-alpha.14",
+    "overallStatus": "CLOUDFLARE_BLOCKED",
+    "endpointsPassed": 1,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": true,
+    "totalLatencyMs": 3268,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "FAIL",
+        "latencyMs": 1210,
+        "error": "Returned 0 items or invalid structure"
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 1109,
+        "itemCount": 0
+      },
+      {
+        "endpoint": "search",
+        "status": "FAIL",
+        "latencyMs": 599,
+        "error": "Search for 'Solo' returned 0 items"
+      }
+    ],
+    "notes": "Requires interactive Cloudflare Turnstile clearance"
+  },
+  {
+    "id": "lilymanga",
+    "name": "LilyManga",
+    "version": "1.0.0-alpha.14",
+    "overallStatus": "OFFLINE",
+    "endpointsPassed": 0,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": false,
+    "totalLatencyMs": 12523,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "FAIL",
+        "latencyMs": 3029,
+        "error": "Returned 0 items or invalid structure"
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "FAIL",
+        "latencyMs": 3673,
+        "error": "Unable to fetch numeric postId for this item! slug:chapter-17-2"
+      },
+      {
+        "endpoint": "search",
+        "status": "FAIL",
+        "latencyMs": 5800,
+        "error": "Unable to fetch numeric postId for this item! slug:chapter-24-3-chika-chans-depression"
+      }
+    ],
+    "notes": "Host unresponsive or changed domain"
+  },
+  {
+    "id": "lelmanga",
+    "name": "LelManga",
+    "version": "1.0.0-alpha.6",
+    "overallStatus": "OPERATIONAL",
+    "endpointsPassed": 7,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": false,
+    "totalLatencyMs": 14805,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "PASS",
+        "latencyMs": 3875,
+        "itemCount": 20,
+        "sample": {
+          "id": "99-wooden-stick",
+          "title": "99 Wooden Stick",
+          "cover": "https://i1.wp.com/www.lelmanga.com/wp-content/uploads/2026/06/thumbnail-1.webp"
+        }
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 2077,
+        "itemCount": 20
+      },
+      {
+        "endpoint": "search",
+        "status": "PASS",
+        "latencyMs": 2261,
+        "itemCount": 4,
+        "sample": {
+          "query": "Solo",
+          "match": "Solo leveling Ragnarok"
+        }
+      },
+      {
+        "endpoint": "detail",
+        "status": "PASS",
+        "latencyMs": 2033,
+        "sample": {
+          "title": "99 Wooden Stick",
+          "status": "Ongoing",
+          "author": "Unknown"
+        }
+      },
+      {
+        "endpoint": "chapters",
+        "status": "PASS",
+        "latencyMs": 1252,
+        "itemCount": 192,
+        "sample": {
+          "chapterId": "99-wooden-stick::192",
+          "chapter": "192",
+          "title": "Chapitre 192"
+        }
+      },
+      {
+        "endpoint": "pageUrls",
+        "status": "PASS",
+        "latencyMs": 2933,
+        "itemCount": 312,
+        "sample": {
+          "firstPageUrl": "https://i0.wp.com/www.lelmanga.com/wp-content/uploads/2026/07/99-wooden-stick-192/001.webp?lmv=1783613302"
+        }
+      },
+      {
+        "endpoint": "image_probe",
+        "status": "PASS",
+        "latencyMs": 354,
+        "sample": {
+          "status": 200,
+          "contentType": "image/jpeg"
+        }
+      }
+    ],
+    "notes": "Behind Cloudflare WAF, passes seamlessly"
+  },
+  {
+    "id": "lhtranslation",
+    "name": "LHTranslation",
+    "version": "1.0.0-alpha.15",
+    "overallStatus": "PARTIAL",
+    "endpointsPassed": 4,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": false,
+    "totalLatencyMs": 21446,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "PASS",
+        "latencyMs": 7970,
+        "itemCount": 12,
+        "sample": {
+          "id": "2538",
+          "title": "Sayounara Ryuusei Konnichiwa Jinsei",
+          "cover": "https://lhtranslation.net/wp-content/uploads/2026/05/sayonara-193x278.jpg"
+        }
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 5912,
+        "itemCount": 12
+      },
+      {
+        "endpoint": "search",
+        "status": "PASS",
+        "latencyMs": 2634,
+        "itemCount": 1,
+        "sample": {
+          "query": "Sayounara Ryuusei",
+          "match": "Sayounara Ryuusei Konnichiwa Jinsei"
+        }
+      },
+      {
+        "endpoint": "detail",
+        "status": "PASS",
+        "latencyMs": 3163,
+        "sample": {
+          "title": "Sayounara Ryuusei Konnichiwa Jinsei",
+          "status": "Ongoing",
+          "author": "NAGASHIMA Hiroaki"
+        }
+      },
+      {
+        "endpoint": "chapters",
+        "status": "FAIL",
+        "latencyMs": 1748,
+        "error": "chapters() returned empty array"
+      }
+    ],
+    "notes": "Browse/Search operational; chapter/page parsing layout update needed"
+  },
+  {
+    "id": "madaradex",
+    "name": "MadaraDex",
+    "version": "1.0.0-alpha.15",
+    "overallStatus": "OFFLINE",
+    "endpointsPassed": 1,
+    "totalEndpoints": 7,
+    "cloudflareDetected": false,
+    "cloudflareChallenge": false,
+    "totalLatencyMs": 223,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "FAIL",
+        "latencyMs": 189,
+        "error": "Returned 0 items or invalid structure"
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 5,
+        "itemCount": 0
+      },
+      {
+        "endpoint": "search",
+        "status": "FAIL",
+        "latencyMs": 2,
+        "error": "Search for 'Solo' returned 0 items"
+      }
+    ],
+    "notes": "fetch failed"
+  },
+  {
+    "id": "lnori",
+    "name": "LNori",
+    "version": "1.0.0-alpha.2",
+    "overallStatus": "PARTIAL",
+    "endpointsPassed": 3,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": false,
+    "totalLatencyMs": 3092,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "PASS",
+        "latencyMs": 954,
+        "itemCount": 60,
+        "sample": {
+          "id": "/series/3343/re-zero-starting-life-in-another-world",
+          "title": "Re ZERO Starting Life in Another World",
+          "cover": "https://cdn.lnori.com/cover/12040.webp"
+        }
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 445,
+        "itemCount": 60
+      },
+      {
+        "endpoint": "search",
+        "status": "FAIL",
+        "latencyMs": 819,
+        "error": "Search for 'ZERO Starting' returned 0 items"
+      },
+      {
+        "endpoint": "detail",
+        "status": "PASS",
+        "latencyMs": 254,
+        "sample": {
+          "title": "Re ZERO Starting Life in Another World",
+          "author": "Nagatsuki Tappei"
+        }
+      },
+      {
+        "endpoint": "chapters",
+        "status": "FAIL",
+        "latencyMs": 0,
+        "error": "Cannot read properties of undefined (reading 'additionalInfo')"
+      }
+    ],
+    "notes": "Browse/Search operational; chapter/page parsing layout update needed"
+  },
+  {
+    "id": "manga3asq",
+    "name": "Manga3asq",
+    "version": "1.0.0-alpha.14",
+    "overallStatus": "PARTIAL",
+    "endpointsPassed": 4,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": false,
+    "totalLatencyMs": 23565,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "PASS",
+        "latencyMs": 6391,
+        "itemCount": 21,
+        "sample": {
+          "id": "23375",
+          "title": "Detective Conan",
+          "cover": "https://3asq.online/wp-content/uploads/2026/08/71Yjir9Xf4L._AC_UF10001000_QL80_-193x278.jpg"
+        }
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 11965,
+        "itemCount": 21
+      },
+      {
+        "endpoint": "search",
+        "status": "PASS",
+        "latencyMs": 1291,
+        "itemCount": 1,
+        "sample": {
+          "query": "Detective Conan",
+          "match": "Detective Conan"
+        }
+      },
+      {
+        "endpoint": "detail",
+        "status": "PASS",
+        "latencyMs": 2567,
+        "sample": {
+          "title": "Detective Conan",
+          "status": "Ongoing",
+          "author": "-"
+        }
+      },
+      {
+        "endpoint": "chapters",
+        "status": "FAIL",
+        "latencyMs": 1328,
+        "error": "chapters() returned empty array"
+      }
+    ],
+    "notes": "Browse/Search operational; chapter/page parsing layout update needed"
+  },
+  {
+    "id": "mangabat",
+    "name": "MangaBat",
+    "version": "1.0.0-alpha.11",
+    "overallStatus": "CLOUDFLARE_BLOCKED",
+    "endpointsPassed": 5,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": true,
+    "totalLatencyMs": 4501,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "PASS",
+        "latencyMs": 1167,
+        "itemCount": 24,
+        "sample": {
+          "id": "uehara-san-the-delusional-girl-is-in-love-for-the-first-time",
+          "title": "Uehara San the Delusional Girl Is in Love for the First Time",
+          "cover": "https://img-r1.2xstorage.com/thumb/uehara-san-the-delusional-girl-is-in-love-for-the-first-time.webp"
+        }
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 336,
+        "itemCount": 24
+      },
+      {
+        "endpoint": "search",
+        "status": "FAIL",
+        "latencyMs": 210,
+        "error": "Search for 'Uehara San' returned 0 items"
+      },
+      {
+        "endpoint": "detail",
+        "status": "PASS",
+        "latencyMs": 853,
+        "sample": {
+          "title": "Uehara San the Delusional Girl Is in Love for the First Time",
+          "status": "Ongoing",
+          "author": "Akimasa Morii"
+        }
+      },
+      {
+        "endpoint": "chapters",
+        "status": "PASS",
+        "latencyMs": 246,
+        "itemCount": 2,
+        "sample": {
+          "chapterId": "uehara-san-the-delusional-girl-is-in-love-for-the-first-time::chapter-2",
+          "chapter": "2",
+          "title": "Chapter 2"
+        }
+      },
+      {
+        "endpoint": "pageUrls",
+        "status": "PASS",
+        "latencyMs": 316,
+        "itemCount": 60,
+        "sample": {
+          "firstPageUrl": "https://img-r1.2xstorage.com/uehara-san-the-delusional-girl-is-in-love-for-the-first-time/2/0.webp"
+        }
+      },
+      {
+        "endpoint": "image_probe",
+        "status": "FAIL",
+        "latencyMs": 786,
+        "error": "Image probe returned non-image content (403 text/html; charset=UTF-8)"
+      }
+    ],
+    "notes": "Requires interactive Cloudflare Turnstile clearance"
+  },
+  {
+    "id": "mangademon",
+    "name": "MangaDemon",
+    "version": "1.0.0-alpha.15",
+    "overallStatus": "OPERATIONAL",
+    "endpointsPassed": 7,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": false,
+    "totalLatencyMs": 13698,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "PASS",
+        "latencyMs": 2531,
+        "itemCount": 20,
+        "sample": {
+          "id": "Magic-Emperor",
+          "title": "Magic Emperor",
+          "cover": "https://readermc.org/images/thumbnails/Magic Emperor.webp"
+        }
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 4052,
+        "itemCount": 20
+      },
+      {
+        "endpoint": "search",
+        "status": "PASS",
+        "latencyMs": 2252,
+        "itemCount": 1,
+        "sample": {
+          "query": "Magic Emperor",
+          "match": "Magic Emperor"
+        }
+      },
+      {
+        "endpoint": "detail",
+        "status": "PASS",
+        "latencyMs": 1632,
+        "sample": {
+          "title": "Magic Emperor",
+          "status": "Ongoing",
+          "author": "Ye Xiao"
+        }
+      },
+      {
+        "endpoint": "chapters",
+        "status": "PASS",
+        "latencyMs": 1444,
+        "itemCount": 914,
+        "sample": {
+          "chapterId": "Magic-Emperor::/chaptered.php?manga=19&chapter=906",
+          "chapter": "906",
+          "title": "Chapter 906"
+        }
+      },
+      {
+        "endpoint": "pageUrls",
+        "status": "PASS",
+        "latencyMs": 1544,
+        "itemCount": 5,
+        "sample": {
+          "firstPageUrl": "https://cdn.demoniclibs.com/Magic Emperor/906./1.jpg"
+        }
+      },
+      {
+        "endpoint": "image_probe",
+        "status": "PASS",
+        "latencyMs": 223,
+        "sample": {
+          "status": 206,
+          "contentType": "image/jpeg"
+        }
+      }
+    ],
+    "notes": "Behind Cloudflare WAF, passes seamlessly"
+  },
+  {
+    "id": "mangadistrict",
+    "name": "MangaDistrict",
+    "version": "1.0.0-alpha.12",
+    "overallStatus": "OPERATIONAL",
+    "endpointsPassed": 5,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": false,
+    "totalLatencyMs": 19154,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "PASS",
+        "latencyMs": 6294,
+        "itemCount": 30,
+        "sample": {
+          "id": "332552",
+          "title": "Sword of the Falcon",
+          "cover": "https://cdn.mangadistrict.com/thumbnail/sword-of-the-falcon-official.webp"
+        }
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 5453,
+        "itemCount": 30
+      },
+      {
+        "endpoint": "search",
+        "status": "PASS",
+        "latencyMs": 4736,
+        "itemCount": 30,
+        "sample": {
+          "query": "Sword the",
+          "match": "Sword of the Falcon"
+        }
+      },
+      {
+        "endpoint": "detail",
+        "status": "PASS",
+        "latencyMs": 1027,
+        "sample": {
+          "title": "Sword of the Falcon",
+          "status": "Completed",
+          "author": "Kyung-Mi KIM"
+        }
+      },
+      {
+        "endpoint": "chapters",
+        "status": "PASS",
+        "latencyMs": 1006,
+        "itemCount": 111,
+        "sample": {
+          "chapterId": "332552::chapter-111",
+          "chapter": "111",
+          "title": "Chapter 111 - Episode 111 (The End)"
+        }
+      },
+      {
+        "endpoint": "pageUrls",
+        "status": "FAIL",
+        "latencyMs": 618,
+        "error": "pageUrls() returned empty array"
+      }
+    ],
+    "notes": "Behind Cloudflare WAF, passes seamlessly"
+  },
+  {
+    "id": "mangafire",
+    "name": "MangaFire",
+    "version": "1.0.0-alpha.21",
+    "overallStatus": "OFFLINE",
+    "endpointsPassed": 0,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": false,
+    "totalLatencyMs": 1673,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "FAIL",
+        "latencyMs": 1669,
+        "error": "Application.executeInWebView is not a function"
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "FAIL",
+        "latencyMs": 1,
+        "error": "Application.executeInWebView is not a function"
+      },
+      {
+        "endpoint": "search",
+        "status": "FAIL",
+        "latencyMs": 0,
+        "error": "Application.executeInWebView is not a function"
+      }
+    ],
+    "notes": "Host unresponsive or changed domain"
+  },
+  {
+    "id": "mangadot",
+    "name": "MangaDot",
+    "version": "1.0.0-alpha.5",
+    "overallStatus": "OPERATIONAL",
+    "endpointsPassed": 5,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": false,
+    "totalLatencyMs": 3345,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "PASS",
+        "latencyMs": 1217,
+        "itemCount": 20,
+        "sample": {
+          "id": "42",
+          "title": "Jujutsu Kaisen",
+          "cover": "https://mangadot.net/uploads/556b949c9542fa44bf81e602.webp"
+        }
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 499,
+        "itemCount": 20
+      },
+      {
+        "endpoint": "search",
+        "status": "PASS",
+        "latencyMs": 337,
+        "itemCount": 20,
+        "sample": {
+          "query": "Jujutsu Kaisen",
+          "match": "Jujutsu Kaisen"
+        }
+      },
+      {
+        "endpoint": "detail",
+        "status": "PASS",
+        "latencyMs": 519,
+        "sample": {
+          "title": "Jujutsu Kaisen",
+          "status": "Completed",
+          "author": "Gege Akutami"
+        }
+      },
+      {
+        "endpoint": "chapters",
+        "status": "PASS",
+        "latencyMs": 531,
+        "itemCount": 2175,
+        "sample": {
+          "chapterId": "42::1442090",
+          "chapter": "0",
+          "title": "Volume 30"
+        }
+      },
+      {
+        "endpoint": "pageUrls",
+        "status": "FAIL",
+        "latencyMs": 239,
+        "error": "pages.images doesn't exist"
+      }
+    ],
+    "notes": "Behind Cloudflare WAF, passes seamlessly"
+  },
+  {
+    "id": "mangafox",
+    "name": "MangaFox",
+    "version": "1.0.0-alpha.13",
+    "overallStatus": "OPERATIONAL",
+    "endpointsPassed": 6,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": false,
+    "totalLatencyMs": 13327,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "PASS",
+        "latencyMs": 784,
+        "itemCount": 17,
+        "sample": {
+          "id": "vigilante_boku_no_hero_academia_illegals",
+          "title": "Vigilante Boku no Hero Academia Illegals",
+          "cover": "https://fmcdn.mfcdn.net/store/manga/21619/cover.jpg?token=00646a479347113e4a4346e0da0474304495e03e&ttl=1788796800&v=1661263614"
+        }
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 371,
+        "itemCount": 17
+      },
+      {
+        "endpoint": "search",
+        "status": "PASS",
+        "latencyMs": 329,
+        "itemCount": 12,
+        "sample": {
+          "query": "Vigilante Boku",
+          "match": "Vigilante Boku no Hero Academia Illegals"
+        }
+      },
+      {
+        "endpoint": "detail",
+        "status": "PASS",
+        "latencyMs": 1985,
+        "sample": {
+          "title": "Vigilante Boku no Hero Academia Illegals",
+          "status": "Ongoing",
+          "author": "FURUHASHI Hideyuki"
+        }
+      },
+      {
+        "endpoint": "chapters",
+        "status": "PASS",
+        "latencyMs": 2290,
+        "itemCount": 135,
+        "sample": {
+          "chapterId": "vigilante_boku_no_hero_academia_illegals::c000",
+          "chapter": "0"
+        }
+      },
+      {
+        "endpoint": "pageUrls",
+        "status": "PASS",
+        "latencyMs": 6730,
+        "itemCount": 17,
+        "sample": {
+          "firstPageUrl": "https://zjcdn.mangafox.me/store/manga/21619/000.0/compressed/l001.jpg?token=fe798310798df503af2883f27c755010c970117c&ttl=1788796800"
+        }
+      },
+      {
+        "endpoint": "image_probe",
+        "status": "FAIL",
+        "latencyMs": 818,
+        "error": "Image probe returned non-image content (403 text/html; charset=UTF-8)"
+      }
+    ],
+    "notes": "Behind Cloudflare WAF, passes seamlessly"
+  },
+  {
+    "id": "mangakoma",
+    "name": "MangaKoma",
+    "version": "1.0.0-alpha.2",
+    "overallStatus": "OFFLINE",
+    "endpointsPassed": 1,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": false,
+    "totalLatencyMs": 5213,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "FAIL",
+        "latencyMs": 2455,
+        "error": "Returned 0 items or invalid structure"
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 1372,
+        "itemCount": 0
+      },
+      {
+        "endpoint": "search",
+        "status": "FAIL",
+        "latencyMs": 687,
+        "error": "Search for 'Solo' returned 0 items"
+      }
+    ],
+    "notes": "Host unresponsive or changed domain"
+  },
+  {
+    "id": "mangago",
+    "name": "Mangago",
+    "version": "1.0.0-alpha.1",
+    "overallStatus": "OPERATIONAL",
+    "endpointsPassed": 5,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": false,
+    "totalLatencyMs": 7641,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "PASS",
+        "latencyMs": 2442,
+        "itemCount": 8,
+        "sample": {
+          "id": "/read-manga/cherry_blossoms_after_winter/",
+          "title": "Cherry Blossoms After Winter",
+          "cover": "https://i0.mangapicgallery.com/r/coverlink/rROHYYKHa8HlWy3U7kHm8eI5JAZfLBWBoYekEkCcx-BVB-N.png?4"
+        }
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 2026,
+        "itemCount": 8
+      },
+      {
+        "endpoint": "search",
+        "status": "PASS",
+        "latencyMs": 576,
+        "itemCount": 10,
+        "sample": {
+          "query": "Cherry Blossoms",
+          "match": "The Last Doctors Think of You Whenever They Look up to Cherry Blossoms"
+        }
+      },
+      {
+        "endpoint": "detail",
+        "status": "PASS",
+        "latencyMs": 718,
+        "sample": {
+          "title": "Cherry Blossoms After Winter Yaoi",
+          "status": "ONGOING",
+          "author": "Bamwoo"
+        }
+      },
+      {
+        "endpoint": "chapters",
+        "status": "PASS",
+        "latencyMs": 894,
+        "itemCount": 196,
+        "sample": {
+          "chapterId": "/read-manga/cherry_blossoms_after_winter/::https://www.mangago.me/read-manga/cherry_blossoms_after_winter/nbt/br_chapter-430786/pg-1/",
+          "chapter": "176",
+          "title": "Ch.176"
+        }
+      },
+      {
+        "endpoint": "pageUrls",
+        "status": "FAIL",
+        "latencyMs": 961,
+        "error": "Application.base64Decode is not a function"
+      }
+    ],
+    "notes": "Behind Cloudflare WAF, passes seamlessly"
+  },
+  {
+    "id": "mangakatana",
+    "name": "MangaKatana",
+    "version": "1.0.0-alpha.15",
+    "overallStatus": "OPERATIONAL",
+    "endpointsPassed": 7,
+    "totalEndpoints": 7,
+    "cloudflareDetected": false,
+    "cloudflareChallenge": false,
+    "totalLatencyMs": 7703,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "PASS",
+        "latencyMs": 1994,
+        "itemCount": 18,
+        "sample": {
+          "id": "noa_is_my_senior_and_my_friend.27014",
+          "title": "Noa Is My Senior and My Friend",
+          "cover": "https://mangakatana.com/imgs/cover/09c/24/a672f.webp"
+        }
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 330,
+        "itemCount": 18
+      },
+      {
+        "endpoint": "search",
+        "status": "PASS",
+        "latencyMs": 1935,
+        "itemCount": 1,
+        "sample": {
+          "query": "Noa Senior",
+          "match": "Noa Is My Senior and My Friend"
+        }
+      },
+      {
+        "endpoint": "detail",
+        "status": "PASS",
+        "latencyMs": 534,
+        "sample": {
+          "title": "Noa Is My Senior and My Friend",
+          "status": "ONGOING"
+        }
+      },
+      {
+        "endpoint": "chapters",
+        "status": "PASS",
+        "latencyMs": 308,
+        "itemCount": 145,
+        "sample": {
+          "chapterId": "noa_is_my_senior_and_my_friend.27014::c1",
+          "chapter": "1"
+        }
+      },
+      {
+        "endpoint": "pageUrls",
+        "status": "PASS",
+        "latencyMs": 298,
+        "itemCount": 45,
+        "sample": {
+          "firstPageUrl": "https://i1.mangakatana.com/token/4100547b40109267887qp%3At%3As43.4rqp20-0c320w%3An%3A281%3A9q001p7r180/0.jpg"
+        }
+      },
+      {
+        "endpoint": "image_probe",
+        "status": "PASS",
+        "latencyMs": 2285,
+        "sample": {
+          "status": 200,
+          "contentType": "application/octet-stream"
+        }
+      }
+    ],
+    "notes": "Direct connection"
+  },
+  {
+    "id": "manganelo",
+    "name": "MangaNelo",
+    "version": "1.0.0-alpha.11",
+    "overallStatus": "CLOUDFLARE_BLOCKED",
+    "endpointsPassed": 1,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": true,
+    "totalLatencyMs": 1382,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "FAIL",
+        "latencyMs": 616,
+        "error": "Returned 0 items or invalid structure"
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 367,
+        "itemCount": 0
+      },
+      {
+        "endpoint": "search",
+        "status": "FAIL",
+        "latencyMs": 169,
+        "error": "Search for 'Solo' returned 0 items"
+      }
+    ],
+    "notes": "Requires interactive Cloudflare Turnstile clearance"
+  },
+  {
+    "id": "manganato",
+    "name": "MangaNato",
+    "version": "1.0.0-alpha.11",
+    "overallStatus": "CLOUDFLARE_BLOCKED",
+    "endpointsPassed": 5,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": true,
+    "totalLatencyMs": 6546,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "PASS",
+        "latencyMs": 1379,
+        "itemCount": 24,
+        "sample": {
+          "id": "uehara-san-the-delusional-girl-is-in-love-for-the-first-time",
+          "title": "Uehara San the Delusional Girl Is in Love for the First Time",
+          "cover": "https://img-r1.2xstorage.com/thumb/uehara-san-the-delusional-girl-is-in-love-for-the-first-time.webp"
+        }
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 978,
+        "itemCount": 24
+      },
+      {
+        "endpoint": "search",
+        "status": "FAIL",
+        "latencyMs": 279,
+        "error": "Search for 'Uehara San' returned 0 items"
+      },
+      {
+        "endpoint": "detail",
+        "status": "PASS",
+        "latencyMs": 1020,
+        "sample": {
+          "title": "Uehara San the Delusional Girl Is in Love for the First Time",
+          "status": "Ongoing",
+          "author": "Akimasa Morii"
+        }
+      },
+      {
+        "endpoint": "chapters",
+        "status": "PASS",
+        "latencyMs": 452,
+        "itemCount": 2,
+        "sample": {
+          "chapterId": "uehara-san-the-delusional-girl-is-in-love-for-the-first-time::chapter-2",
+          "chapter": "2",
+          "title": "Chapter 2"
+        }
+      },
+      {
+        "endpoint": "pageUrls",
+        "status": "PASS",
+        "latencyMs": 176,
+        "itemCount": 60,
+        "sample": {
+          "firstPageUrl": "https://img-r1.2xstorage.com/uehara-san-the-delusional-girl-is-in-love-for-the-first-time/2/0.webp"
+        }
+      },
+      {
+        "endpoint": "image_probe",
+        "status": "FAIL",
+        "latencyMs": 743,
+        "error": "Image probe returned non-image content (403 text/html; charset=UTF-8)"
+      }
+    ],
+    "notes": "Requires interactive Cloudflare Turnstile clearance"
+  },
+  {
+    "id": "mangaorigines",
+    "name": "MangaOrigines",
+    "version": "1.0.0-alpha.14",
+    "overallStatus": "CLOUDFLARE_BLOCKED",
+    "endpointsPassed": 1,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": true,
+    "totalLatencyMs": 6650,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "FAIL",
+        "latencyMs": 3598,
+        "error": "Returned 0 items or invalid structure"
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 1113,
+        "itemCount": 0
+      },
+      {
+        "endpoint": "search",
+        "status": "FAIL",
+        "latencyMs": 1186,
+        "error": "Search for 'Solo' returned 0 items"
+      }
+    ],
+    "notes": "Requires interactive Cloudflare Turnstile clearance"
+  },
+  {
+    "id": "mangaplus",
+    "name": "MangaPlus",
+    "version": "1.0.0-alpha.11",
+    "overallStatus": "OFFLINE",
+    "endpointsPassed": 0,
+    "totalEndpoints": 7,
+    "cloudflareDetected": false,
+    "cloudflareChallenge": false,
+    "totalLatencyMs": 2804,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "FAIL",
+        "latencyMs": 1920,
+        "error": "Unexpected token '<', \"<html>\r\n<h\"... is not valid JSON"
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "FAIL",
+        "latencyMs": 581,
+        "error": "Unexpected token '<', \"<html>\r\n<h\"... is not valid JSON"
+      },
+      {
+        "endpoint": "search",
+        "status": "FAIL",
+        "latencyMs": 300,
+        "error": "Unexpected token '<', \"<html>\r\n<h\"... is not valid JSON"
+      }
+    ],
+    "notes": "Host unresponsive or changed domain"
+  },
+  {
+    "id": "mangapill",
+    "name": "Mangapill",
+    "version": "1.0.0-alpha.12",
+    "overallStatus": "OPERATIONAL",
+    "endpointsPassed": 6,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": false,
+    "totalLatencyMs": 4061,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "PASS",
+        "latencyMs": 781,
+        "itemCount": 10,
+        "sample": {
+          "id": "1",
+          "title": "Berserk",
+          "cover": "https://cdn.readdetectiveconan.com/file/mangapill/i/1.jpeg"
+        }
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 298,
+        "itemCount": 10
+      },
+      {
+        "endpoint": "search",
+        "status": "PASS",
+        "latencyMs": 280,
+        "itemCount": 4,
+        "sample": {
+          "query": "Berserk",
+          "match": "Berserk"
+        }
+      },
+      {
+        "endpoint": "detail",
+        "status": "PASS",
+        "latencyMs": 996,
+        "sample": {
+          "title": "Berserk",
+          "status": "Ongoing"
+        }
+      },
+      {
+        "endpoint": "chapters",
+        "status": "PASS",
+        "latencyMs": 721,
+        "itemCount": 405,
+        "sample": {
+          "chapterId": "1::1-20386000",
+          "chapter": "386",
+          "title": "Group 2 Chapter 386"
+        }
+      },
+      {
+        "endpoint": "pageUrls",
+        "status": "PASS",
+        "latencyMs": 539,
+        "itemCount": 24,
+        "sample": {
+          "firstPageUrl": "https://cdn.readdetectiveconan.com/file/mangap/2026/28/1/20386000/019f4a76-c331-734a-9c2d-1364beeacc6f/1.jpeg"
+        }
+      },
+      {
+        "endpoint": "image_probe",
+        "status": "FAIL",
+        "latencyMs": 423,
+        "error": "Image probe returned non-image content (403 text/html; charset=UTF-8)"
+      }
+    ],
+    "notes": "Behind Cloudflare WAF, passes seamlessly"
+  },
+  {
+    "id": "mangareadorg",
+    "name": "MangaReadOrg",
+    "version": "1.0.0-alpha.17",
+    "overallStatus": "PARTIAL",
+    "endpointsPassed": 4,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": false,
+    "totalLatencyMs": 9689,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "PASS",
+        "latencyMs": 3329,
+        "itemCount": 12,
+        "sample": {
+          "id": "340601",
+          "title": "Turns Out It’s the 3rd Generation of the Chaebol",
+          "cover": "https://www.mangaread.org/wp-content/uploads/2026/09/Read-Manhwa-193x278.webp"
+        }
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 2455,
+        "itemCount": 12
+      },
+      {
+        "endpoint": "search",
+        "status": "PASS",
+        "latencyMs": 2284,
+        "itemCount": 12,
+        "sample": {
+          "query": "Turns Out",
+          "match": "Turns Out It’s the 3rd Generation of the Chaebol"
+        }
+      },
+      {
+        "endpoint": "detail",
+        "status": "PASS",
+        "latencyMs": 1167,
+        "sample": {
+          "title": "Turns Out It’s the 3rd Generation of the Chaebol",
+          "status": "Ongoing",
+          "author": "Bathed in Moonlight,Fantera,Han"
+        }
+      },
+      {
+        "endpoint": "chapters",
+        "status": "FAIL",
+        "latencyMs": 435,
+        "error": "chapters() returned empty array"
+      }
+    ],
+    "notes": "Browse/Search operational; chapter/page parsing layout update needed"
+  },
+  {
+    "id": "mangaupdates",
+    "name": "MangaUpdates",
+    "version": "1.0.0-alpha.7",
+    "overallStatus": "OFFLINE",
+    "endpointsPassed": 1,
+    "totalEndpoints": 7,
+    "cloudflareDetected": false,
+    "cloudflareChallenge": false,
+    "totalLatencyMs": 6,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "FAIL",
+        "latencyMs": 3,
+        "error": "Returned 0 items or invalid structure"
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 0,
+        "itemCount": 0
+      },
+      {
+        "endpoint": "search",
+        "status": "FAIL",
+        "latencyMs": 0,
+        "error": "Search for 'Solo' returned 0 items"
+      }
+    ],
+    "notes": "Host unresponsive or changed domain"
+  },
+  {
+    "id": "mangataro",
+    "name": "MangaTaro",
+    "version": "1.0.0-alpha.3",
+    "overallStatus": "PARTIAL",
+    "endpointsPassed": 4,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": false,
+    "totalLatencyMs": 1563,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "PASS",
+        "latencyMs": 718,
+        "itemCount": 15,
+        "sample": {
+          "id": "the-swordmasters-son:67",
+          "title": "The Swordmaster's Son",
+          "cover": "https://mangataro.org/content/media/the-swordmasters-son.jpg"
+        }
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 254,
+        "itemCount": 15
+      },
+      {
+        "endpoint": "search",
+        "status": "PASS",
+        "latencyMs": 270,
+        "itemCount": 2,
+        "sample": {
+          "query": "The Swordmaster",
+          "match": "Becoming the Swordmaster Rank Young Lord of the Sichuan Tang Family"
+        }
+      },
+      {
+        "endpoint": "detail",
+        "status": "PASS",
+        "latencyMs": 317,
+        "sample": {
+          "title": "The Swordmaster’s Son",
+          "status": "Ongoing",
+          "author": "Hwangje Penguin, Lee, Jewon"
+        }
+      },
+      {
+        "endpoint": "chapters",
+        "status": "FAIL",
+        "latencyMs": 0,
+        "error": "Application.crypto_md5Hash is not a function"
+      }
+    ],
+    "notes": "Browse/Search operational; chapter/page parsing layout update needed"
+  },
+  {
+    "id": "mangascantrad",
+    "name": "MangaScantrad",
+    "version": "1.0.0-alpha.15",
+    "overallStatus": "CLOUDFLARE_BLOCKED",
+    "endpointsPassed": 1,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": true,
+    "totalLatencyMs": 6165,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "FAIL",
+        "latencyMs": 1806,
+        "error": "Returned 0 items or invalid structure"
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 1522,
+        "itemCount": 0
+      },
+      {
+        "endpoint": "search",
+        "status": "FAIL",
+        "latencyMs": 821,
+        "error": "Search for 'Solo' returned 0 items"
+      }
+    ],
+    "notes": "Requires interactive Cloudflare Turnstile clearance"
+  },
+  {
+    "id": "mangaworldadult",
+    "name": "MangaWorldAdult",
+    "version": "1.0.0-alpha.5",
+    "overallStatus": "OFFLINE",
+    "endpointsPassed": 0,
+    "totalEndpoints": 7,
+    "cloudflareDetected": false,
+    "cloudflareChallenge": false,
+    "totalLatencyMs": 283,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "FAIL",
+        "latencyMs": 249,
+        "error": "No JSON Found"
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "FAIL",
+        "latencyMs": 5,
+        "error": "No JSON Found"
+      },
+      {
+        "endpoint": "search",
+        "status": "FAIL",
+        "latencyMs": 4,
+        "error": "No JSON Found"
+      }
+    ],
+    "notes": "fetch failed"
+  },
+  {
+    "id": "mangaworld",
+    "name": "MangaWorld",
+    "version": "1.0.0-alpha.5",
+    "overallStatus": "PARTIAL",
+    "endpointsPassed": 4,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": false,
+    "totalLatencyMs": 5440,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "PASS",
+        "latencyMs": 1643,
+        "itemCount": 10,
+        "sample": {
+          "id": "1708/one-piece",
+          "title": "One Piece",
+          "cover": "https://cdn.mangaworld.mx/mangas/5fa0c9e2c9f2201ee55d3bd4.jpg?1788706110594"
+        }
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 584,
+        "itemCount": 10
+      },
+      {
+        "endpoint": "search",
+        "status": "PASS",
+        "latencyMs": 2000,
+        "itemCount": 6,
+        "sample": {
+          "query": "One Piece",
+          "match": "One Piece"
+        }
+      },
+      {
+        "endpoint": "detail",
+        "status": "PASS",
+        "latencyMs": 619,
+        "sample": {
+          "title": "One Piece",
+          "status": "In corso",
+          "author": "ODA Eiichiro"
+        }
+      },
+      {
+        "endpoint": "chapters",
+        "status": "FAIL",
+        "latencyMs": 569,
+        "error": "Cannot read properties of undefined (reading 'additionalInfo')"
+      }
+    ],
+    "notes": "Browse/Search operational; chapter/page parsing layout update needed"
+  },
+  {
+    "id": "mangazin",
+    "name": "MangaZin",
+    "version": "1.0.0-alpha.14",
+    "overallStatus": "OPERATIONAL",
+    "endpointsPassed": 5,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": false,
+    "totalLatencyMs": 11212,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "PASS",
+        "latencyMs": 2380,
+        "itemCount": 12,
+        "sample": {
+          "id": "the-unlimited-bacteriomancer",
+          "title": "The Unlimited Bacteriomancer",
+          "cover": "https://mangazin.org/wp-content/uploads/2026/09/manga_63588_image-193x278.jpg"
+        }
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 1366,
+        "itemCount": 12
+      },
+      {
+        "endpoint": "search",
+        "status": "PASS",
+        "latencyMs": 2064,
+        "itemCount": 10,
+        "sample": {
+          "query": "The Unlimited",
+          "match": "The Unlimited Bacteriomancer"
+        }
+      },
+      {
+        "endpoint": "detail",
+        "status": "PASS",
+        "latencyMs": 3421,
+        "sample": {
+          "title": "The Unlimited Bacteriomancer",
+          "status": "Ongoing"
+        }
+      },
+      {
+        "endpoint": "chapters",
+        "status": "PASS",
+        "latencyMs": 1465,
+        "itemCount": 9,
+        "sample": {
+          "chapterId": "the-unlimited-bacteriomancer::chapter-9",
+          "chapter": "9",
+          "title": "Chapter 9"
+        }
+      },
+      {
+        "endpoint": "pageUrls",
+        "status": "FAIL",
+        "latencyMs": 497,
+        "error": "pageUrls() returned empty array"
+      }
+    ],
+    "notes": "Behind Cloudflare WAF, passes seamlessly"
+  },
+  {
+    "id": "manhwaclub",
+    "name": "ManhwaClub",
+    "version": "1.0.0-alpha.3",
+    "overallStatus": "OFFLINE",
+    "endpointsPassed": 1,
+    "totalEndpoints": 7,
+    "cloudflareDetected": false,
+    "cloudflareChallenge": false,
+    "totalLatencyMs": 217,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "FAIL",
+        "latencyMs": 185,
+        "error": "Returned 0 items or invalid structure"
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 6,
+        "itemCount": 0
+      },
+      {
+        "endpoint": "search",
+        "status": "FAIL",
+        "latencyMs": 3,
+        "error": "Search for 'Solo' returned 0 items"
+      }
+    ],
+    "notes": "fetch failed"
+  },
+  {
+    "id": "manhuaus",
+    "name": "Manhuaus",
+    "version": "1.0.0-alpha.14",
+    "overallStatus": "CLOUDFLARE_BLOCKED",
+    "endpointsPassed": 1,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": true,
+    "totalLatencyMs": 2819,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "FAIL",
+        "latencyMs": 1043,
+        "error": "Returned 0 items or invalid structure"
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 722,
+        "itemCount": 0
+      },
+      {
+        "endpoint": "search",
+        "status": "FAIL",
+        "latencyMs": 323,
+        "error": "Search for 'Solo' returned 0 items"
+      }
+    ],
+    "notes": "Requires interactive Cloudflare Turnstile clearance"
+  },
+  {
+    "id": "manhuaplus",
+    "name": "ManhuaPlus",
+    "version": "1.0.0-alpha.14",
+    "overallStatus": "OFFLINE",
+    "endpointsPassed": 1,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": false,
+    "totalLatencyMs": 5290,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "FAIL",
+        "latencyMs": 3100,
+        "error": "Unable to fetch numeric postId for this item! slug:the-legendary-mechanic"
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 1131,
+        "itemCount": 0
+      },
+      {
+        "endpoint": "search",
+        "status": "FAIL",
+        "latencyMs": 532,
+        "error": "Search for 'Solo' returned 0 items"
+      }
+    ],
+    "notes": "Host unresponsive or changed domain"
+  },
+  {
+    "id": "manhwaraw",
+    "name": "ManhwaRaw",
+    "version": "1.0.0-alpha.15",
+    "overallStatus": "OFFLINE",
+    "endpointsPassed": 1,
+    "totalEndpoints": 7,
+    "cloudflareDetected": false,
+    "cloudflareChallenge": false,
+    "totalLatencyMs": 169,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "FAIL",
+        "latencyMs": 127,
+        "error": "Returned 0 items or invalid structure"
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 9,
+        "itemCount": 0
+      },
+      {
+        "endpoint": "search",
+        "status": "FAIL",
+        "latencyMs": 4,
+        "error": "Search for 'Solo' returned 0 items"
+      }
+    ],
+    "notes": "fetch failed"
+  },
+  {
+    "id": "manhwax",
+    "name": "ManhwaX",
+    "version": "1.0.0-alpha.9",
+    "overallStatus": "OFFLINE",
+    "endpointsPassed": 1,
+    "totalEndpoints": 7,
+    "cloudflareDetected": false,
+    "cloudflareChallenge": false,
+    "totalLatencyMs": 122,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "FAIL",
+        "latencyMs": 87,
+        "error": "Returned 0 items or invalid structure"
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 9,
+        "itemCount": 0
+      },
+      {
+        "endpoint": "search",
+        "status": "FAIL",
+        "latencyMs": 4,
+        "error": "Search for 'Solo' returned 0 items"
+      }
+    ],
+    "notes": "fetch failed"
+  },
+  {
+    "id": "manhwatop",
+    "name": "ManhwaTop",
+    "version": "1.0.0-alpha.15",
+    "overallStatus": "CLOUDFLARE_BLOCKED",
+    "endpointsPassed": 1,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": true,
+    "totalLatencyMs": 1172,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "FAIL",
+        "latencyMs": 530,
+        "error": "Returned 0 items or invalid structure"
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 315,
+        "itemCount": 0
+      },
+      {
+        "endpoint": "search",
+        "status": "FAIL",
+        "latencyMs": 155,
+        "error": "Search for 'Solo' returned 0 items"
+      }
+    ],
+    "notes": "Requires interactive Cloudflare Turnstile clearance"
+  },
+  {
+    "id": "qiscans",
+    "name": "QiScans",
+    "version": "1.0.0-alpha.15",
+    "overallStatus": "CLOUDFLARE_BLOCKED",
+    "endpointsPassed": 0,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": true,
+    "totalLatencyMs": 3669,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "FAIL",
+        "latencyMs": 1750,
+        "error": "Request failed with status 403: https://api.qimanhwa.com/api/v1/series?page=1&perPage=20&sort=latest"
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "FAIL",
+        "latencyMs": 1159,
+        "error": "Request failed with status 403: https://api.qimanhwa.com/api/v1/series?page=2&perPage=20&sort=latest"
+      },
+      {
+        "endpoint": "search",
+        "status": "FAIL",
+        "latencyMs": 758,
+        "error": "Request failed with status 403: https://api.qimanhwa.com/api/v1/series/search?q=Solo&page=1&perPage=20"
+      }
+    ],
+    "notes": "Requires interactive Cloudflare Turnstile clearance"
+  },
+  {
+    "id": "mgeko",
+    "name": "Mgeko",
+    "version": "1.0.0-alpha.29",
+    "overallStatus": "PARTIAL",
+    "endpointsPassed": 4,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": false,
+    "totalLatencyMs": 15603,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "PASS",
+        "latencyMs": 3422,
+        "itemCount": 24,
+        "sample": {
+          "id": "apex-future-martial-arts2",
+          "title": "Logging 10 000 Years into the Future Apex Future Martial Arts",
+          "cover": "https://imgsrv5.com/avatar/288x412/media/manga_covers/apex-future-martial-arts.jpg"
+        }
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 4343,
+        "itemCount": 24
+      },
+      {
+        "endpoint": "search",
+        "status": "PASS",
+        "latencyMs": 663,
+        "itemCount": 1,
+        "sample": {
+          "query": "Logging 000",
+          "match": "Logging 10 000 Years into the Future Apex Future Martial Arts"
+        }
+      },
+      {
+        "endpoint": "detail",
+        "status": "PASS",
+        "latencyMs": 3778,
+        "sample": {
+          "title": "Logging 10 000 Years into the Future Apex Future Martial Arts",
+          "status": "Ongoing",
+          "author": "Updating"
+        }
+      },
+      {
+        "endpoint": "chapters",
+        "status": "FAIL",
+        "latencyMs": 3379,
+        "error": "Invalid time value"
+      }
+    ],
+    "notes": "Browse/Search operational; chapter/page parsing layout update needed"
+  },
+  {
+    "id": "punkrecords",
+    "name": "PunkRecords",
+    "version": "1.0.0-alpha.2",
+    "overallStatus": "OPERATIONAL",
+    "endpointsPassed": 7,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": false,
+    "totalLatencyMs": 15914,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "PASS",
+        "latencyMs": 5439,
+        "itemCount": 2,
+        "sample": {
+          "id": "one-piece",
+          "title": "One Piece",
+          "cover": "https://api.punkrecordz.com/images/webp/495ca501-828a-4674-a856-ee6eaf0b2d70.jpg.webp"
+        }
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 4771,
+        "itemCount": 2
+      },
+      {
+        "endpoint": "search",
+        "status": "PASS",
+        "latencyMs": 707,
+        "itemCount": 6,
+        "sample": {
+          "query": "One Piece",
+          "match": "One Piece"
+        }
+      },
+      {
+        "endpoint": "detail",
+        "status": "PASS",
+        "latencyMs": 3093,
+        "sample": {
+          "title": "One Piece",
+          "status": "Ongoing",
+          "author": "Punk Records"
+        }
+      },
+      {
+        "endpoint": "chapters",
+        "status": "PASS",
+        "latencyMs": 454,
+        "itemCount": 50,
+        "sample": {
+          "chapterId": "one-piece::1192",
+          "chapter": "1192",
+          "title": "One Piece Chapitre 1192"
+        }
+      },
+      {
+        "endpoint": "pageUrls",
+        "status": "PASS",
+        "latencyMs": 423,
+        "itemCount": 13,
+        "sample": {
+          "firstPageUrl": "https://api.punkrecordz.com/images/webp/5becc716-6506-4838-a302-10e3d7a5c96d.jpeg.webp"
+        }
+      },
+      {
+        "endpoint": "image_probe",
+        "status": "PASS",
+        "latencyMs": 1009,
+        "sample": {
+          "status": 206,
+          "contentType": "application/octet-stream"
+        }
+      }
+    ],
+    "notes": "Behind Cloudflare WAF, passes seamlessly"
+  },
+  {
+    "id": "roliascan",
+    "name": "Roliascan",
+    "version": "1.0.0-alpha.1",
+    "overallStatus": "PARTIAL",
+    "endpointsPassed": 4,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": false,
+    "totalLatencyMs": 2672,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "PASS",
+        "latencyMs": 872,
+        "itemCount": 15,
+        "sample": {
+          "id": "my-bias-gets-on-the-last-train",
+          "title": "My Bias Gets on the Last Train",
+          "cover": "https://roliascan.com/content/media/178671l.webp"
+        }
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 322,
+        "itemCount": 15
+      },
+      {
+        "endpoint": "search",
+        "status": "PASS",
+        "latencyMs": 375,
+        "itemCount": 1,
+        "sample": {
+          "query": "Bias Gets",
+          "match": "My Bias Gets on the Last Train"
+        }
+      },
+      {
+        "endpoint": "detail",
+        "status": "PASS",
+        "latencyMs": 386,
+        "sample": {
+          "title": "My Bias Gets on the Last Train",
+          "status": "ONGOING",
+          "author": "Jixksee"
+        }
+      },
+      {
+        "endpoint": "chapters",
+        "status": "FAIL",
+        "latencyMs": 699,
+        "error": "Application.crypto_md5Hash is not a function"
+      }
+    ],
+    "notes": "Browse/Search operational; chapter/page parsing layout update needed"
+  },
+  {
+    "id": "ragescans",
+    "name": "Rage Scans",
+    "version": "1.0.0-alpha.2",
+    "overallStatus": "CLOUDFLARE_BLOCKED",
+    "endpointsPassed": 1,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": true,
+    "totalLatencyMs": 5103,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "FAIL",
+        "latencyMs": 2143,
+        "error": "Returned 0 items or invalid structure"
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 1051,
+        "itemCount": 0
+      },
+      {
+        "endpoint": "search",
+        "status": "FAIL",
+        "latencyMs": 676,
+        "error": "Search for 'Solo' returned 0 items"
+      }
+    ],
+    "notes": "Requires interactive Cloudflare Turnstile clearance"
+  },
+  {
+    "id": "raw1001",
+    "name": "Raw1001",
+    "version": "1.0.0-alpha.2",
+    "overallStatus": "OFFLINE",
+    "endpointsPassed": 1,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": false,
+    "totalLatencyMs": 6884,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "FAIL",
+        "latencyMs": 3426,
+        "error": "Returned 0 items or invalid structure"
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 1751,
+        "itemCount": 0
+      },
+      {
+        "endpoint": "search",
+        "status": "FAIL",
+        "latencyMs": 790,
+        "error": "Search for 'Solo' returned 0 items"
+      }
+    ],
+    "notes": "Host unresponsive or changed domain"
+  },
+  {
+    "id": "setsuscans",
+    "name": "SetsuScans",
+    "version": "1.0.0-alpha.15",
+    "overallStatus": "CLOUDFLARE_BLOCKED",
+    "endpointsPassed": 1,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": true,
+    "totalLatencyMs": 4440,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "FAIL",
+        "latencyMs": 1974,
+        "error": "Returned 0 items or invalid structure"
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 1565,
+        "itemCount": 0
+      },
+      {
+        "endpoint": "search",
+        "status": "FAIL",
+        "latencyMs": 302,
+        "error": "Search for 'Solo' returned 0 items"
+      }
+    ],
+    "notes": "Requires interactive Cloudflare Turnstile clearance"
+  },
+  {
+    "id": "royalroad",
+    "name": "RoyalRoad",
+    "version": "1.0.0-alpha.1",
+    "overallStatus": "OPERATIONAL",
+    "endpointsPassed": 5,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": false,
+    "totalLatencyMs": 4765,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "PASS",
+        "latencyMs": 1131,
+        "itemCount": 20,
+        "sample": {
+          "id": "21220/mother-of-learning",
+          "title": "Mother of Learning",
+          "cover": "https://www.royalroadcdn.com/public/covers-full/21220-mother-of-learning.jpg?time=1637247458"
+        }
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 658,
+        "itemCount": 20
+      },
+      {
+        "endpoint": "search",
+        "status": "PASS",
+        "latencyMs": 812,
+        "itemCount": 20,
+        "sample": {
+          "query": "Mother Learning",
+          "match": "Mother of Learning"
+        }
+      },
+      {
+        "endpoint": "detail",
+        "status": "PASS",
+        "latencyMs": 839,
+        "sample": {
+          "title": "Mother of Learning",
+          "status": "Completed",
+          "author": "nobody103"
+        }
+      },
+      {
+        "endpoint": "chapters",
+        "status": "PASS",
+        "latencyMs": 742,
+        "itemCount": 109,
+        "sample": {
+          "chapterId": "21220/mother-of-learning::fiction/21220/mother-of-learning/chapter/301778/1-good-morning-brother",
+          "chapter": "1",
+          "title": "1. Good Morning Brother"
+        }
+      },
+      {
+        "endpoint": "pageUrls",
+        "status": "FAIL",
+        "latencyMs": 565,
+        "error": "pageUrls() returned empty array"
+      }
+    ],
+    "notes": "Behind Cloudflare WAF, passes seamlessly"
+  },
+  {
+    "id": "samuraiscan",
+    "name": "SamuraiScan",
+    "version": "1.0.0-alpha.14",
+    "overallStatus": "PARTIAL",
+    "endpointsPassed": 4,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": false,
+    "totalLatencyMs": 17685,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "PASS",
+        "latencyMs": 6312,
+        "itemCount": 10,
+        "sample": {
+          "id": "3793",
+          "title": "EL DEL HEROE MAXIMO ULTIMOS CAPITULOS",
+          "cover": "https://samurai.j5z.xyz/wp-content/uploads/2026/03/ChatGPT-Image-26-mar-2026-07_13_26-p.m-193x278.png"
+        }
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 6883,
+        "itemCount": 10
+      },
+      {
+        "endpoint": "search",
+        "status": "PASS",
+        "latencyMs": 1124,
+        "itemCount": 2,
+        "sample": {
+          "query": "DEL HEROE",
+          "match": "EL DEL HEROE MAXIMO ULTIMOS CAPITULOS"
+        }
+      },
+      {
+        "endpoint": "detail",
+        "status": "PASS",
+        "latencyMs": 2729,
+        "sample": {
+          "title": "EL DEL HEROE MAXIMO ULTIMOS CAPITULOS",
+          "status": "Ongoing"
+        }
+      },
+      {
+        "endpoint": "chapters",
+        "status": "FAIL",
+        "latencyMs": 619,
+        "error": "chapters() returned empty array"
+      }
+    ],
+    "notes": "Browse/Search operational; chapter/page parsing layout update needed"
+  },
+  {
+    "id": "sushiscans",
+    "name": "SushiScans",
+    "version": "1.0.0-alpha.7",
+    "overallStatus": "CLOUDFLARE_BLOCKED",
+    "endpointsPassed": 1,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": true,
+    "totalLatencyMs": 767,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "FAIL",
+        "latencyMs": 500,
+        "error": "Returned 0 items or invalid structure"
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 106,
+        "itemCount": 0
+      },
+      {
+        "endpoint": "search",
+        "status": "FAIL",
+        "latencyMs": 55,
+        "error": "Search for 'Solo' returned 0 items"
+      }
+    ],
+    "notes": "Requires interactive Cloudflare Turnstile clearance"
+  },
+  {
+    "id": "utoon",
+    "name": "UToon",
+    "version": "1.0.0-alpha.15",
+    "overallStatus": "OFFLINE",
+    "endpointsPassed": 1,
+    "totalEndpoints": 7,
+    "cloudflareDetected": false,
+    "cloudflareChallenge": false,
+    "totalLatencyMs": 3454,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "FAIL",
+        "latencyMs": 2273,
+        "error": "Returned 0 items or invalid structure"
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 575,
+        "itemCount": 0
+      },
+      {
+        "endpoint": "search",
+        "status": "FAIL",
+        "latencyMs": 299,
+        "error": "Search for 'Solo' returned 0 items"
+      }
+    ],
+    "notes": "Host unresponsive or changed domain"
+  },
+  {
+    "id": "thunderscans",
+    "name": "Thunderscans",
+    "version": "1.0.0-alpha.11",
+    "overallStatus": "OPERATIONAL",
+    "endpointsPassed": 7,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": false,
+    "totalLatencyMs": 8716,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "PASS",
+        "latencyMs": 1034,
+        "itemCount": 6,
+        "sample": {
+          "id": "demonic-emperor",
+          "title": "Demonic Emperor",
+          "cover": "https://en-thunderscans.com/wp-content/uploads/2024/09/2026-05-16-01-38-06-1778938686956-210x300.jpg"
+        }
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 649,
+        "itemCount": 6
+      },
+      {
+        "endpoint": "search",
+        "status": "PASS",
+        "latencyMs": 888,
+        "itemCount": 10,
+        "sample": {
+          "query": "Solo",
+          "match": "Solo Life of the Strongest Point Gifter in a different world"
+        }
+      },
+      {
+        "endpoint": "detail",
+        "status": "PASS",
+        "latencyMs": 1925,
+        "sample": {
+          "title": "Demonic Emperor",
+          "status": "Ongoing",
+          "author": "Unknown"
+        }
+      },
+      {
+        "endpoint": "chapters",
+        "status": "PASS",
+        "latencyMs": 1934,
+        "itemCount": 911,
+        "sample": {
+          "chapterId": "demonic-emperor::906",
+          "chapter": "906",
+          "title": "Chapter 906"
+        }
+      },
+      {
+        "endpoint": "pageUrls",
+        "status": "PASS",
+        "latencyMs": 2201,
+        "itemCount": 4,
+        "sample": {
+          "firstPageUrl": "https://en-thunderscans.com/wp-content/uploads/manga/054d7ba40f02af61fcc24a2710669484/0003_b8bfff94.webp"
+        }
+      },
+      {
+        "endpoint": "image_probe",
+        "status": "PASS",
+        "latencyMs": 65,
+        "sample": {
+          "status": 206,
+          "contentType": "image/webp"
+        }
+      }
+    ],
+    "notes": "Behind Cloudflare WAF, passes seamlessly"
+  },
+  {
+    "id": "yaoiscan",
+    "name": "YaoiScan",
+    "version": "1.0.0-alpha.12",
+    "overallStatus": "CLOUDFLARE_BLOCKED",
+    "endpointsPassed": 1,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": true,
+    "totalLatencyMs": 3969,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "FAIL",
+        "latencyMs": 786,
+        "error": "Returned 0 items or invalid structure"
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 1175,
+        "itemCount": 0
+      },
+      {
+        "endpoint": "search",
+        "status": "FAIL",
+        "latencyMs": 1620,
+        "error": "Search for 'Solo' returned 0 items"
+      }
+    ],
+    "notes": "Requires interactive Cloudflare Turnstile clearance"
   }
 ]

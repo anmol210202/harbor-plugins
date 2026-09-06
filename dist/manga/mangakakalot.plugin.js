@@ -135,36 +135,38 @@ var source=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
     id: "mangakakalot",
     name: "MangaKakalot",
 
-    async popular(offset, tagId) {
+    async popular(offset, tagOrFilters) {
       if (__ext) {
         if (__ext.initialise && !this.__initDone) {
           try { await __ext.initialise(); } catch (_) {}
           this.__initDone = true;
         }
 
-        const page = Math.floor(Math.max(0, offset) / 48) + 1;
-        try {
-          if (typeof __ext.getDiscoverSections === "function") {
-            const sections = await __ext.getDiscoverSections();
-            if (Array.isArray(sections) && sections.length > 0) {
-              const targetSec =
-                sections.find((s) => ["hot", "recommended", "popular", "featured"].includes(String(s.id).toLowerCase())) ||
-                sections[0];
-              const res = await __ext.getDiscoverSectionItems(targetSec, { page });
-              const items = res?.items || (Array.isArray(res) ? res : []);
-              if (items.length > 0) {
-                return items.map(__mapItem).filter(Boolean);
+        if (!tagOrFilters) {
+          const page = Math.floor(Math.max(0, offset) / 48) + 1;
+          try {
+            if (typeof __ext.getDiscoverSections === "function") {
+              const sections = await __ext.getDiscoverSections();
+              if (Array.isArray(sections) && sections.length > 0) {
+                const targetSec =
+                  sections.find((s) => ["hot", "recommended", "popular", "featured"].includes(String(s.id).toLowerCase())) ||
+                  sections[0];
+                const res = await __ext.getDiscoverSectionItems(targetSec, { page });
+                const items = res?.items || (Array.isArray(res) ? res : []);
+                if (items.length > 0) {
+                  return items.map(__mapItem).filter(Boolean);
+                }
               }
             }
+          } catch (e) {
+            harbor.log("getDiscoverSections error:", e);
           }
-        } catch (e) {
-          harbor.log("getDiscoverSections error:", e);
         }
       }
-      return this.search("", offset, tagId);
+      return this.search("", offset, tagOrFilters);
     },
 
-    async search(query, offset, tagId) {
+    async search(query, offset, tagOrFilters) {
       if (!__ext) return [];
       if (__ext.initialise && !this.__initDone) {
         try { await __ext.initialise(); } catch (_) {}
@@ -172,21 +174,96 @@ var source=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
       }
 
       const page = Math.floor(Math.max(0, offset) / 48) + 1;
+
+      // 1. Resolve Sorting Options
+      let sortOpts = [];
       let sortOption = { id: "default", label: "Default" };
       try {
         if (typeof __ext.getSortingOptions === "function") {
-          const sortOpts = await __ext.getSortingOptions();
+          sortOpts = (await __ext.getSortingOptions()) || [];
           if (Array.isArray(sortOpts) && sortOpts.length > 0) {
             sortOption = sortOpts[0];
           }
         }
       } catch (_) {}
 
-      const searchParams = { title: query || "" };
-      if (tagId) {
-        searchParams.metadata = { genres: [tagId] };
+      // 2. Resolve selected sort and metadata from tagOrFilters
+      let metadata = undefined;
+      if (typeof tagOrFilters === "string" && tagOrFilters) {
+        if (tagOrFilters.startsWith("sort:")) {
+          const sortId = tagOrFilters.slice(5);
+          const matchedSort = sortOpts.find((s) => s.id === sortId || s.label === sortId || String(s.id).toLowerCase() === sortId.toLowerCase());
+          if (matchedSort) sortOption = matchedSort;
+        } else {
+          const cleanTag = tagOrFilters.startsWith("genre:") ? tagOrFilters.slice(6) : tagOrFilters;
+          if (typeof __ext.getSearchFilters === "function") {
+            metadata = [{ id: "tags", value: { [cleanTag]: "included" } }];
+          } else {
+            metadata = {
+              genres: [cleanTag],
+              categories: { [cleanTag]: "included" },
+              includedTags: [cleanTag],
+              seriesStatuses: [cleanTag],
+            };
+          }
+        }
+      } else if (Array.isArray(tagOrFilters)) {
+        // Structured PluginFilterGroup[]
+        for (const group of tagOrFilters) {
+          if (group.id === "sort" || group.name?.toLowerCase().includes("sort")) {
+            const sortFilter = group.filters?.find((f) => f.type === "sort");
+            if (sortFilter && sortFilter.selectedIndex != null && sortFilter.values) {
+              const selectedVal = sortFilter.values[sortFilter.selectedIndex];
+              const matchedSort = sortOpts.find((s) => s.label === selectedVal || s.id === selectedVal || String(s.id).toLowerCase() === String(selectedVal).toLowerCase());
+              if (matchedSort) sortOption = matchedSort;
+            }
+          }
+        }
+
+        if (typeof __ext.getSearchFilters === "function") {
+          const filterArr = [];
+          for (const group of tagOrFilters) {
+            if (group.id === "sort") continue;
+            const groupVal = {};
+            for (const f of group.filters || []) {
+              if (f.type === "tri-state" && f.state && f.state !== "ignore") {
+                groupVal[f.id] = f.state === "include" ? "included" : "excluded";
+              } else if (f.type === "checkbox" && f.checked) {
+                groupVal[f.id] = true;
+              } else if (f.type === "select" && f.selectedIndex != null && f.values) {
+                groupVal[f.id] = f.values[f.selectedIndex];
+              }
+            }
+            if (Object.keys(groupVal).length > 0) {
+              filterArr.push({ id: group.id, value: groupVal });
+            }
+          }
+          if (filterArr.length > 0) metadata = filterArr;
+        } else {
+          const genres = [];
+          const categories = {};
+          for (const group of tagOrFilters) {
+            if (group.id === "sort") continue;
+            for (const f of group.filters || []) {
+              if (f.type === "tri-state" && f.state && f.state !== "ignore") {
+                if (f.state === "include") {
+                  genres.push(f.id);
+                  categories[f.id] = "included";
+                } else if (f.state === "exclude") {
+                  categories[f.id] = "excluded";
+                }
+              } else if (f.type === "checkbox" && f.checked) {
+                genres.push(f.id);
+              }
+            }
+          }
+          if (genres.length > 0 || Object.keys(categories).length > 0) {
+            metadata = { genres, categories, includedTags: genres };
+          }
+        }
       }
 
+      const searchParams = { title: query || "", metadata };
       const res = await __ext.getSearchResults(searchParams, { offset, page }, sortOption);
       const items = res?.items || (Array.isArray(res) ? res : []);
       return items.map(__mapItem).filter(Boolean);
@@ -264,12 +341,109 @@ var source=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
         chapterId,
       });
 
-      const pages = res?.pages || (Array.isArray(res) ? res : []);
+      const pages = res?.pages || res?.images || res?.imageUrls || (Array.isArray(res) ? res : []);
       return pages.map(__absUrl).filter(Boolean);
     },
 
+    async getFilters() {
+      if (!__ext) return [];
+      if (__ext.initialise && !this.__initDone) {
+        try { await __ext.initialise(); } catch (_) {}
+        this.__initDone = true;
+      }
+
+      const groups = [];
+
+      // 1. Sorting options group
+      if (typeof __ext.getSortingOptions === "function") {
+        try {
+          const sortOpts = await __ext.getSortingOptions();
+          if (Array.isArray(sortOpts) && sortOpts.length > 0) {
+            groups.push({
+              id: "sort",
+              name: "Sort By",
+              filters: [
+                {
+                  type: "sort",
+                  id: "order",
+                  name: "Order",
+                  values: sortOpts.map((s) => s.label || s.id),
+                  selectedIndex: 0,
+                  ascending: false,
+                },
+              ],
+            });
+          }
+        } catch (_) {}
+      }
+
+      // 2. Search tags / filters groups
+      if (typeof __ext.getSearchTags === "function") {
+        try {
+          const tagGroups = await __ext.getSearchTags();
+          if (Array.isArray(tagGroups)) {
+            for (const tg of tagGroups) {
+              if (tg.tags && tg.tags.length > 0) {
+                groups.push({
+                  id: tg.id || "tags",
+                  name: tg.title || tg.id || "Tags",
+                  filters: tg.tags.map((t) => ({
+                    type: "tri-state",
+                    id: t.id,
+                    name: t.title || t.id,
+                    state: "ignore",
+                  })),
+                });
+              }
+            }
+          }
+        } catch (_) {}
+      } else if (typeof __ext.getSearchFilters === "function") {
+        try {
+          const filters = await __ext.getSearchFilters();
+          if (Array.isArray(filters)) {
+            for (const f of filters) {
+              if (f.options && Array.isArray(f.options) && f.options.length > 0) {
+                groups.push({
+                  id: f.id,
+                  name: f.title || f.id,
+                  filters: f.options.map((o) => ({
+                    type: "tri-state",
+                    id: o.id,
+                    name: o.title || o.id,
+                    state: "ignore",
+                  })),
+                });
+              }
+            }
+          }
+        } catch (_) {}
+      }
+
+      return groups;
+    },
+
     async tags() {
-      if (__ext && typeof __ext.getGenres === "function") {
+      const filters = await this.getFilters();
+      const tagList = [];
+
+      for (const group of filters) {
+        if (group.id === "sort") {
+          const sortFilter = group.filters?.find((f) => f.type === "sort");
+          if (sortFilter && sortFilter.values) {
+            for (const val of sortFilter.values) {
+              tagList.push({ id: "sort:" + val, name: val, group: "Sort" });
+            }
+          }
+        } else {
+          for (const f of group.filters || []) {
+            tagList.push({ id: "genre:" + f.id, name: f.name, group: group.name });
+          }
+        }
+      }
+
+      // Fallback to legacy getGenres if available and empty
+      if (tagList.length === 0 && __ext && typeof __ext.getGenres === "function") {
         try {
           const genres = await __ext.getGenres();
           if (Array.isArray(genres)) {
@@ -283,7 +457,8 @@ var source=(function(e){Object.defineProperty(e,Symbol.toStringTag,{value:`Modul
           }
         } catch (_) {}
       }
-      return [];
+
+      return tagList;
     },
   };
 

@@ -107,6 +107,66 @@ export const plugin: MangaProvider = {
       }))
       .filter((t) => Boolean(t.id && t.name));
   },
+
+  preferences: [
+    {
+      key: 'imageQuality',
+      label: 'Image Quality',
+      type: 'select',
+      options: ['high', 'medium', 'dataSaver'],
+      default: 'high',
+    },
+    {
+      key: 'mirrorDomain',
+      label: 'Custom Mirror URL',
+      type: 'text',
+      default: 'https://example-manga-host.test',
+    },
+  ],
+
+  async getFilters() {
+    return [
+      {
+        id: 'sort',
+        name: 'Sort By',
+        filters: [
+          {
+            type: 'sort' as const,
+            id: 'order',
+            name: 'Order',
+            values: ['Popularity', 'Latest Update', 'Alphabetical', 'Rating'],
+            selectedIndex: 0,
+            ascending: false,
+          },
+        ],
+      },
+      {
+        id: 'status',
+        name: 'Publication Status',
+        filters: [
+          {
+            type: 'select' as const,
+            id: 'status',
+            name: 'Status',
+            values: ['All', 'Ongoing', 'Completed', 'Hiatus'],
+            selectedIndex: 0,
+          },
+        ],
+      },
+      {
+        id: 'genres',
+        name: 'Genres',
+        filters: [
+          { type: 'tri-state' as const, id: 'action', name: 'Action', state: 'ignore' as const },
+          { type: 'tri-state' as const, id: 'adventure', name: 'Adventure', state: 'ignore' as const },
+          { type: 'tri-state' as const, id: 'comedy', name: 'Comedy', state: 'ignore' as const },
+          { type: 'tri-state' as const, id: 'fantasy', name: 'Fantasy', state: 'ignore' as const },
+          { type: 'tri-state' as const, id: 'romance', name: 'Romance', state: 'ignore' as const },
+          { type: 'tri-state' as const, id: 'sci-fi', name: 'Sci-Fi', state: 'ignore' as const },
+        ],
+      },
+    ];
+  },
 };
 
 // Explicit harbor registration as recommended by Harbor docs
