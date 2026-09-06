@@ -1,0 +1,759 @@
+{
+  "name": "Community Manga Repo",
+  "description": "High quality community manga plugins for Harbor reader",
+  "plugins": [
+    {
+      "id": "allmanga",
+      "name": "AllManga",
+      "version": "1.0.0-alpha.4",
+      "lang": "en",
+      "nsfw": true,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/AllManga/static/icon.png",
+      "entry": "allmanga.plugin.js",
+      "description": "[Verified | Popular] Extension that pulls content from allmanga.to.",
+      "badges": [
+        "Verified",
+        "Popular"
+      ]
+    },
+    {
+      "id": "atsumaru",
+      "name": "Atsumaru",
+      "version": "1.0.0-alpha.24",
+      "lang": "en",
+      "nsfw": false,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/Atsumaru/static/icon.png",
+      "entry": "atsumaru.plugin.js",
+      "description": "[Verified | Popular] Extension that pulls content from atsu.moe.",
+      "badges": [
+        "Verified",
+        "Popular"
+      ]
+    },
+    {
+      "id": "dragontea",
+      "name": "DragonTea",
+      "version": "1.0.0-alpha.14",
+      "lang": "en",
+      "nsfw": true,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/DragonTea/static/icon.png",
+      "entry": "dragontea.plugin.js",
+      "description": "[Verified | Popular] Extension that pulls content from dragontea.ink.",
+      "badges": [
+        "Verified",
+        "Popular"
+      ]
+    },
+    {
+      "id": "drakescans",
+      "name": "Drake Scans",
+      "version": "1.0.0-alpha.7",
+      "lang": "en",
+      "nsfw": false,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/DrakeScans/static/icon.png",
+      "entry": "drakescans.plugin.js",
+      "description": "[Verified | Popular] Extension that pulls content from drakecomic.org.",
+      "badges": [
+        "Verified",
+        "Popular"
+      ]
+    },
+    {
+      "id": "flamecomics",
+      "name": "FlameComics",
+      "version": "1.0.0-alpha.1",
+      "lang": "en",
+      "nsfw": false,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/FlameComics/static/icon.png",
+      "entry": "flamecomics.plugin.js",
+      "description": "[Verified | Popular] Extension that pulls content from FlameComics.xyz.",
+      "badges": [
+        "Verified",
+        "Popular"
+      ]
+    },
+    {
+      "id": "hivetoons",
+      "name": "HiveToons",
+      "version": "1.0.0-alpha.3",
+      "lang": "en",
+      "nsfw": true,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/HiveToons/static/icon.png",
+      "entry": "hivetoons.plugin.js",
+      "description": "[Verified | Popular] Extension that pulls content from hivetoons.org.",
+      "badges": [
+        "Verified",
+        "Popular"
+      ]
+    },
+    {
+      "id": "weebcentral",
+      "name": "WeebCentral",
+      "version": "1.0.0-alpha.25",
+      "lang": "en",
+      "nsfw": false,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/WeebCentral/static/icon.png",
+      "entry": "weebcentral.plugin.js",
+      "description": "[Verified | Popular] Extension that pulls content from weebcentral.com.",
+      "badges": [
+        "Verified",
+        "Popular"
+      ]
+    },
+    {
+      "id": "comix",
+      "name": "Comix",
+      "version": "1.0.0-alpha.46",
+      "lang": "en",
+      "nsfw": false,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/Comix/static/icon.png",
+      "entry": "comix.plugin.js",
+      "description": "[Popular] Extension that pulls content from Comix.to.",
+      "badges": [
+        "Popular"
+      ]
+    },
+    {
+      "id": "kunmanga",
+      "name": "KunManga",
+      "version": "1.0.0-alpha.14",
+      "lang": "en",
+      "nsfw": false,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/KunManga/static/icon.png",
+      "entry": "kunmanga.plugin.js",
+      "description": "[Popular] Extension that pulls content from kunmanga.co.uk.",
+      "badges": [
+        "Popular"
+      ]
+    },
+    {
+      "id": "mangadex",
+      "name": "MangaDex",
+      "version": "1.0.0-alpha.27",
+      "lang": "multi",
+      "nsfw": false,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/MangaDex/static/icon.png",
+      "entry": "mangadex.plugin.js",
+      "description": "[Popular] Extension that pulls content from mangadex.org.",
+      "badges": [
+        "Popular"
+      ]
+    },
+    {
+      "id": "mangakakalot",
+      "name": "MangaKakalot",
+      "version": "1.0.0-alpha.11",
+      "lang": "en",
+      "nsfw": false,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/MangaKakalot/static/icon.png",
+      "entry": "mangakakalot.plugin.js",
+      "description": "[Popular] Extension that pulls content from mangakakalot.gg.",
+      "badges": [
+        "Popular"
+      ]
+    },
+    {
+      "id": "toongod",
+      "name": "ToonGod",
+      "version": "1.0.0-alpha.14",
+      "lang": "en",
+      "nsfw": true,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/ToonGod/static/icon.png",
+      "entry": "toongod.plugin.js",
+      "description": "[Popular] Extension that pulls content from toongod.com.",
+      "badges": [
+        "Popular"
+      ]
+    },
+    {
+      "id": "toonily",
+      "name": "Toonily",
+      "version": "1.0.0-alpha.15",
+      "lang": "en",
+      "nsfw": true,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/Toonily/static/icon.png",
+      "entry": "toonily.plugin.js",
+      "description": "[Popular] Extension that pulls content from toonily.com.",
+      "badges": [
+        "Popular"
+      ]
+    },
+    {
+      "id": "webtoon",
+      "name": "Webtoon",
+      "version": "1.0.0-alpha.18",
+      "lang": "multi",
+      "nsfw": false,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/Webtoon/static/icon.png",
+      "entry": "webtoon.plugin.js",
+      "description": "[Popular] Extension that pulls content from webtoons.com.",
+      "badges": [
+        "Popular"
+      ]
+    },
+    {
+      "id": "webtoonxyz",
+      "name": "WebtoonXYZ",
+      "version": "1.0.0-alpha.14",
+      "lang": "en",
+      "nsfw": true,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/WebtoonXYZ/static/icon.png",
+      "entry": "webtoonxyz.plugin.js",
+      "description": "[Popular] Extension that pulls content from webtoon.xyz.",
+      "badges": [
+        "Popular"
+      ]
+    },
+    {
+      "id": "allporncomic",
+      "name": "AllPornComic",
+      "version": "1.0.0-alpha.14",
+      "lang": "en",
+      "nsfw": true,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/AllPornComic/static/icon.png",
+      "entry": "allporncomic.plugin.js",
+      "description": "Extension that pulls content from allporncomic.com."
+    },
+    {
+      "id": "anilist",
+      "name": "AniList",
+      "version": "1.0.0-alpha.19",
+      "lang": "en",
+      "nsfw": false,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/AniList/static/icon.png",
+      "entry": "anilist.plugin.js",
+      "description": "Extension that integrates with anilist.co for tracking and collection management."
+    },
+    {
+      "id": "arthurscan",
+      "name": "ArthurScan",
+      "version": "1.0.0-alpha.16",
+      "lang": "pt",
+      "nsfw": true,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/ArthurScan/static/icon.png",
+      "entry": "arthurscan.plugin.js",
+      "description": "Extension that pulls content from arthurscan.xyz."
+    },
+    {
+      "id": "coffeemanga",
+      "name": "CoffeeManga",
+      "version": "1.0.0-alpha.16",
+      "lang": "en",
+      "nsfw": true,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/CoffeeManga/static/icon.png",
+      "entry": "coffeemanga.plugin.js",
+      "description": "Extension that pulls content from coffeemanga.ink."
+    },
+    {
+      "id": "example-manga",
+      "name": "Example Manga Source",
+      "version": "1.0.0",
+      "lang": "en",
+      "nsfw": false,
+      "icon": "https://harbor-reader.test/icons/manga.png",
+      "entry": "example-manga.plugin.js",
+      "description": "Clean, typed, annotated reference Manga source plugin for Harbor",
+      "website": "https://example-manga.test"
+    },
+    {
+      "id": "gourmetscans",
+      "name": "GourmetScans",
+      "version": "1.0.0-alpha.14",
+      "lang": "en",
+      "nsfw": true,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/GourmetScans/static/icon.png",
+      "entry": "gourmetscans.plugin.js",
+      "description": "Extension that pulls content from gourmetsupremacy.com."
+    },
+    {
+      "id": "hentai20",
+      "name": "Hentai20",
+      "version": "1.0.0-alpha.6",
+      "lang": "en",
+      "nsfw": true,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/Hentai20/static/icon.png",
+      "entry": "hentai20.plugin.js",
+      "description": "Extension that pulls content from hentai20.io."
+    },
+    {
+      "id": "hiperdex",
+      "name": "HiperDex",
+      "version": "1.0.0-alpha.15",
+      "lang": "en",
+      "nsfw": true,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/HiperDex/static/icon.png",
+      "entry": "hiperdex.plugin.js",
+      "description": "Extension that pulls content from hiperdex.com."
+    },
+    {
+      "id": "lekmanga",
+      "name": "LekManga",
+      "version": "1.0.0-alpha.14",
+      "lang": "ar",
+      "nsfw": false,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/LekManga/static/icon.png",
+      "entry": "lekmanga.plugin.js",
+      "description": "Extension that pulls content from mangalik.net."
+    },
+    {
+      "id": "lelmanga",
+      "name": "LelManga",
+      "version": "1.0.0-alpha.6",
+      "lang": "fr",
+      "nsfw": false,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/LelManga/static/icon.png",
+      "entry": "lelmanga.plugin.js",
+      "description": "Extension that pulls content from lelmanga.com."
+    },
+    {
+      "id": "lhtranslation",
+      "name": "LHTranslation",
+      "version": "1.0.0-alpha.15",
+      "lang": "en",
+      "nsfw": false,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/LHTranslation/static/icon.png",
+      "entry": "lhtranslation.plugin.js",
+      "description": "Extension that pulls content from lhtranslation.net."
+    },
+    {
+      "id": "lilymanga",
+      "name": "LilyManga",
+      "version": "1.0.0-alpha.14",
+      "lang": "en",
+      "nsfw": true,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/LilyManga/static/icon.png",
+      "entry": "lilymanga.plugin.js",
+      "description": "Extension that pulls content from lilymanga.net."
+    },
+    {
+      "id": "lnori",
+      "name": "LNori",
+      "version": "1.0.0-alpha.2",
+      "lang": "en",
+      "nsfw": false,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/LNori/static/icon.png",
+      "entry": "lnori.plugin.js",
+      "description": "Extension that pulls content from LNori."
+    },
+    {
+      "id": "madaradex",
+      "name": "MadaraDex",
+      "version": "1.0.0-alpha.15",
+      "lang": "en",
+      "nsfw": true,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/MadaraDex/static/icon.png",
+      "entry": "madaradex.plugin.js",
+      "description": "Extension that pulls content from madaradex.org."
+    },
+    {
+      "id": "manga3asq",
+      "name": "Manga3asq",
+      "version": "1.0.0-alpha.14",
+      "lang": "ar",
+      "nsfw": false,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/Manga3asq/static/icon.png",
+      "entry": "manga3asq.plugin.js",
+      "description": "Extension that pulls content from 3asq.pro."
+    },
+    {
+      "id": "mangabat",
+      "name": "MangaBat",
+      "version": "1.0.0-alpha.11",
+      "lang": "en",
+      "nsfw": false,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/MangaBat/static/icon.png",
+      "entry": "mangabat.plugin.js",
+      "description": "Extension that pulls content from mangabat.com."
+    },
+    {
+      "id": "mangademon",
+      "name": "MangaDemon",
+      "version": "1.0.0-alpha.15",
+      "lang": "en",
+      "nsfw": false,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/MangaDemon/static/icon.png",
+      "entry": "mangademon.plugin.js",
+      "description": "Extension that pulls content from demonicscans.org."
+    },
+    {
+      "id": "mangadistrict",
+      "name": "MangaDistrict",
+      "version": "1.0.0-alpha.12",
+      "lang": "en",
+      "nsfw": true,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/MangaDistrict/static/icon.png",
+      "entry": "mangadistrict.plugin.js",
+      "description": "Extension that pulls content from mangadistrict.com."
+    },
+    {
+      "id": "mangadot",
+      "name": "MangaDot",
+      "version": "1.0.0-alpha.5",
+      "lang": "en",
+      "nsfw": false,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/MangaDot/static/icon.png",
+      "entry": "mangadot.plugin.js",
+      "description": "Extension that pulls content from MangaDot.net"
+    },
+    {
+      "id": "mangafire",
+      "name": "MangaFire",
+      "version": "1.0.0-alpha.21",
+      "lang": "multi",
+      "nsfw": true,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/MangaFire/static/icon.png",
+      "entry": "mangafire.plugin.js",
+      "description": "Extension that pulls content from mangafire.to."
+    },
+    {
+      "id": "mangafox",
+      "name": "MangaFox",
+      "version": "1.0.0-alpha.13",
+      "lang": "en",
+      "nsfw": true,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/MangaFox/static/icon.png",
+      "entry": "mangafox.plugin.js",
+      "description": "Extension that pulls content from fanfox.net."
+    },
+    {
+      "id": "mangago",
+      "name": "Mangago",
+      "version": "1.0.0-alpha.1",
+      "lang": "en",
+      "nsfw": true,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/Mangago/static/icon.png",
+      "entry": "mangago.plugin.js",
+      "description": "Extension that pulls content from mangago.me."
+    },
+    {
+      "id": "mangakatana",
+      "name": "MangaKatana",
+      "version": "1.0.0-alpha.15",
+      "lang": "en",
+      "nsfw": true,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/MangaKatana/static/icon.png",
+      "entry": "mangakatana.plugin.js",
+      "description": "Extension that pulls content from mangakatana.com."
+    },
+    {
+      "id": "mangakoma",
+      "name": "MangaKoma",
+      "version": "1.0.0-alpha.2",
+      "lang": "ja",
+      "nsfw": true,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/MangaKoma/static/icon.png",
+      "entry": "mangakoma.plugin.js",
+      "description": "Extension that pulls content from mangakoma.net."
+    },
+    {
+      "id": "manganato",
+      "name": "MangaNato",
+      "version": "1.0.0-alpha.11",
+      "lang": "en",
+      "nsfw": false,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/MangaNato/static/icon.png",
+      "entry": "manganato.plugin.js",
+      "description": "Extension that pulls content from manganato.gg."
+    },
+    {
+      "id": "manganelo",
+      "name": "MangaNelo",
+      "version": "1.0.0-alpha.11",
+      "lang": "en",
+      "nsfw": false,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/MangaNelo/static/icon.png",
+      "entry": "manganelo.plugin.js",
+      "description": "Extension that pulls content from nelomanga.net."
+    },
+    {
+      "id": "mangaorigines",
+      "name": "MangaOrigines",
+      "version": "1.0.0-alpha.14",
+      "lang": "fr",
+      "nsfw": true,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/MangaOrigines/static/icon.png",
+      "entry": "mangaorigines.plugin.js",
+      "description": "Extension that pulls content from mangas-origines.fr."
+    },
+    {
+      "id": "mangapill",
+      "name": "Mangapill",
+      "version": "1.0.0-alpha.12",
+      "lang": "en",
+      "nsfw": false,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/Mangapill/static/icon.png",
+      "entry": "mangapill.plugin.js",
+      "description": "Extension that pulls content from mangapill.com."
+    },
+    {
+      "id": "mangaplus",
+      "name": "MangaPlus",
+      "version": "1.0.0-alpha.11",
+      "lang": "en",
+      "nsfw": false,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/MangaPlus/static/icon.png",
+      "entry": "mangaplus.plugin.js",
+      "description": "Extension that pulls content from mangaplus.shueisha.co.jp."
+    },
+    {
+      "id": "mangareadorg",
+      "name": "MangaReadOrg",
+      "version": "1.0.0-alpha.17",
+      "lang": "en",
+      "nsfw": false,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/MangaReadOrg/static/icon.png",
+      "entry": "mangareadorg.plugin.js",
+      "description": "Extension that pulls content from mangaread.org."
+    },
+    {
+      "id": "mangascantrad",
+      "name": "MangaScantrad",
+      "version": "1.0.0-alpha.15",
+      "lang": "fr",
+      "nsfw": true,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/MangaScantrad/static/icon.png",
+      "entry": "mangascantrad.plugin.js",
+      "description": "Extension that pulls content from manga-scantrad.io."
+    },
+    {
+      "id": "mangataro",
+      "name": "MangaTaro",
+      "version": "1.0.0-alpha.3",
+      "lang": "en",
+      "nsfw": false,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/MangaTaro/static/icon.png",
+      "entry": "mangataro.plugin.js",
+      "description": "Extension that pulls content from mangataro.org."
+    },
+    {
+      "id": "mangaupdates",
+      "name": "MangaUpdates",
+      "version": "1.0.0-alpha.7",
+      "lang": "en",
+      "nsfw": false,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/MangaUpdates/static/icon.png",
+      "entry": "mangaupdates.plugin.js",
+      "description": "Extension that integrates with mangaupdates.com for tracking and collection management."
+    },
+    {
+      "id": "mangaworld",
+      "name": "MangaWorld",
+      "version": "1.0.0-alpha.5",
+      "lang": "it",
+      "nsfw": false,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/MangaWorld/static/icon.png",
+      "entry": "mangaworld.plugin.js",
+      "description": "Extension that pulls content from www.mangaworld.mx."
+    },
+    {
+      "id": "mangaworldadult",
+      "name": "MangaWorldAdult",
+      "version": "1.0.0-alpha.5",
+      "lang": "it",
+      "nsfw": true,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/MangaWorldAdult/static/icon.png",
+      "entry": "mangaworldadult.plugin.js",
+      "description": "Extension that pulls content from www.mangaworldadult.net."
+    },
+    {
+      "id": "mangazin",
+      "name": "MangaZin",
+      "version": "1.0.0-alpha.14",
+      "lang": "en",
+      "nsfw": true,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/MangaZin/static/icon.png",
+      "entry": "mangazin.plugin.js",
+      "description": "Extension that pulls content from mangazin.org."
+    },
+    {
+      "id": "manhuaplus",
+      "name": "ManhuaPlus",
+      "version": "1.0.0-alpha.14",
+      "lang": "en",
+      "nsfw": true,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/ManhuaPlus/static/icon.png",
+      "entry": "manhuaplus.plugin.js",
+      "description": "Extension that pulls content from manhuaplus.com."
+    },
+    {
+      "id": "manhuaus",
+      "name": "Manhuaus",
+      "version": "1.0.0-alpha.14",
+      "lang": "en",
+      "nsfw": false,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/Manhuaus/static/icon.png",
+      "entry": "manhuaus.plugin.js",
+      "description": "Extension that pulls content from manhuaus.com."
+    },
+    {
+      "id": "manhwaclub",
+      "name": "ManhwaClub",
+      "version": "1.0.0-alpha.3",
+      "lang": "en",
+      "nsfw": true,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/ManhwaClub/static/icon.png",
+      "entry": "manhwaclub.plugin.js",
+      "description": "Extension that pulls content from manhwaclub.net."
+    },
+    {
+      "id": "manhwaraw",
+      "name": "ManhwaRaw",
+      "version": "1.0.0-alpha.15",
+      "lang": "ko",
+      "nsfw": true,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/ManhwaRaw/static/icon.png",
+      "entry": "manhwaraw.plugin.js",
+      "description": "Extension that pulls content from manhwa-raw.com."
+    },
+    {
+      "id": "manhwatop",
+      "name": "ManhwaTop",
+      "version": "1.0.0-alpha.15",
+      "lang": "en",
+      "nsfw": true,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/ManhwaTop/static/icon.png",
+      "entry": "manhwatop.plugin.js",
+      "description": "Extension that pulls content from manhwatop.com."
+    },
+    {
+      "id": "manhwax",
+      "name": "ManhwaX",
+      "version": "1.0.0-alpha.9",
+      "lang": "en",
+      "nsfw": true,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/ManhwaX/static/icon.png",
+      "entry": "manhwax.plugin.js",
+      "description": "Extension that pulls content from manhwax.top."
+    },
+    {
+      "id": "mgeko",
+      "name": "Mgeko",
+      "version": "1.0.0-alpha.29",
+      "lang": "en",
+      "nsfw": false,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/Mgeko/static/icon.png",
+      "entry": "mgeko.plugin.js",
+      "description": "Extension that pulls content from mgeko.cc."
+    },
+    {
+      "id": "punkrecords",
+      "name": "PunkRecords",
+      "version": "1.0.0-alpha.2",
+      "lang": "fr",
+      "nsfw": false,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/PunkRecords/static/icon.png",
+      "entry": "punkrecords.plugin.js",
+      "description": "Extension pour récupérer le contenu de punkrecordz.com."
+    },
+    {
+      "id": "qiscans",
+      "name": "QiScans",
+      "version": "1.0.0-alpha.15",
+      "lang": "en",
+      "nsfw": false,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/QiScans/static/icon.png",
+      "entry": "qiscans.plugin.js",
+      "description": "Extension that pulls content from qimanhwa.com."
+    },
+    {
+      "id": "ragescans",
+      "name": "Rage Scans",
+      "version": "1.0.0-alpha.2",
+      "lang": "en",
+      "nsfw": false,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/RageScans/static/icon.png",
+      "entry": "ragescans.plugin.js",
+      "description": "Extension that pulls content from ragescans.com."
+    },
+    {
+      "id": "raw1001",
+      "name": "Raw1001",
+      "version": "1.0.0-alpha.2",
+      "lang": "ja",
+      "nsfw": true,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/Raw1001/static/icon.png",
+      "entry": "raw1001.plugin.js",
+      "description": "Extension that pulls content from raw1001.net."
+    },
+    {
+      "id": "roliascan",
+      "name": "Roliascan",
+      "version": "1.0.0-alpha.1",
+      "lang": "en",
+      "nsfw": true,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/Roliascan/static/icon.png",
+      "entry": "roliascan.plugin.js",
+      "description": "Extension that pulls content from roliascan.com."
+    },
+    {
+      "id": "royalroad",
+      "name": "RoyalRoad",
+      "version": "1.0.0-alpha.1",
+      "lang": "en",
+      "nsfw": false,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/RoyalRoad/static/icon.png",
+      "entry": "royalroad.plugin.js",
+      "description": "Extension that pulls web novels from royalroad.com and renders their chapters as readable pages."
+    },
+    {
+      "id": "samuraiscan",
+      "name": "SamuraiScan",
+      "version": "1.0.0-alpha.14",
+      "lang": "es",
+      "nsfw": true,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/SamuraiScan/static/icon.png",
+      "entry": "samuraiscan.plugin.js",
+      "description": "Extension that pulls content from samurai.j5z.xyz."
+    },
+    {
+      "id": "setsuscans",
+      "name": "SetsuScans",
+      "version": "1.0.0-alpha.15",
+      "lang": "en",
+      "nsfw": true,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/SetsuScans/static/icon.png",
+      "entry": "setsuscans.plugin.js",
+      "description": "Extension that pulls content from setsuscans.com."
+    },
+    {
+      "id": "sushiscans",
+      "name": "SushiScans",
+      "version": "1.0.0-alpha.7",
+      "lang": "en",
+      "nsfw": false,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/SushiScans/static/icon.png",
+      "entry": "sushiscans.plugin.js",
+      "description": "Extension that pulls content from sushiscan.net."
+    },
+    {
+      "id": "thunderscans",
+      "name": "Thunderscans",
+      "version": "1.0.0-alpha.11",
+      "lang": "en",
+      "nsfw": false,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/Thunderscans/static/icon.png",
+      "entry": "thunderscans.plugin.js",
+      "description": "Extension that pulls content from en-thunderscans.com."
+    },
+    {
+      "id": "utoon",
+      "name": "UToon",
+      "version": "1.0.0-alpha.15",
+      "lang": "en",
+      "nsfw": true,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/UToon/static/icon.png",
+      "entry": "utoon.plugin.js",
+      "description": "Extension that pulls content from utoon.net."
+    },
+    {
+      "id": "yaoiscan",
+      "name": "YaoiScan",
+      "version": "1.0.0-alpha.12",
+      "lang": "en",
+      "nsfw": true,
+      "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/YaoiScan/static/icon.png",
+      "entry": "yaoiscan.plugin.js",
+      "description": "Extension that pulls content from yaoiscan.com."
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "type": "ebook",
+  "name": "Community eBook Repo",
+  "description": "High quality community eBook plugins for Harbor reader",
+  "plugins": [
+    {
+      "id": "example-ebook",
+      "name": "Example eBook Source",
+      "version": "1.0.0",
+      "lang": "en",
+      "nsfw": false,
+      "icon": "https://harbor-reader.test/icons/ebook.png",
+      "entry": "example-ebook.plugin.js",
+      "description": "Clean, typed, annotated reference eBook source plugin for Harbor",
+      "website": "https://example-ebook-host.test"
+    },
+    {
+      "id": "freewebnovel",
+      "name": "FreeWebNovel",
+      "version": "1.0.0",
+      "lang": "en",
+      "nsfw": false,
+      "icon": "https://freewebnovel.com/static/freewebnovel/favicon.ico",
+      "entry": "freewebnovel.plugin.js",
+      "description": "Massive library of over 10,000 popular light novels, web fiction, and fantasy books with full chapters and clean prose",
+      "website": "https://freewebnovel.com"
+    },
+    {
+      "id": "libgen",
+      "name": "Library Genesis (Books)",
+      "version": "1.0.0",
+      "lang": "en",
+      "nsfw": false,
+      "icon": "https://libgen.li/favicon.ico",
+      "entry": "libgen.plugin.js",
+      "description": "Fiction and literature book search with automatic ISBN and metadata resolution via Harbor",
+      "website": "https://libgen.li"
+    },
+    {
+      "id": "libgen-stream",
+      "name": "Library Genesis (Stream)",
+      "version": "1.3.0",
+      "lang": "en",
+      "nsfw": false,
+      "icon": "https://libgen.li/img/logo.png",
+      "entry": "libgen-stream.plugin.js",
+      "description": "Stream published literature and books chapter-by-chapter directly in Harbor with built-in instant unpacker",
+      "website": "https://libgen.li"
+    },
+    {
+      "id": "royalroad",
+      "name": "Royal Road",
+      "version": "1.0.0",
+      "lang": "en",
+      "nsfw": false,
+      "icon": "https://www.royalroad.com/icons/favicon-32x32.png",
+      "entry": "royalroad.plugin.js",
+      "description": "Original web novels, litrpg, fantasy, and sci-fi serialized fiction from Royal Road",
+      "website": "https://www.royalroad.com"
+    }
+  ]
+}

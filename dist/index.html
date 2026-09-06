@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Harbor Plugins Repository</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220%22%20width=%22100%22%20height=%22100%22><text y=%22.9em%22 font-size=%2290%22>⚓</text></svg>" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo-badge">⚓ Harbor Extensions</div>
+      <h1>Harbor Plugins Repository</h1>
+      <p class="subtitle">
+        High quality, fast, and optimized source plugins for Manga & eBooks in Harbor reader.
+      </p>
+    </header>
+
+    <main>
+      <!-- Dual Repo URLs -->
+      <section class="repo-grid">
+        <!-- Manga Repo Card -->
+        <div class="repo-card" id="card-manga">
+          <div class="card-header">
+            <span class="repo-type-tag tag-manga">Manga</span>
+          </div>
+          <h2>Manga Repository</h2>
+          <p class="card-desc">
+            Community-driven manga source plugins compatible with Harbor's Manga engine.
+          </p>
+          <div class="url-box">
+            <code id="url-manga">Loading...</code>
+            <button class="btn-copy" onclick="copyUrl('url-manga', this)">Copy URL</button>
+          </div>
+          <div class="instructions">
+            <strong>How to add:</strong> In Harbor, go to <em>Manga</em> → <em>Set up a source</em> → <em>Extensions</em> → paste this URL.
+          </div>
+        </div>
+
+        <!-- eBook Repo Card -->
+        <div class="repo-card" id="card-ebook">
+          <div class="card-header">
+            <span class="repo-type-tag tag-ebook">eBook</span>
+          </div>
+          <h2>eBook Repository</h2>
+          <p class="card-desc">
+            Novel and eBook source plugins with support for volume grouping and typography.
+          </p>
+          <div class="url-box">
+            <code id="url-ebook">Loading...</code>
+            <button class="btn-copy" onclick="copyUrl('url-ebook', this)">Copy URL</button>
+          </div>
+          <div class="instructions">
+            <strong>How to add:</strong> In Harbor, go to <em>eBook</em> → <em>Sources</em> → <em>Extensions</em> → paste this URL.
+          </div>
+        </div>
+      </section>
+
+      <!-- Active Catalog -->
+      <section>
+        <h2 class="section-title">Available Plugins</h2>
+        <div class="catalog-controls">
+          <input
+            type="text"
+            id="search-box"
+            class="search-input"
+            placeholder="🔍 Search plugins by name, ID, or description (e.g. WeebCentral, MangaDex, Solo Leveling)..."
+            oninput="handleSearch(this.value)"
+          />
+          <div class="filter-chips">
+            <button class="chip-btn active" onclick="setFilter('all', this)">All</button>
+            <button class="chip-btn" onclick="setFilter('verified', this)">✔️ Verified</button>
+            <button class="chip-btn" onclick="setFilter('popular', this)">⭐ Popular</button>
+            <button class="chip-btn" onclick="setFilter('manga', this)">Manga</button>
+            <button class="chip-btn" onclick="setFilter('ebook', this)">eBook</button>
+            <button class="chip-btn" onclick="setFilter('safe', this)">Safe (Non-NSFW)</button>
+            <button class="chip-btn" onclick="setFilter('nsfw', this)">🔞 18+</button>
+          </div>
+        </div>
+        <div class="catalog-stats" id="catalog-stats">Loading sources...</div>
+        <div class="plugin-list" id="plugin-container">
+          <div style="color: var(--text-secondary); font-size: 0.9rem;">Loading available sources...</div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        Built with TypeScript & esbuild. Fully compliant with the Harbor sandboxed Web Worker specification.
+      </p>
+    </footer>
+  </div>
+
+  <script>
+    function getRepoUrl(subpath) {
+      const base = window.location.origin + window.location.pathname.replace(/\/+$/, '');
+      return `${base}/${subpath}/repo.json`;
+    }
+
+    const mangaUrl = getRepoUrl('manga');
+    const ebookUrl = getRepoUrl('ebook');
+
+    document.getElementById('url-manga').textContent = mangaUrl;
+    document.getElementById('url-ebook').textContent = ebookUrl;
+
+    async function copyUrl(elementId, button) {
+      const text = document.getElementById(elementId).textContent;
+      try {
+        await navigator.clipboard.writeText(text);
+        const originalText = button.textContent;
+        button.textContent = 'Copied!';
+        button.classList.add('copied');
+        setTimeout(() => {
+          button.textContent = originalText;
+          button.classList.remove('copied');
+        }, 2000);
+      } catch (err) {
+        console.error('Failed to copy', err);
+      }
+    }
+
+    let allPlugins = [];
+    let currentFilter = 'all';
+    let searchQuery = '';
+
+    function renderCatalog() {
+      const container = document.getElementById('plugin-container');
+      const stats = document.getElementById('catalog-stats');
+
+      const filtered = allPlugins.filter(p => {
+        // Text search
+        if (searchQuery) {
+          const q = searchQuery.toLowerCase();
+          const matchesName = (p.name || '').toLowerCase().includes(q);
+          const matchesId = (p.id || '').toLowerCase().includes(q);
+          const matchesDesc = (p.description || '').toLowerCase().includes(q);
+          if (!matchesName && !matchesId && !matchesDesc) return false;
+        }
+
+        // Chip filter
+        if (currentFilter === 'verified') return (p.badges || []).includes('Verified');
+        if (currentFilter === 'popular') return (p.badges || []).includes('Popular');
+        if (currentFilter === 'manga') return p.type === 'manga';
+        if (currentFilter === 'ebook') return p.type === 'ebook';
+        if (currentFilter === 'safe') return !p.nsfw;
+        if (currentFilter === 'nsfw') return p.nsfw;
+
+        return true;
+      });
+
+      stats.textContent = `Showing ${filtered.length} of ${allPlugins.length} sources`;
+
+      if (filtered.length === 0) {
+        container.innerHTML = '<div style="color: var(--text-secondary);">No matching plugins found.</div>';
+        return;
+      }
+
+      container.innerHTML = filtered.map(p => {
+        const isVerified = (p.badges || []).includes('Verified');
+        const isPopular = (p.badges || []).includes('Popular');
+
+        return `
+          <div class="plugin-item">
+            <div class="plugin-item-header">
+              <h3>${p.name}</h3>
+              <span class="plugin-version">v${p.version}</span>
+            </div>
+            <p>${p.description || 'No description provided.'}</p>
+            <div class="badges">
+              <span class="badge ${p.type === 'manga' ? 'tag-manga' : 'tag-ebook'}">${p.type}</span>
+              <span class="badge badge-lang">${p.lang || 'en'}</span>
+              ${isVerified ? '<span class="badge badge-verified">✔️ Verified</span>' : ''}
+              ${isPopular ? '<span class="badge badge-popular">⭐ Popular</span>' : ''}
+              ${p.nsfw ? '<span class="badge badge-nsfw">🔞 18+</span>' : ''}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function handleSearch(val) {
+      searchQuery = val.trim();
+      renderCatalog();
+    }
+
+    function setFilter(filter, button) {
+      currentFilter = filter;
+      document.querySelectorAll('.chip-btn').forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
+      renderCatalog();
+    }
+
+    async function loadCatalog() {
+      allPlugins = [];
+
+      try {
+        const mangaRes = await fetch('./manga/repo.json');
+        if (mangaRes.ok) {
+          const mangaData = await mangaRes.json();
+          (mangaData.plugins || []).forEach(p => allPlugins.push({ ...p, type: 'manga' }));
+        }
+      } catch (_) {}
+
+      try {
+        const ebookRes = await fetch('./ebook/repo.json');
+        if (ebookRes.ok) {
+          const ebookData = await ebookRes.json();
+          (ebookData.plugins || []).forEach(p => allPlugins.push({ ...p, type: 'ebook' }));
+        }
+      } catch (_) {}
+
+      renderCatalog();
+    }
+
+    loadCatalog();
+  </script>
+</body>
+</html>
