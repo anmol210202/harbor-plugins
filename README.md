@@ -103,17 +103,23 @@ Endpoints:
 1. In Harbor, navigate to **Manga** → **Set up a source** → **Extensions**.
 2. Paste your Manga repository URL:
    ```text
-   https://<your-username>.github.io/<repo-name>/manga/repo.json
+   https://anmol210202.github.io/harbor-plugins/manga/repo.json
    ```
-3. Click **Install** on your desired sources.
+   *(Alternative Raw GitHub fallback: `https://raw.githubusercontent.com/anmol210202/harbor-plugins/main/dist/manga/repo.json`)*
+3. Click **Install** on your desired sources (supports 70+ manga plugins including WeebCentral, MangaDex, FlameComics, Atsumaru, DragonTea, AllManga, etc.).
 
 ### Adding eBook Sources
 1. In Harbor, navigate to **eBook** → **Sources** → **Extensions**.
 2. Paste your eBook repository URL:
    ```text
-   https://<your-username>.github.io/<repo-name>/ebook/repo.json
+   https://anmol210202.github.io/harbor-plugins/ebook/repo.json
    ```
+   *(Alternative Raw GitHub fallback: `https://raw.githubusercontent.com/anmol210202/harbor-plugins/main/dist/ebook/repo.json`)*
 3. Click **Install** on your desired sources.
+
+### 🌐 Web Catalog Portal
+You can also view, search, and filter all 70+ available plugins directly from your browser:
+👉 **[https://anmol210202.github.io/harbor-plugins/](https://anmol210202.github.io/harbor-plugins/)**
 
 ---
 
