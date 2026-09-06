@@ -70,6 +70,7 @@
           />
           <div class="filter-chips">
             <button class="chip-btn active" onclick="setFilter('all', this)">All</button>
+            <button class="chip-btn" onclick="setFilter('operational', this)">🟢 Tested & Working</button>
             <button class="chip-btn" onclick="setFilter('verified', this)">✔️ Verified</button>
             <button class="chip-btn" onclick="setFilter('popular', this)">⭐ Popular</button>
             <button class="chip-btn" onclick="setFilter('manga', this)">Manga</button>
@@ -121,6 +122,7 @@
     }
 
     let allPlugins = [];
+    let healthReports = {};
     let currentFilter = 'all';
     let searchQuery = '';
 
@@ -139,6 +141,10 @@
         }
 
         // Chip filter
+        if (currentFilter === 'operational') {
+          const h = healthReports[p.id];
+          return h && h.overallStatus === 'OPERATIONAL';
+        }
         if (currentFilter === 'verified') return (p.badges || []).includes('Verified');
         if (currentFilter === 'popular') return (p.badges || []).includes('Popular');
         if (currentFilter === 'manga') return p.type === 'manga';
@@ -159,6 +165,20 @@
       container.innerHTML = filtered.map(p => {
         const isVerified = (p.badges || []).includes('Verified');
         const isPopular = (p.badges || []).includes('Popular');
+        const health = healthReports[p.id];
+
+        let healthBadge = '';
+        if (health) {
+          if (health.overallStatus === 'OPERATIONAL') {
+            healthBadge = `<span class="badge badge-verified" title="Passed ${health.endpointsPassed}/${health.totalEndpoints} Harbor endpoints (${health.totalLatencyMs}ms)">🟢 Working (${health.endpointsPassed}/${health.totalEndpoints})</span>`;
+          } else if (health.overallStatus === 'CLOUDFLARE_BLOCKED') {
+            healthBadge = `<span class="badge badge-popular" title="Cloudflare Turnstile challenge detected">🔒 CF Challenge</span>`;
+          } else if (health.overallStatus === 'PARTIAL') {
+            healthBadge = `<span class="badge badge-popular" title="Partial support">🟡 Partial</span>`;
+          } else {
+            healthBadge = `<span class="badge" style="background: rgba(248, 81, 73, 0.15); color: #f85149;" title="${health.notes || 'Offline'}">🔴 Offline</span>`;
+          }
+        }
 
         return `
           <div class="plugin-item">
@@ -170,6 +190,7 @@
             <div class="badges">
               <span class="badge ${p.type === 'manga' ? 'tag-manga' : 'tag-ebook'}">${p.type}</span>
               <span class="badge badge-lang">${p.lang || 'en'}</span>
+              ${healthBadge}
               ${isVerified ? '<span class="badge badge-verified">✔️ Verified</span>' : ''}
               ${isPopular ? '<span class="badge badge-popular">⭐ Popular</span>' : ''}
               ${p.nsfw ? '<span class="badge badge-nsfw">🔞 18+</span>' : ''}
@@ -193,6 +214,17 @@
 
     async function loadCatalog() {
       allPlugins = [];
+      healthReports = {};
+
+      try {
+        const repRes = await fetch('./test-report.json');
+        if (repRes.ok) {
+          const list = await repRes.json();
+          for (const item of list) {
+            healthReports[item.id] = item;
+          }
+        }
+      } catch (_) {}
 
       try {
         const mangaRes = await fetch('./manga/repo.json');

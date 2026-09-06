@@ -1,0 +1,795 @@
+[
+  {
+    "id": "allmanga",
+    "name": "AllManga",
+    "version": "1.0.0-alpha.4",
+    "overallStatus": "CLOUDFLARE_BLOCKED",
+    "endpointsPassed": 5,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": true,
+    "totalLatencyMs": 2257,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "PASS",
+        "latencyMs": 761,
+        "itemCount": 20,
+        "sample": {
+          "id": "SFrub9DDGMrmdZWyh",
+          "title": "Solo Leveling",
+          "cover": "https://wp.youtube-anime.com/aln.youtube-anime.com/mcovers/m_tbs/wkHZ8HGnq5kWxQR9y/006.1.webp?w=250"
+        }
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 221,
+        "itemCount": 20
+      },
+      {
+        "endpoint": "search",
+        "status": "PASS",
+        "latencyMs": 223,
+        "itemCount": 6,
+        "sample": {
+          "query": "Solo Leveling",
+          "match": "The Privilege of the Second Life is Power Leveling"
+        }
+      },
+      {
+        "endpoint": "detail",
+        "status": "PASS",
+        "latencyMs": 213,
+        "sample": {
+          "title": "Solo Leveling",
+          "status": "Completed",
+          "author": "REDICE Studio (레드아이스 스튜디오)"
+        }
+      },
+      {
+        "endpoint": "chapters",
+        "status": "PASS",
+        "latencyMs": 363,
+        "itemCount": 219,
+        "sample": {
+          "chapterId": "SFrub9DDGMrmdZWyh::0",
+          "chapter": "0",
+          "title": "Prologue"
+        }
+      },
+      {
+        "endpoint": "pageUrls",
+        "status": "FAIL",
+        "latencyMs": 442,
+        "error": "Application.executeInWebView is not a function"
+      }
+    ],
+    "notes": "Requires interactive Cloudflare Turnstile clearance"
+  },
+  {
+    "id": "dragontea",
+    "name": "DragonTea",
+    "version": "1.0.0-alpha.14",
+    "overallStatus": "CLOUDFLARE_BLOCKED",
+    "endpointsPassed": 1,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": true,
+    "totalLatencyMs": 2304,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "FAIL",
+        "latencyMs": 1015,
+        "error": "Returned 0 items or invalid structure"
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 638,
+        "itemCount": 0
+      },
+      {
+        "endpoint": "search",
+        "status": "FAIL",
+        "latencyMs": 312,
+        "error": "Search for 'Solo' returned 0 items"
+      }
+    ],
+    "notes": "Requires interactive Cloudflare Turnstile clearance"
+  },
+  {
+    "id": "atsumaru",
+    "name": "Atsumaru",
+    "version": "1.0.0-alpha.24",
+    "overallStatus": "OPERATIONAL",
+    "endpointsPassed": 7,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": false,
+    "totalLatencyMs": 6050,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "PASS",
+        "latencyMs": 1511,
+        "itemCount": 20,
+        "sample": {
+          "id": "xdhnm",
+          "title": "Lookism",
+          "cover": "https://atsu.moe/static/posters/d2KDc5IvDdEM3Czr-medium.avif"
+        }
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 364,
+        "itemCount": 20
+      },
+      {
+        "endpoint": "search",
+        "status": "PASS",
+        "latencyMs": 370,
+        "itemCount": 1,
+        "sample": {
+          "query": "Lookism",
+          "match": "Lookism"
+        }
+      },
+      {
+        "endpoint": "detail",
+        "status": "PASS",
+        "latencyMs": 730,
+        "sample": {
+          "title": "Lookism",
+          "status": "Ongoing",
+          "author": "Tae-Jun Park, Tae-Jun Park"
+        }
+      },
+      {
+        "endpoint": "chapters",
+        "status": "PASS",
+        "latencyMs": 1656,
+        "itemCount": 4094,
+        "sample": {
+          "chapterId": "xdhnm::kEb2b",
+          "chapter": "623"
+        }
+      },
+      {
+        "endpoint": "pageUrls",
+        "status": "PASS",
+        "latencyMs": 390,
+        "itemCount": 57,
+        "sample": {
+          "firstPageUrl": "https://atsu.moe/static/pages/cmgzl8e3c8vehm191t1j11y4p/kEb2b/dc7990561c1beb54.avif"
+        }
+      },
+      {
+        "endpoint": "image_probe",
+        "status": "PASS",
+        "latencyMs": 1025,
+        "sample": {
+          "status": 206,
+          "contentType": "image/avif"
+        }
+      }
+    ],
+    "notes": "Behind Cloudflare WAF, passes seamlessly"
+  },
+  {
+    "id": "hivetoons",
+    "name": "HiveToons",
+    "version": "1.0.0-alpha.3",
+    "overallStatus": "OPERATIONAL",
+    "endpointsPassed": 7,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": false,
+    "totalLatencyMs": 5750,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "PASS",
+        "latencyMs": 894,
+        "itemCount": 18,
+        "sample": {
+          "id": "lookism",
+          "title": "Lookism",
+          "cover": "https://storage.hivetoon.com/public/upload/2026/03/30/cd3034dd-8bef-43ae-aab5-d764fa9918e8.gif"
+        }
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 322,
+        "itemCount": 18
+      },
+      {
+        "endpoint": "search",
+        "status": "PASS",
+        "latencyMs": 323,
+        "itemCount": 1,
+        "sample": {
+          "query": "Lookism",
+          "match": "Lookism"
+        }
+      },
+      {
+        "endpoint": "detail",
+        "status": "PASS",
+        "latencyMs": 328,
+        "sample": {
+          "title": "Lookism",
+          "status": "Ongoing",
+          "author": "Park Tae Jun"
+        }
+      },
+      {
+        "endpoint": "chapters",
+        "status": "PASS",
+        "latencyMs": 3002,
+        "itemCount": 632,
+        "sample": {
+          "chapterId": "lookism::8581",
+          "chapter": "1",
+          "title": "Ep. 1"
+        }
+      },
+      {
+        "endpoint": "pageUrls",
+        "status": "PASS",
+        "latencyMs": 314,
+        "itemCount": 92,
+        "sample": {
+          "firstPageUrl": "https://storage.hivetoon.com/public/upload/series/lookism/503468341f2bfb17/image_1_9c56338a.webp"
+        }
+      },
+      {
+        "endpoint": "image_probe",
+        "status": "PASS",
+        "latencyMs": 543,
+        "sample": {
+          "status": 206,
+          "contentType": "image/webp"
+        }
+      }
+    ],
+    "notes": "Behind Cloudflare WAF, passes seamlessly"
+  },
+  {
+    "id": "drakescans",
+    "name": "Drake Scans",
+    "version": "1.0.0-alpha.7",
+    "overallStatus": "OFFLINE",
+    "endpointsPassed": 1,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": false,
+    "totalLatencyMs": 6469,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "FAIL",
+        "latencyMs": 3180,
+        "error": "Returned 0 items or invalid structure"
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 1656,
+        "itemCount": 0
+      },
+      {
+        "endpoint": "search",
+        "status": "FAIL",
+        "latencyMs": 798,
+        "error": "Search for 'Solo' returned 0 items"
+      }
+    ],
+    "notes": "Host unresponsive or changed domain"
+  },
+  {
+    "id": "flamecomics",
+    "name": "FlameComics",
+    "version": "1.0.0-alpha.1",
+    "overallStatus": "OPERATIONAL",
+    "endpointsPassed": 7,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": false,
+    "totalLatencyMs": 9811,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "PASS",
+        "latencyMs": 1650,
+        "itemCount": 6,
+        "sample": {
+          "id": "23",
+          "title": "The Ancient Sovereign of Eternity",
+          "cover": "https://cdn.flamecomics.xyz/uploads/images/series/23/thumbnail.png?1723049203"
+        }
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 1745,
+        "itemCount": 6
+      },
+      {
+        "endpoint": "search",
+        "status": "PASS",
+        "latencyMs": 1451,
+        "itemCount": 1,
+        "sample": {
+          "query": "The Ancient",
+          "match": "The Ancient Sovereign of Eternity"
+        }
+      },
+      {
+        "endpoint": "detail",
+        "status": "PASS",
+        "latencyMs": 1596,
+        "sample": {
+          "title": "The Ancient Sovereign of Eternity",
+          "status": "Ongoing",
+          "author": "Tai Yi Shui Sheng"
+        }
+      },
+      {
+        "endpoint": "chapters",
+        "status": "PASS",
+        "latencyMs": 832,
+        "itemCount": 512,
+        "sample": {
+          "chapterId": "23::23:701b5baf6a0aac4d",
+          "chapter": "512",
+          "title": "Chapter 512"
+        }
+      },
+      {
+        "endpoint": "pageUrls",
+        "status": "PASS",
+        "latencyMs": 298,
+        "itemCount": 12,
+        "sample": {
+          "firstPageUrl": "https://cdn.flamecomics.xyz/uploads/images/series/23/701b5baf6a0aac4d/ASOE-512-00.webp?701b5baf6a0aac4d"
+        }
+      },
+      {
+        "endpoint": "image_probe",
+        "status": "PASS",
+        "latencyMs": 2236,
+        "sample": {
+          "status": 206,
+          "contentType": "image/webp"
+        }
+      }
+    ],
+    "notes": "Behind Cloudflare WAF, passes seamlessly"
+  },
+  {
+    "id": "comix",
+    "name": "Comix",
+    "version": "1.0.0-alpha.46",
+    "overallStatus": "OFFLINE",
+    "endpointsPassed": 0,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": false,
+    "totalLatencyMs": 2357,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "FAIL",
+        "latencyMs": 1128,
+        "error": "Application.executeInWebView is not a function"
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "FAIL",
+        "latencyMs": 791,
+        "error": "Application.executeInWebView is not a function"
+      },
+      {
+        "endpoint": "search",
+        "status": "FAIL",
+        "latencyMs": 417,
+        "error": "Application.executeInWebView is not a function"
+      }
+    ],
+    "notes": "Host unresponsive or changed domain"
+  },
+  {
+    "id": "weebcentral",
+    "name": "WeebCentral",
+    "version": "1.0.0-alpha.25",
+    "overallStatus": "OPERATIONAL",
+    "endpointsPassed": 7,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": false,
+    "totalLatencyMs": 2922,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "PASS",
+        "latencyMs": 745,
+        "itemCount": 15,
+        "sample": {
+          "id": "01J76XYE72FJ56JA2KBB8HM7ZF",
+          "title": "I'm a Noble on the Brink of Ruin So I Might as Well Try Mastering Magic",
+          "cover": "https://temp.compsci88.com/cover/normal/01J76XYE72FJ56JA2KBB8HM7ZF.webp"
+        }
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 293,
+        "itemCount": 15
+      },
+      {
+        "endpoint": "search",
+        "status": "PASS",
+        "latencyMs": 654,
+        "itemCount": 15,
+        "sample": {
+          "query": "Solo",
+          "match": "Solo Leveling"
+        }
+      },
+      {
+        "endpoint": "detail",
+        "status": "PASS",
+        "latencyMs": 261,
+        "sample": {
+          "title": "I'm a Noble on the Brink of Ruin So I Might as Well Try Mastering Magic",
+          "status": "Ongoing",
+          "author": "AKISAKI Rio, MIKI Nazuna"
+        }
+      },
+      {
+        "endpoint": "chapters",
+        "status": "PASS",
+        "latencyMs": 278,
+        "itemCount": 39,
+        "sample": {
+          "chapterId": "01J76XYE72FJ56JA2KBB8HM7ZF::01M0MS9PB2KEB1S2V6W3GDGFCR",
+          "chapter": "39",
+          "title": "Chapter 39"
+        }
+      },
+      {
+        "endpoint": "pageUrls",
+        "status": "PASS",
+        "latencyMs": 265,
+        "itemCount": 50,
+        "sample": {
+          "firstPageUrl": "https://official.lowee.us/manga/My-Noble-Family-Is-Headed-for-Ruin-so-I-May-as-Well-Study-Magic-in-My-Free-Time/0039-001.png"
+        }
+      },
+      {
+        "endpoint": "image_probe",
+        "status": "PASS",
+        "latencyMs": 402,
+        "sample": {
+          "status": 206,
+          "contentType": "image/png"
+        }
+      }
+    ],
+    "notes": "Behind Cloudflare WAF, passes seamlessly"
+  },
+  {
+    "id": "kunmanga",
+    "name": "KunManga",
+    "version": "1.0.0-alpha.14",
+    "overallStatus": "OFFLINE",
+    "endpointsPassed": 1,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": false,
+    "totalLatencyMs": 5329,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "FAIL",
+        "latencyMs": 2732,
+        "error": "Returned 0 items or invalid structure"
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 1436,
+        "itemCount": 0
+      },
+      {
+        "endpoint": "search",
+        "status": "FAIL",
+        "latencyMs": 842,
+        "error": "Search for 'Solo' returned 0 items"
+      }
+    ],
+    "notes": "Host unresponsive or changed domain"
+  },
+  {
+    "id": "mangakakalot",
+    "name": "MangaKakalot",
+    "version": "1.0.0-alpha.11",
+    "overallStatus": "CLOUDFLARE_BLOCKED",
+    "endpointsPassed": 1,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": true,
+    "totalLatencyMs": 3496,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "FAIL",
+        "latencyMs": 1388,
+        "error": "Returned 0 items or invalid structure"
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 1042,
+        "itemCount": 0
+      },
+      {
+        "endpoint": "search",
+        "status": "FAIL",
+        "latencyMs": 523,
+        "error": "Search for 'Solo' returned 0 items"
+      }
+    ],
+    "notes": "Requires interactive Cloudflare Turnstile clearance"
+  },
+  {
+    "id": "toongod",
+    "name": "ToonGod",
+    "version": "1.0.0-alpha.14",
+    "overallStatus": "CLOUDFLARE_BLOCKED",
+    "endpointsPassed": 1,
+    "totalEndpoints": 7,
+    "cloudflareDetected": true,
+    "cloudflareChallenge": true,
+    "totalLatencyMs": 5624,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "FAIL",
+        "latencyMs": 2526,
+        "error": "Returned 0 items or invalid structure"
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 1258,
+        "itemCount": 0
+      },
+      {
+        "endpoint": "search",
+        "status": "FAIL",
+        "latencyMs": 985,
+        "error": "Search for 'Solo' returned 0 items"
+      }
+    ],
+    "notes": "Requires interactive Cloudflare Turnstile clearance"
+  },
+  {
+    "id": "mangadex",
+    "name": "MangaDex",
+    "version": "1.0.0-alpha.27",
+    "overallStatus": "OPERATIONAL",
+    "endpointsPassed": 7,
+    "totalEndpoints": 7,
+    "cloudflareDetected": false,
+    "cloudflareChallenge": false,
+    "totalLatencyMs": 6109,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "PASS",
+        "latencyMs": 1879,
+        "itemCount": 96,
+        "sample": {
+          "id": "2cf5ac51-8ad6-46a5-a921-2e2f26b5fcf1",
+          "title": "The Result of Confessing to the Class Angel",
+          "cover": "https://uploads.mangadex.org/covers/2cf5ac51-8ad6-46a5-a921-2e2f26b5fcf1/8b4c16f7-62a4-4687-bf93-c04cad0b13d1.jpg.512.jpg"
+        }
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 299,
+        "itemCount": 96
+      },
+      {
+        "endpoint": "search",
+        "status": "PASS",
+        "latencyMs": 951,
+        "itemCount": 19,
+        "sample": {
+          "query": "The Result",
+          "match": "The Result of Confessing to the Class Angel"
+        }
+      },
+      {
+        "endpoint": "detail",
+        "status": "PASS",
+        "latencyMs": 829,
+        "sample": {
+          "title": "The Result of Confessing to the Class Angel",
+          "status": "ongoing",
+          "author": "Orihara Shikaku"
+        }
+      },
+      {
+        "endpoint": "chapters",
+        "status": "PASS",
+        "latencyMs": 838,
+        "itemCount": 2,
+        "sample": {
+          "chapterId": "2cf5ac51-8ad6-46a5-a921-2e2f26b5fcf1::78564646-a4a6-452a-b4b3-54810d75a15a",
+          "chapter": "2"
+        }
+      },
+      {
+        "endpoint": "pageUrls",
+        "status": "PASS",
+        "latencyMs": 452,
+        "itemCount": 16,
+        "sample": {
+          "firstPageUrl": "https://cmdxd98sb0x3yprd.mangadex.network/data/af82e8a3b0c1360e7b8306f98637f9b2/1-e7e5dacfefa828a78b7ddcaf412c0b203186fb2904226ad05e406a57a3996bde.jpg"
+        }
+      },
+      {
+        "endpoint": "image_probe",
+        "status": "PASS",
+        "latencyMs": 820,
+        "sample": {
+          "status": 206,
+          "contentType": "image/jpeg"
+        }
+      }
+    ],
+    "notes": "Direct connection"
+  },
+  {
+    "id": "toonily",
+    "name": "Toonily",
+    "version": "1.0.0-alpha.15",
+    "overallStatus": "OFFLINE",
+    "endpointsPassed": 1,
+    "totalEndpoints": 7,
+    "cloudflareDetected": false,
+    "cloudflareChallenge": false,
+    "totalLatencyMs": 213,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "FAIL",
+        "latencyMs": 160,
+        "error": "Returned 0 items or invalid structure"
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 12,
+        "itemCount": 0
+      },
+      {
+        "endpoint": "search",
+        "status": "FAIL",
+        "latencyMs": 10,
+        "error": "Search for 'Solo' returned 0 items"
+      }
+    ],
+    "notes": "fetch failed"
+  },
+  {
+    "id": "webtoonxyz",
+    "name": "WebtoonXYZ",
+    "version": "1.0.0-alpha.14",
+    "overallStatus": "OFFLINE",
+    "endpointsPassed": 1,
+    "totalEndpoints": 7,
+    "cloudflareDetected": false,
+    "cloudflareChallenge": false,
+    "totalLatencyMs": 166,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "FAIL",
+        "latencyMs": 113,
+        "error": "Returned 0 items or invalid structure"
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 14,
+        "itemCount": 0
+      },
+      {
+        "endpoint": "search",
+        "status": "FAIL",
+        "latencyMs": 10,
+        "error": "Search for 'Solo' returned 0 items"
+      }
+    ],
+    "notes": "fetch failed"
+  },
+  {
+    "id": "webtoon",
+    "name": "Webtoon",
+    "version": "1.0.0-alpha.18",
+    "overallStatus": "OPERATIONAL",
+    "endpointsPassed": 5,
+    "totalEndpoints": 7,
+    "cloudflareDetected": false,
+    "cloudflareChallenge": false,
+    "totalLatencyMs": 3314,
+    "endpoints": [
+      {
+        "endpoint": "popular_page1",
+        "status": "FAIL",
+        "latencyMs": 30,
+        "error": "Returned 0 items or invalid structure"
+      },
+      {
+        "endpoint": "popular_page2_scroll",
+        "status": "PASS",
+        "latencyMs": 0,
+        "itemCount": 0
+      },
+      {
+        "endpoint": "search",
+        "status": "PASS",
+        "latencyMs": 1191,
+        "itemCount": 12,
+        "sample": {
+          "query": "Solo",
+          "match": "I Solo Fiction"
+        }
+      },
+      {
+        "endpoint": "detail",
+        "status": "PASS",
+        "latencyMs": 493,
+        "sample": {
+          "title": "I Solo Fiction",
+          "author": "AG Media"
+        }
+      },
+      {
+        "endpoint": "chapters",
+        "status": "PASS",
+        "latencyMs": 744,
+        "itemCount": 1,
+        "sample": {
+          "chapterId": "en/canvas/i-solo-fiction/list?title_no=725064::en/canvas/i-solo-fiction/god-reveal/viewer?title_no=725064&episode_no=1&readingLanguageCode=en",
+          "chapter": "1",
+          "title": "God Reveal"
+        }
+      },
+      {
+        "endpoint": "pageUrls",
+        "status": "PASS",
+        "latencyMs": 554,
+        "itemCount": 13,
+        "sample": {
+          "firstPageUrl": "https://webtoon-phinf.pstatic.net/20220119_119/164260419854006Lvu_JPEG/cdb09bfd-38d7-4680-96ba-df1c6c9733a9.jpg?type=q90"
+        }
+      },
+      {
+        "endpoint": "image_probe",
+        "status": "FAIL",
+        "latencyMs": 280,
+        "error": "Image probe returned non-image content (403 text/html)"
+      }
+    ],
+    "notes": "Direct connection"
+  }
+]

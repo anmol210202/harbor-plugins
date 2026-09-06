@@ -10,7 +10,10 @@
     "sync-upstream": "tsx scripts/build.ts && tsx scripts/convert-paperback.ts && tsx scripts/validate.ts",
     "validate": "tsx scripts/validate.ts",
     "typecheck": "tsc --noEmit",
-    "serve": "tsx scripts/serve.ts"
+    "serve": "tsx scripts/serve.ts",
+    "test:extensions": "tsx scripts/test-extensions.ts",
+    "test:quick": "tsx scripts/test-extensions.ts --popular-only",
+    "test:all": "tsx scripts/test-extensions.ts --all"
   },
   "keywords": [
     "harbor",
