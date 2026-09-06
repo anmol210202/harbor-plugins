@@ -60,6 +60,25 @@
       <!-- Active Catalog -->
       <section>
         <h2 class="section-title">Available Plugins</h2>
+        <div class="catalog-controls">
+          <input
+            type="text"
+            id="search-box"
+            class="search-input"
+            placeholder="🔍 Search plugins by name, ID, or description (e.g. WeebCentral, MangaDex, Solo Leveling)..."
+            oninput="handleSearch(this.value)"
+          />
+          <div class="filter-chips">
+            <button class="chip-btn active" onclick="setFilter('all', this)">All</button>
+            <button class="chip-btn" onclick="setFilter('verified', this)">✔️ Verified</button>
+            <button class="chip-btn" onclick="setFilter('popular', this)">⭐ Popular</button>
+            <button class="chip-btn" onclick="setFilter('manga', this)">Manga</button>
+            <button class="chip-btn" onclick="setFilter('ebook', this)">eBook</button>
+            <button class="chip-btn" onclick="setFilter('safe', this)">Safe (Non-NSFW)</button>
+            <button class="chip-btn" onclick="setFilter('nsfw', this)">🔞 18+</button>
+          </div>
+        </div>
+        <div class="catalog-stats" id="catalog-stats">Loading sources...</div>
         <div class="plugin-list" id="plugin-container">
           <div style="color: var(--text-secondary); font-size: 0.9rem;">Loading available sources...</div>
         </div>
@@ -101,15 +120,85 @@
       }
     }
 
-    async function loadCatalog() {
+    let allPlugins = [];
+    let currentFilter = 'all';
+    let searchQuery = '';
+
+    function renderCatalog() {
       const container = document.getElementById('plugin-container');
-      const plugins = [];
+      const stats = document.getElementById('catalog-stats');
+
+      const filtered = allPlugins.filter(p => {
+        // Text search
+        if (searchQuery) {
+          const q = searchQuery.toLowerCase();
+          const matchesName = (p.name || '').toLowerCase().includes(q);
+          const matchesId = (p.id || '').toLowerCase().includes(q);
+          const matchesDesc = (p.description || '').toLowerCase().includes(q);
+          if (!matchesName && !matchesId && !matchesDesc) return false;
+        }
+
+        // Chip filter
+        if (currentFilter === 'verified') return (p.badges || []).includes('Verified');
+        if (currentFilter === 'popular') return (p.badges || []).includes('Popular');
+        if (currentFilter === 'manga') return p.type === 'manga';
+        if (currentFilter === 'ebook') return p.type === 'ebook';
+        if (currentFilter === 'safe') return !p.nsfw;
+        if (currentFilter === 'nsfw') return p.nsfw;
+
+        return true;
+      });
+
+      stats.textContent = `Showing ${filtered.length} of ${allPlugins.length} sources`;
+
+      if (filtered.length === 0) {
+        container.innerHTML = '<div style="color: var(--text-secondary);">No matching plugins found.</div>';
+        return;
+      }
+
+      container.innerHTML = filtered.map(p => {
+        const isVerified = (p.badges || []).includes('Verified');
+        const isPopular = (p.badges || []).includes('Popular');
+
+        return `
+          <div class="plugin-item">
+            <div class="plugin-item-header">
+              <h3>${p.name}</h3>
+              <span class="plugin-version">v${p.version}</span>
+            </div>
+            <p>${p.description || 'No description provided.'}</p>
+            <div class="badges">
+              <span class="badge ${p.type === 'manga' ? 'tag-manga' : 'tag-ebook'}">${p.type}</span>
+              <span class="badge badge-lang">${p.lang || 'en'}</span>
+              ${isVerified ? '<span class="badge badge-verified">✔️ Verified</span>' : ''}
+              ${isPopular ? '<span class="badge badge-popular">⭐ Popular</span>' : ''}
+              ${p.nsfw ? '<span class="badge badge-nsfw">🔞 18+</span>' : ''}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function handleSearch(val) {
+      searchQuery = val.trim();
+      renderCatalog();
+    }
+
+    function setFilter(filter, button) {
+      currentFilter = filter;
+      document.querySelectorAll('.chip-btn').forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
+      renderCatalog();
+    }
+
+    async function loadCatalog() {
+      allPlugins = [];
 
       try {
         const mangaRes = await fetch('./manga/repo.json');
         if (mangaRes.ok) {
           const mangaData = await mangaRes.json();
-          (mangaData.plugins || []).forEach(p => plugins.push({ ...p, type: 'manga' }));
+          (mangaData.plugins || []).forEach(p => allPlugins.push({ ...p, type: 'manga' }));
         }
       } catch (_) {}
 
@@ -117,29 +206,11 @@
         const ebookRes = await fetch('./ebook/repo.json');
         if (ebookRes.ok) {
           const ebookData = await ebookRes.json();
-          (ebookData.plugins || []).forEach(p => plugins.push({ ...p, type: 'ebook' }));
+          (ebookData.plugins || []).forEach(p => allPlugins.push({ ...p, type: 'ebook' }));
         }
       } catch (_) {}
 
-      if (plugins.length === 0) {
-        container.innerHTML = '<div style="color: var(--text-secondary);">No plugins found.</div>';
-        return;
-      }
-
-      container.innerHTML = plugins.map(p => `
-        <div class="plugin-item">
-          <div class="plugin-item-header">
-            <h3>${p.name}</h3>
-            <span class="plugin-version">v${p.version}</span>
-          </div>
-          <p>${p.description || 'No description provided.'}</p>
-          <div class="badges">
-            <span class="badge ${p.type === 'manga' ? 'tag-manga' : 'tag-ebook'}">${p.type}</span>
-            <span class="badge badge-lang">${p.lang || 'en'}</span>
-            ${p.nsfw ? '<span class="badge badge-nsfw">18+</span>' : ''}
-          </div>
-        </div>
-      `).join('');
+      renderCatalog();
     }
 
     loadCatalog();

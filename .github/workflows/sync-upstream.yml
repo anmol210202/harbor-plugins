@@ -1,0 +1,71 @@
+name: Sync Upstream Manga Plugins
+
+on:
+  schedule:
+    # Runs daily at 06:00 UTC
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: 'upstream-sync'
+  cancel-in-progress: true
+
+jobs:
+  sync-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Typecheck Sources
+        run: npm run typecheck
+
+      - name: Sync & Convert Upstream Plugins
+        run: npm run sync-upstream
+
+      - name: Build Repositories & Static Assets
+        run: npm run build
+
+      - name: Validate All Manifests & Bundles
+        run: npm run validate
+
+      - name: Commit & Push Changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Stage generated manifests and dist artifacts if committing to main
+          git add config/ dist/ plugins/
+          if git diff --cached --quiet; then
+            echo "No upstream changes detected. Everything is up to date."
+          else
+            git commit -m "chore(upstream): auto-sync plugins from inkdex [skip ci]"
+            git push origin main
+          fi
+
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './dist'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

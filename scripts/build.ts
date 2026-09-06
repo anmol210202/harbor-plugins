@@ -114,6 +114,21 @@ async function processRepoType(repoType: RepoType) {
     });
   }
 
+  // Preserve any converted plugins in dist/manga/repo.json
+  const existingRepoJson = path.join(typeDistDir, 'repo.json');
+  if (fs.existsSync(existingRepoJson)) {
+    try {
+      const existing = JSON.parse(fs.readFileSync(existingRepoJson, 'utf-8'));
+      if (Array.isArray(existing.plugins)) {
+        for (const p of existing.plugins) {
+          if (!pluginManifests.some((m) => m.id === p.id)) {
+            pluginManifests.push(p);
+          }
+        }
+      }
+    } catch (_) {}
+  }
+
   const repoManifest = {
     ...repoMeta,
     plugins: pluginManifests,

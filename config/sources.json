@@ -1,0 +1,42 @@
+{
+  "upstream": {
+    "repo": "inkdex/extensions",
+    "branch": "master",
+    "versioningUrl": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/versioning.json",
+    "rawBaseUrl": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable"
+  },
+  "syncMode": "all",
+  "popular": [
+    "WeebCentral",
+    "MangaDex",
+    "FlameComics",
+    "AllManga",
+    "Atsumaru",
+    "DragonTea",
+    "DrakeScans",
+    "Comix",
+    "HiveToons",
+    "Webtoon",
+    "WebtoonXYZ",
+    "Toonily",
+    "ToonGod",
+    "KunManga",
+    "MangaKakalot",
+    "MangaReader",
+    "MangaPark"
+  ],
+  "verified": [
+    "WeebCentral",
+    "FlameComics",
+    "DragonTea",
+    "AllManga",
+    "Atsumaru",
+    "DrakeScans",
+    "HiveToons"
+  ],
+  "options": {
+    "includeNsfw": true,
+    "maxBundleSizeMb": 2.0,
+    "defaultTimeoutMs": 25000
+  }
+}
