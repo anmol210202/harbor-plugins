@@ -61,7 +61,7 @@
     {
       "id": "flamecomics",
       "name": "FlameComics",
-      "version": "1.0.0-alpha.1",
+      "version": "1.0.0-alpha.2",
       "lang": "en",
       "nsfw": false,
       "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/FlameComics/static/icon.png",
@@ -318,7 +318,7 @@
     {
       "id": "lilymanga",
       "name": "LilyManga",
-      "version": "1.0.0-alpha.14",
+      "version": "1.0.0-alpha.15",
       "lang": "en",
       "nsfw": true,
       "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/LilyManga/static/icon.png",
