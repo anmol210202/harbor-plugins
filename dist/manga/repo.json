@@ -515,7 +515,7 @@
     {
       "id": "mangaupdates",
       "name": "MangaUpdates",
-      "version": "1.0.0-alpha.8",
+      "version": "1.0.0-alpha.9",
       "lang": "en",
       "nsfw": false,
       "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/MangaUpdates/static/icon.png",
