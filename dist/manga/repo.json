@@ -75,7 +75,7 @@
     {
       "id": "hivetoons",
       "name": "HiveToons",
-      "version": "1.0.0-alpha.3",
+      "version": "1.0.0-alpha.4",
       "lang": "en",
       "nsfw": true,
       "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/HiveToons/static/icon.png",
@@ -116,7 +116,7 @@
     {
       "id": "mangadex",
       "name": "MangaDex",
-      "version": "1.0.0-alpha.27",
+      "version": "1.0.0-alpha.28",
       "lang": "multi",
       "nsfw": false,
       "icon": "https://raw.githubusercontent.com/inkdex/extensions/master/0.9/stable/MangaDex/static/icon.png",
